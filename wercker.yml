@@ -1,0 +1,15 @@
+box: debian
+build:
+  steps:
+    - arjen/hugo-build@2.9.1:
+        version: "0.55.6"
+        theme: hermit
+        flags: --buildDrafts=true
+# deploy:
+#   steps:
+#     - install-packages:
+#         packages: git ssh-client
+#     - lukevivier/gh-pages@0.2.1:
+#         token: $GITHUB_TOKEN
+#         domain: marc.guyer.me
+#         basedir: public
