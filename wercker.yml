@@ -11,4 +11,5 @@ deploy:
         packages: git ssh-client
     - pheres/git-push@0.4.10:
         gh_token: $GIT_TOKEN
+        host: github.com
         basedir: public
