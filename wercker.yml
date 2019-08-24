@@ -12,3 +12,4 @@ deploy:
     - pheres/git-push@0.4.10:
         gh_token: $GITHUB_TOKEN
         basedir: public
+        branch: master
