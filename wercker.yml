@@ -11,5 +11,6 @@ deploy:
         packages: git ssh-client
     - lukevivier/gh-pages@0.2.1:
         token: $GITHUB_TOKEN
+        branch: master
         domain: marc.guyer.me
         basedir: public
