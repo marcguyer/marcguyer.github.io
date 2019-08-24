@@ -1,0 +1,9 @@
+#home-avatar {
+    text-align: center;
+}
+#home-avatar img {
+    opacity: .6;
+	width: 100px;
+	height: 100px;
+	border-radius: 50%;
+}

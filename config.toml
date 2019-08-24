@@ -37,7 +37,7 @@ enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/func
   # images = [""]
   themeColor = "#494f5c"
 
-  homeSubtitle = "SaSS & Payment Systems Architect"
+  homeSubtitle = "SaaS, API, and Payment Systems Architect"
   footerCopyright = ''
   # bgImg = ""  # Homepage background-image URL
 
@@ -50,7 +50,7 @@ enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/func
   relatedPosts = false  # Add a related content section to all single posts page
 
   # Add custom css
-  # customCSS = ["css/foo.css", "css/bar.css"]
+  customCSS = ["css/avatar.css"]
 
   # Social Icons
   # Check https://github.com/Track3/hermit#social-icons for more info.
