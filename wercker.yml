@@ -9,8 +9,8 @@ deploy:
   steps:
     - install-packages:
         packages: git ssh-client
-    - 7h3laughingman/gh-pages@0.4.5:
-        domain: "marc.guyer.me"
-        repo: "marcguyer/marcguyer.github.io"
-        token: $GITHUB_TOKEN
-        comment: "GitHub Pages static deploy"
+    - leipert/git-push:
+        gh_oauth: $GIT_TOKEN
+        repo: marcguyer/marcguyer.github.io
+        branch: master
+        basedir: public
