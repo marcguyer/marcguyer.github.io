@@ -9,8 +9,7 @@ deploy:
   steps:
     - install-packages:
         packages: git ssh-client
-    - lukevivier/gh-pages@0.2.1:
+    - 7h3laughingman/gh-pages@0.4.5:
+        domain: "marc.guyer.me"
+        repo: "marcguyer/marcguyer.github.io"
         token: $GITHUB_TOKEN
-        branch: master
-        domain: marc.guyer.me
-        basedir: public
