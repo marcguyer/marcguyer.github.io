@@ -9,8 +9,6 @@ deploy:
   steps:
     - install-packages:
         packages: git ssh-client
-    - leipert/git-push:
-        gh_oauth: $GIT_TOKEN
-        repo: marcguyer/marcguyer.github.io
-        branch: master
+    - pheres/git-push@0.4.10:
+        gh_token: $GIT_TOKEN
         basedir: public
