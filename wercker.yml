@@ -13,3 +13,4 @@ deploy:
         domain: "marc.guyer.me"
         repo: "marcguyer/marcguyer.github.io"
         token: $GITHUB_TOKEN
+        comment: "GitHub Pages static deploy"
