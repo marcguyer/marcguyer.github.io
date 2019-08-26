@@ -13,3 +13,4 @@ deploy:
         gh_token: $GITHUB_TOKEN
         basedir: public
         gh_pages: true
+        branch: master
