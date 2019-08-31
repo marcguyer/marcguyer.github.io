@@ -1,15 +1,16 @@
 box: debian
 build:
   steps:
-    - arjen/hugo-build:
+    - arjen/hugo-build@2.9.1:
         version: "0.55.6"
         theme: hermit
         flags: --buildDrafts=true
+        force_install: true
 deploy:
   steps:
     - install-packages:
         packages: git ssh-client
-    - pheres/git-push@0.4.10:
-        gh_token: $GITHUB_TOKEN
-        basedir: ./public
+    - pahnev/gh-pages@0.3.1:
+        token: $GITHUB_TOKEN
+        basedir: public
         branch: master
