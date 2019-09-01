@@ -1,8 +1,12 @@
 box: debian
 build:
   steps:
+    - script:
+        name: initialize git submodules
+        code: |
+            git submodule update --init --recursive
     - arjen/hugo-build@2.9.1:
-        version: "0.55.6"
+        version: "0.57.2"
         theme: hermit
         flags: --buildDrafts=true
         force_install: true
