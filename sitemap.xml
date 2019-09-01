@@ -3,17 +3,17 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>https://marc.guyer.me/about/</loc>
+    <loc>/about/</loc>
     <lastmod>2019-08-03T09:42:49-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://marc.guyer.me/</loc>
+    <loc>/</loc>
     <lastmod>2019-08-03T09:42:49-04:00</lastmod>
   </url>
   
   <url>
-    <loc>https://marc.guyer.me/tags/</loc>
+    <loc>/tags/</loc>
   </url>
   
 </urlset>
