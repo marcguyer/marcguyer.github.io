@@ -20,3 +20,4 @@ deploy:
         token: $GITHUB_TOKEN
         basedir: public
         branch: master
+        domain: marc.guyer.me
