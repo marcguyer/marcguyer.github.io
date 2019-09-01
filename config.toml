@@ -1,4 +1,4 @@
-baseURL = ""
+baseURL = "//marc.guyer.me"
 languageCode = "en-us"
 defaultContentLanguage = "en"
 title = "Marc Guyer"
