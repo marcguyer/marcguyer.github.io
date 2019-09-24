@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en-us">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<meta name="theme-color" content="#494f5c">
+	<meta name="msapplication-TileColor" content="#494f5c">
+<meta itemprop="name" content="Recovery Procedure for MySQL Backup Made with Xtrabackup">
+<meta itemprop="description" content="We have a pre-existing procedure for backing up a MySQL database using hot backups with the wonderful Percona Xtrabackup and in this case the deprecated innobackupex binary.
+Xtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM tables quickly and without locking. There are countless useful features including point-in-time recovery, incremental backups, single table recovery, single partition recovery, I/O throttling, parallel processing, encryption, compression, streaming, and more.">
+
+
+<meta itemprop="datePublished" content="2019-09-24T17:09:56-04:00" />
+<meta itemprop="dateModified" content="2019-09-24T17:09:56-04:00" />
+<meta itemprop="wordCount" content="568">
+
+
+
+<meta itemprop="keywords" content="mysql,xtrabackup," />
+<meta property="og:title" content="Recovery Procedure for MySQL Backup Made with Xtrabackup" />
+<meta property="og:description" content="We have a pre-existing procedure for backing up a MySQL database using hot backups with the wonderful Percona Xtrabackup and in this case the deprecated innobackupex binary.
+Xtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM tables quickly and without locking. There are countless useful features including point-in-time recovery, incremental backups, single table recovery, single partition recovery, I/O throttling, parallel processing, encryption, compression, streaming, and more." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="//marc.guyer.me/posts/recover-xtrabackup/" />
+<meta property="article:published_time" content="2019-09-24T17:09:56-04:00" />
+<meta property="article:modified_time" content="2019-09-24T17:09:56-04:00" />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Recovery Procedure for MySQL Backup Made with Xtrabackup"/>
+<meta name="twitter:description" content="We have a pre-existing procedure for backing up a MySQL database using hot backups with the wonderful Percona Xtrabackup and in this case the deprecated innobackupex binary.
+Xtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM tables quickly and without locking. There are countless useful features including point-in-time recovery, incremental backups, single table recovery, single partition recovery, I/O throttling, parallel processing, encryption, compression, streaming, and more."/>
+
+	<link rel="apple-touch-icon" sizes="180x180" href="//www.gravatar.com/avatar/65a09071cad77a42b1421c8119352229?s=180">
+	<link rel="icon" type="image/png" sizes="32x32" href="//www.gravatar.com/avatar/65a09071cad77a42b1421c8119352229?s=32">
+	<link rel="icon" type="image/png" sizes="16x16" href="//www.gravatar.com/avatar/65a09071cad77a42b1421c8119352229?s=16">
+	<link rel="shortcut icon" href="//www.gravatar.com/avatar/65a09071cad77a42b1421c8119352229?s=512">
+	
+
+	<title>Recovery Procedure for MySQL Backup Made with Xtrabackup</title>
+	<link rel="stylesheet" href="//marc.guyer.me/css/style.min.568c54a56780af2a70c45272522247710b69dbfc080b315211fb98381e3796f8.css" integrity="sha256-VoxUpWeArypwxFJyUiJHcQtp2/wICzFSEfuYOB43lvg=">
+	
+	<link rel="stylesheet" href="//marc.guyer.me/css/avatar.css">
+</head>
+
+<body id="page">
+	
+	<header id="site-header" class="animated slideInUp faster">
+		<div class="hdr-wrapper section-inner">
+			<div class="hdr-left">
+				<div class="site-branding">
+					<a href="//marc.guyer.me">Marc Guyer</a>
+				</div>
+				<nav class="site-nav hide-in-mobile">
+					
+				<a href="//marc.guyer.me/posts/">Posts</a>
+				<a href="//marc.guyer.me/about/">About</a>
+
+				</nav>
+			</div>
+			<div class="hdr-right hdr-icons">
+				<span class="hdr-social hide-in-mobile"><a href="https://github.com/marcguyer" target="_blank" rel="noopener me" title="Github"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"></path></svg></a><a href="https://stackoverflow.com/users/1774759/marcguyer" target="_blank" rel="noopener me" title="Stackoverflow"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M2.913 16.041v6.848h17.599v-6.848M7.16 18.696h8.925M7.65 13.937l8.675 1.8M9.214 9.124l8.058 3.758M12.086 4.65l6.849 5.66M15.774 1.111l5.313 7.162"/></svg></a><a href="https://instagram.com/marcguyer" target="_blank" rel="noopener me" title="Instagram"><svg xmlns="http://www.w3.org/2000/svg" class="feather" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.5" y2="6.5"></line></svg></a></span><button id="menu-btn" class="hdr-btn" title="Menu"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></button>
+			</div>
+		</div>
+	</header>
+	<div id="mobile-menu" class="animated fast">
+		<ul>
+			<li><a href="//marc.guyer.me/posts/">Posts</a></li>
+			<li><a href="//marc.guyer.me/about/">About</a></li>
+		</ul>
+	</div>
+
+
+	<main class="site-main section-inner animated fadeIn faster">
+		<article class="thin">
+			<header class="post-header">
+				<div class="post-meta"><span>2019-09-24</span></div>
+				<h1>Recovery Procedure for MySQL Backup Made with Xtrabackup</h1>
+			</header>
+			<div class="content">
+				
+
+<p>We have a pre-existing procedure for backing up a MySQL database using hot backups with the wonderful <a href="https://www.percona.com/doc/percona-xtrabackup/2.4/index.html">Percona Xtrabackup</a> and in this case the deprecated <a href="https://www.percona.com/doc/percona-xtrabackup/2.4/innobackupex/innobackupex_option_reference.html">innobackupex</a> binary.</p>
+
+<p>Xtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM tables quickly and <em>without locking</em>. There are countless useful features including point-in-time recovery, incremental backups, single table recovery, single partition recovery, I/O throttling, parallel processing, encryption, compression, streaming, and more.</p>
+
+<p><strong>A recovery procedure document was needed so I wrote one. Here is is.</strong></p>
+
+<p>The pre-existing backup procedure in play has a few quirks:</p>
+
+<ol>
+<li>The deprecated <code>innobackupex</code> binary v2.4.15 is used to create the backups. <code>innobackupex</code> is a wrapper for <code>xtrabackup</code> with some additional features that were rolled into <code>xtrabackup</code> in later versions.</li>
+<li>The non-default <code>--compress</code> and <code>--stream</code> options are used. This has the effect of creating a single compressed file with multiple compressed files within it.</li>
+</ol>
+
+<p>Here&rsquo;s the procedure:</p>
+
+<h2 id="summary">Summary<a href="#summary" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<ol>
+<li><a href="#1-retrieve-backups-from-s3-storage">Retrieve</a></li>
+<li><a href="#2-decompress-backup-file">Decompress</a></li>
+<li><a href="#3-prepare-the-backup-files">Prepare</a></li>
+<li><a href="#4-prepare-the-backup-files">Restore</a></li>
+</ol>
+
+<p>See also <a href="#advanced-usage">Advanced Usage</a> for faster, more disk-efficient usage</p>
+
+<h2 id="procedure">Procedure<a href="#procedure" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<h3 id="1-retrieve-backups-from-s3-storage">1. Retrieve backups from S3 Storage<a href="#1-retrieve-backups-from-s3-storage" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+
+<p>The current backup routine uses <code>innobackupex</code> to create full snapshot hot backups nightly and incremental backups every half hour during the day. These are all stored in an <a href="https://aws.amazon.com/s3/">Amazon S3</a> bucket.</p>
+
+<h4 id="s3-bucket-locations">S3 Bucket Locations<a href="#s3-bucket-locations" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+
+<p>Login to the S3 Management Console to view full backups and incrementals located in the following directories</p>
+
+<ul>
+<li>Full Compressed Snapshots
+
+<ul>
+<li>s3://my-db-backup/xtrabackups/</li>
+</ul></li>
+<li>Incremental Backups
+
+<ul>
+<li>s3://my-db-backup/xtrabackups/incrs</li>
+</ul></li>
+</ul>
+
+<h4 id="create-a-clean-working-directory-and-download-the-snapshot">Create a clean working directory and download the snapshot<a href="#create-a-clean-working-directory-and-download-the-snapshot" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
+
+<p>Create a temporary directory on the server where you will recover your database</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">mkdir /restore_tmp</code></pre></div>
+<p>Download the full snapshot:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup.qp.xbs /restore_tmp/</code></pre></div>
+<h3 id="2-decompress-backup-file">2. Decompress Backup File<a href="#2-decompress-backup-file" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+
+<p>The following command decompresses the file into the same (current) directory</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">xbstream -x &lt; mysqlbackup09-24-2019-16.qp.xbs</code></pre></div>
+<p><strong>There are still many compressed files in the result!</strong> The next step is to decompress all compressed files in the current directory and can be done like so:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">xtrabackup --decompress --remove-original --parallel<span class="o">=</span><span class="m">8</span> --target-dir<span class="o">=</span>.</code></pre></div>
+<h3 id="3-prepare-the-backup-files">3. Prepare the Backup Files<a href="#3-prepare-the-backup-files" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+
+<p>Next we need to prepare the backup. This step completes any open transactions or rollbacks that happened during the original backup procedure.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">xtrabackup --prepare --target-dir<span class="o">=</span>.</code></pre></div>
+<h3 id="4-restore-the-files">4. Restore the files<a href="#4-restore-the-files" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+
+<p>The MySQL server must be shut down for this step.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">systemctl stop mysql</code></pre></div>
+<p>The datadir must be empty for restoration. Consider backing up what&rsquo;s there if it&rsquo;s not empty.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">rm -rf /var/lib/mysql/*</code></pre></div>
+<p>Now, move the backup into the datadir with the <code>xtrabackup</code> binary:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">xtrabackup --move-back --target-dir<span class="o">=</span>.</code></pre></div>
+<p>The ownership must change:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">chown -R mysql:mysql /var/lib/mysql</code></pre></div>
+<p>Now we can start the server:</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">systemctl start mysql</code></pre></div>
+<h3 id="advanced-usage">Advanced Usage<a href="#advanced-usage" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
+
+<p>Do it all in one command &ndash; this is a more efficient use of disk.</p>
+<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup09-24-2019-16.qp.xbs - <span class="p">|</span> <span class="se">\
+</span><span class="se"></span>xbstream -x --parallel<span class="o">=</span><span class="m">8</span> <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>xtrabackup --decompress --remove-original --parallel<span class="o">=</span><span class="m">8</span> --target-dir<span class="o">=</span>. <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>xtrabackup --prepare --target-dir<span class="o">=</span>. <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>systemctl stop mysql <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>rm -rf /var/lib/mysql/* <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>xtrabackup --move-back --target-dir<span class="o">=</span>. <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>chown -R mysql:mysql /var/lib/mysql <span class="o">&amp;&amp;</span> <span class="se">\
+</span><span class="se"></span>systemctl start mysql</code></pre></div>
+<ol>
+<li>Download single compressed file from S3 and send to stdin.</li>
+<li>Pipe to decompress the single file (streaming to stdin) into multiple files/directories at the current location. The resulting files and directories still contain compressed files.</li>
+<li>Decompress the resulting individual files and remove the original compressed files.</li>
+<li>Prepare the backup (completes open transactions and rollbacks)</li>
+<li>Stop the server</li>
+<li>Remove existing files from the datadir</li>
+<li>Restore the files</li>
+<li>Change ownership of all files to <code>mysql:mysql</code></li>
+<li>Start the server</li>
+</ol>
+
+<h2 id="references">References<a href="#references" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
+
+<ul>
+<li><a href="https://aws.amazon.com/s3/">Amazon S3</a></li>
+<li><a href="https://www.percona.com/doc/percona-xtrabackup/2.4/index.html">Percona XtraBackup v2.4</a></li>
+<li><a href="https://www.percona.com/doc/percona-xtrabackup/2.4/backup_scenarios/compressed_backup.html">Compressed Backup Recipe</a></li>
+<li><a href="https://www.percona.com/doc/percona-xtrabackup/2.4/innobackupex/innobackupex_option_reference.html">Innobackupex Option Reference</a></li>
+<li><a href="https://www.percona.com/doc/percona-xtrabackup/2.4/howtos/recipes_ibkx_compressed.html">Innobackupex Compressed Backup Recipe</a></li>
+</ul>
+
+			</div>
+			<hr class="post-end">
+			<footer class="post-info">
+				<p>
+					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="//marc.guyer.me/tags/mysql">mysql</a></span><span class="tag"><a href="//marc.guyer.me/tags/xtrabackup">xtrabackup</a></span>
+				</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>568 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-09-24 21:09 &#43;0000</p>
+			</footer>
+		</article>
+		<div class="post-nav thin">
+		</div>
+		<div id="comments" class="thin">
+</div>
+	</main>
+
+	<footer id="site-footer" class="section-inner thin animated fadeIn faster">
+		<p>&copy; 2019 <a href="//marc.guyer.me">Marc Guyer</a></p>
+		<p>
+			Made with <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> &#183; Theme <a href="https://github.com/Track3/hermit" target="_blank" rel="noopener">Hermit</a>
+		</p>
+	</footer>
+
+
+	<script src="//marc.guyer.me/js/main.min.35ccbf1cdceb91e4c64c06b5d009d6e2977fafe56beda7762febd4e67528d2ac.js" integrity="sha256-Ncy/HNzrkeTGTAa10AnW4pd/r+Vr7ad2L+vU5nUo0qw="></script>
+
+</body>
+
+</html>

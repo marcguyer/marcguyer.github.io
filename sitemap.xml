@@ -3,17 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
-    <loc>//marc.guyer.me/about/</loc>
-    <lastmod>2019-08-03T09:42:49-04:00</lastmod>
+    <loc>//marc.guyer.me/</loc>
+    <lastmod>2019-09-24T17:09:56-04:00</lastmod>
   </url>
   
   <url>
-    <loc>//marc.guyer.me/</loc>
-    <lastmod>2019-08-03T09:42:49-04:00</lastmod>
+    <loc>//marc.guyer.me/tags/mysql/</loc>
+    <lastmod>2019-09-24T17:09:56-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//marc.guyer.me/posts/</loc>
+    <lastmod>2019-09-24T17:09:56-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//marc.guyer.me/posts/recover-xtrabackup/</loc>
+    <lastmod>2019-09-24T17:09:56-04:00</lastmod>
   </url>
   
   <url>
     <loc>//marc.guyer.me/tags/</loc>
+    <lastmod>2019-09-24T17:09:56-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//marc.guyer.me/tags/xtrabackup/</loc>
+    <lastmod>2019-09-24T17:09:56-04:00</lastmod>
+  </url>
+  
+  <url>
+    <loc>//marc.guyer.me/about/</loc>
+    <lastmod>2019-08-03T09:42:49-04:00</lastmod>
   </url>
   
 </urlset>
