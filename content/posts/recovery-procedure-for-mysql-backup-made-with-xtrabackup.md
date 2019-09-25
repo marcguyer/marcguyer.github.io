@@ -39,7 +39,7 @@ The current backup routine uses `innobackupex` to create full snapshot hot backu
 
 #### S3 Bucket Locations
 
-Login to the S3 Management Console to view full backups and incrementals located in the following directories
+In this particular instance, the complete snapshot backup files and the incremental backups are in S3. For example:
 
 * Full Compressed Snapshots
     * s3://my-db-backup/xtrabackups/
@@ -48,7 +48,7 @@ Login to the S3 Management Console to view full backups and incrementals located
 
 #### Create a clean working directory and download the snapshot
 
-Create a temporary directory on the server where you will recover your database
+Create a clean directory on the server where you will work with the backup files
 ```sh
 mkdir /restore_tmp
 ```  
@@ -58,11 +58,13 @@ Download the full snapshot:
 aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup.qp.xbs /restore_tmp/
 ```
 
+_NOTE: We're using the AWS CLI here. Authentication is accomplished with stored credentials for the current user. More about [AWS CLI Configuration](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html)._
+
 ### 2. Decompress Backup File
 
 The following command decompresses the file into the same (current) directory
 ```sh
-xbstream -x < mysqlbackup09-24-2019-16.qp.xbs
+xbstream -x < mysqlbackup.qp.xbs
 ```
 
 **There are still many compressed files in the result!** The next step is to decompress all compressed files in the current directory and can be done like so:
@@ -89,7 +91,7 @@ The datadir must be empty for restoration. Consider backing up what's there if i
 rm -rf /var/lib/mysql/*
 ```
 
-Now, move the backup into the datadir with the `xtrabackup` binary:
+Now, move the backup into the datadir with the `xtrabackup` binary. Note that the `--target-dir` is required and is used to indicate where the files will be moved _from_:
 ```sh
 xtrabackup --move-back --target-dir=.
 ```
@@ -106,9 +108,9 @@ systemctl start mysql
 
 ### Advanced Usage
 
-Do it all in one command -- this is a more efficient use of disk.
+Do it all in one command -- this is a more efficient use of disk since it decompresses the download without saving it to disk first.
 ```sh
-aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup09-24-2019-16.qp.xbs - | \
+aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup.qp.xbs - | \
 xbstream -x --parallel=8 && \
 xtrabackup --decompress --remove-original --parallel=8 --target-dir=. && \
 xtrabackup --prepare --target-dir=. && \
