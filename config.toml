@@ -37,7 +37,13 @@ disqusShortname = "marcguyer"
   # images = [""]
   themeColor = "#494f5c"
 
-  homeSubtitle = "SaaS, API, and Payment Systems Architect"
+  homeSubtitle = "Senior Full Stack Web Systems Architect"
+  homeSubtitles = [
+    "PHP, Zend Framework, and Laminas Specialist",
+    "REST API and Payment Systems Expert",
+    "Open Source Contributor",
+    "Private Pilot"
+  ]
   footerCopyright = ''
   # bgImg = ""  # Homepage background-image URL
 
@@ -50,7 +56,10 @@ disqusShortname = "marcguyer"
   relatedPosts = false  # Add a related content section to all single posts page
 
   # Add custom css
-  customCSS = ["css/avatar.css"]
+  customCSS = [
+    "css/home.css",
+    "css/avatar.css"
+  ]
 
   # Social Icons
   # Check https://github.com/Track3/hermit#social-icons for more info.

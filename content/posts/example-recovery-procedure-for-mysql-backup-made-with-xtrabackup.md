@@ -1,5 +1,5 @@
 ---
-title: "Recovery Procedure for MySQL Backup Made with Xtrabackup"
+title: "Example Recovery Procedure for MySQL Backup Made with Xtrabackup"
 date: 2019-09-24T17:09:56-04:00
 draft: false
 toc: false
@@ -13,7 +13,7 @@ We have a pre-existing procedure for backing up a MySQL database using hot backu
 
 Xtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM tables quickly and _without locking_. There are countless useful features including point-in-time recovery, incremental backups, single table recovery, single partition recovery, I/O throttling, parallel processing, encryption, compression, streaming, and more.
 
-**A recovery procedure document was needed so I wrote one. Here is is.**
+**A basic recovery procedure document was needed so I wrote one. Here is is.**
 
 The pre-existing backup procedure in play has a few quirks:
 

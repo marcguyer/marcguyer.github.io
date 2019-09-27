@@ -1,0 +1,21 @@
+#home-subtitle {
+  margin-top: 0;
+  margin-bottom: 1.5em;
+  text-align: center;
+  line-height: normal;
+  font-size: .8em;
+  font-style: italic;
+  opacity: .9;
+}
+#home-subtitles {
+  margin-top: 0;
+  margin-bottom: .5em;
+  text-align: center;
+  line-height: normal;
+  font-size: .7em;
+  font-style: italic;
+  opacity: .9;
+}
+#home-social {
+    margin-top: .5em;
+}
