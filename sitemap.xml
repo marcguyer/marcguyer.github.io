@@ -3,38 +3,38 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
   <url>
+    <loc>//marc.guyer.me/posts/example-recovery-procedure-for-mysql-backup-made-with-xtrabackup/</loc>
+    <lastmod>2019-09-27T17:45:52-04:00</lastmod>
+  </url>
+  
+  <url>
     <loc>//marc.guyer.me/</loc>
-    <lastmod>2019-09-25T09:19:55-04:00</lastmod>
+    <lastmod>2019-09-27T17:45:52-04:00</lastmod>
   </url>
   
   <url>
     <loc>//marc.guyer.me/tags/mysql/</loc>
-    <lastmod>2019-09-25T09:19:55-04:00</lastmod>
+    <lastmod>2019-09-27T17:45:52-04:00</lastmod>
   </url>
   
   <url>
     <loc>//marc.guyer.me/posts/</loc>
-    <lastmod>2019-09-25T09:19:55-04:00</lastmod>
-  </url>
-  
-  <url>
-    <loc>//marc.guyer.me/posts/recovery-procedure-for-mysql-backup-made-with-xtrabackup/</loc>
-    <lastmod>2019-09-25T09:19:55-04:00</lastmod>
+    <lastmod>2019-09-27T17:45:52-04:00</lastmod>
   </url>
   
   <url>
     <loc>//marc.guyer.me/tags/</loc>
-    <lastmod>2019-09-25T09:19:55-04:00</lastmod>
+    <lastmod>2019-09-27T17:45:52-04:00</lastmod>
   </url>
   
   <url>
     <loc>//marc.guyer.me/tags/xtrabackup/</loc>
-    <lastmod>2019-09-25T09:19:55-04:00</lastmod>
+    <lastmod>2019-09-27T17:45:52-04:00</lastmod>
   </url>
   
   <url>
     <loc>//marc.guyer.me/about/</loc>
-    <lastmod>2019-08-03T11:37:00-04:00</lastmod>
+    <lastmod>2019-09-27T17:45:52-04:00</lastmod>
   </url>
   
 </urlset>
