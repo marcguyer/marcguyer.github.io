@@ -25,6 +25,7 @@ disqusShortname = "marcguyer"
 [taxonomies]
   tag = "tags"
   # Categories are disabled by default.
+  series = "series"
 
 [params]
   dateform        = "2006-01-02"

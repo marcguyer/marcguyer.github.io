@@ -30,9 +30,9 @@ The Resite platform was written initially in PHP3 and as of 2006 was serving the
 
 In 2009, as a cofounder of [SproutBox](http://sproutbox.com), I founded [GetCheddar, Inc](https://www.getcheddar.com).
 
-Since founding GetCheddar (formerly CheddarGetter), I have remained focused as CTO and Full Stack Architect. Cheddar was the first of it's kind to offer a true software-as-a-service recurring billing and payments platform with fully automated merchant self-signup and self-service. Cheddar specializes in providing usage tracking and billing for web application subscriptions.
+Since founding GetCheddar (formerly CheddarGetter), I have remained focused as CTO and Full Stack Architect. Cheddar is the first of it's kind to offer a true software-as-a-service recurring billing and payments platform with fully automated merchant self-signup and self-service. Cheddar specializes in providing usage tracking and billing for web application subscriptions.
 
-The Cheddar platform was initially written in PHP5 and Zend Framework version 1. Initially hosted on the Rackspace Cloud, the entire environment was soon migrated to a proprietary PCI-compliant environment. The hosting environment migration resulted in zerod downtime. Later the codebase was migrated to PHP7 and Zend Framework 2. Most recently, it was rewritten as a pure REST API on Zend Expressive with OAuth2. I wrote 99% of the code.
+The Cheddar platform was initially written in PHP5 and Zend Framework version 1. Initially hosted on the Rackspace Cloud, the entire environment was soon migrated to a proprietary PCI-compliant environment. The hosting environment migration resulted in zero downtime. Later the codebase was migrated to PHP7 and Zend Framework 2. Most recently, it was rewritten as a pure REST API on Zend Expressive with OAuth2. I wrote 99% of the code.
 
 ### The Future
 
