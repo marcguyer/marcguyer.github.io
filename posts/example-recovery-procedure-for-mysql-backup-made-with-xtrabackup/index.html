@@ -60,7 +60,7 @@ Xtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM
   "headline": "Example Recovery Procedure for MySQL Backup Made with Xtrabackup",
   "description" : "We have a pre-existing procedure for backing up a MySQL database using hot backups with the wonderful Percona Xtrabackup and in this case the deprecated innobackupex binary.\nXtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM tables quickly and without locking. There are countless useful features including point-in-time recovery, incremental backups, single table recovery, single partition recovery, I\/O throttling, parallel processing, encryption, compression, streaming, and more.",
   "inLanguage" : "en",
-  "wordCount":  643 ,
+  "wordCount":  633 ,
   "datePublished" : "2019-09-24T17:09:56",
   "dateModified" : "2019-09-24T17:09:56",
   "image" : "https:\/\/www.gravatar.com\/avatar\/e96773ada2643a59cf32d6e1407a7cc8?s=512",
@@ -288,100 +288,30 @@ if (!doNotTrack) {
 </ul>
 <h4 id="create-a-clean-working-directory-and-download-the-snapshot">Create a clean working directory and download the snapshot</h4>
 <p>Create a clean directory on the server where you will work with the backup files</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir /restore_tmp
-</code></pre></td></tr></table>
-</div>
-</div><p>Download the full snapshot:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup.qp.xbs /restore_tmp/
-</code></pre></td></tr></table>
-</div>
-</div><p><em>NOTE: We're using the AWS CLI here. Authentication is accomplished with stored credentials for the current user. More about <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html">AWS CLI Configuration</a>.</em></p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir /restore_tmp
+</code></pre></div><p>Download the full snapshot:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup.qp.xbs /restore_tmp/
+</code></pre></div><p><em>NOTE: We're using the AWS CLI here. Authentication is accomplished with stored credentials for the current user. More about <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html">AWS CLI Configuration</a>.</em></p>
 <h3 id="2-decompress-backup-file">2. Decompress Backup File</h3>
 <p>The following command decompresses the file into the same (current) directory</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xbstream -x &lt; mysqlbackup.qp.xbs
-</code></pre></td></tr></table>
-</div>
-</div><p><strong>There are still many compressed files in the result!</strong> The next step is to decompress all compressed files in the current directory and can be done like so:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xtrabackup --decompress --remove-original --parallel<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span> --target-dir<span style="color:#f92672">=</span>.
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="3-prepare-the-backup-files">3. Prepare the Backup Files</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xbstream -x &lt; mysqlbackup.qp.xbs
+</code></pre></div><p><strong>There are still many compressed files in the result!</strong> The next step is to decompress all compressed files in the current directory and can be done like so:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xtrabackup --decompress --remove-original --parallel<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span> --target-dir<span style="color:#f92672">=</span>.
+</code></pre></div><h3 id="3-prepare-the-backup-files">3. Prepare the Backup Files</h3>
 <p>Next we need to prepare the backup. This step completes any open transactions or rollbacks that happened during the original backup procedure.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xtrabackup --prepare --target-dir<span style="color:#f92672">=</span>.
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="4-restore-the-files">4. Restore the files</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xtrabackup --prepare --target-dir<span style="color:#f92672">=</span>.
+</code></pre></div><h3 id="4-restore-the-files">4. Restore the files</h3>
 <p>The MySQL server must be shut down for this step.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl stop mysql
-</code></pre></td></tr></table>
-</div>
-</div><p>The datadir must be empty for restoration. Consider backing up what's there if it's not empty.</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rm -rf /var/lib/mysql/*
-</code></pre></td></tr></table>
-</div>
-</div><p>Now, move the backup into the datadir with the <code>xtrabackup</code> binary. Note that the <code>--target-dir</code> is required and is used to indicate where the files will be moved <em>from</em>:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xtrabackup --move-back --target-dir<span style="color:#f92672">=</span>.
-</code></pre></td></tr></table>
-</div>
-</div><p>The ownership must change:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">chown -R mysql:mysql /var/lib/mysql
-</code></pre></td></tr></table>
-</div>
-</div><p>Now we can start the server:</p>
-<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
-<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">1
-</span></code></pre></td>
-<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
-<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl start mysql
-</code></pre></td></tr></table>
-</div>
-</div><h3 id="advanced-usage">Advanced Usage</h3>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl stop mysql
+</code></pre></div><p>The datadir must be empty for restoration. Consider backing up what's there if it's not empty.</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rm -rf /var/lib/mysql/*
+</code></pre></div><p>Now, move the backup into the datadir with the <code>xtrabackup</code> binary. Note that the <code>--target-dir</code> is required and is used to indicate where the files will be moved <em>from</em>:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xtrabackup --move-back --target-dir<span style="color:#f92672">=</span>.
+</code></pre></div><p>The ownership must change:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">chown -R mysql:mysql /var/lib/mysql
+</code></pre></div><p>Now we can start the server:</p>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl start mysql
+</code></pre></div><h3 id="advanced-usage">Advanced Usage</h3>
 <p>Do it all in one command &ndash; this is a more efficient use of disk since it decompresses the download without saving it to disk first.</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
@@ -509,7 +439,7 @@ if (!doNotTrack) {
           
           
             <li class="next">
-              <a href="//marc.guyer.me/posts/example-application-with-mezzio-introduction/" data-toggle="tooltip" data-placement="top" title="Example Application with Mezzio: Introduction">Next Post &rarr;</a>
+              <a href="//marc.guyer.me/posts/example-application-with-mezzio/introduction/" data-toggle="tooltip" data-placement="top" title="Example Application with Mezzio: Introduction">Next Post &rarr;</a>
             </li>
           
         </ul>
@@ -616,7 +546,7 @@ if (!doNotTrack) {
         
         <p class="credits theme-by text-muted">
           <a href="https://gohugo.io">Hugo v0.60.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
-          &nbsp;&bull;&nbsp;[<a href="4c2d016bc7d920646c6294df68459829b4c30a8a">4c2d016b</a>]
+          &nbsp;&bull;&nbsp;[<a href="363f2820e1a189703bbaaa5993eeb112ea96a50c">363f2820</a>]
         </p>
       </div>
     </div>
