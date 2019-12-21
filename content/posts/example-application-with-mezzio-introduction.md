@@ -41,3 +41,7 @@ I won't go into any more detail. Since you're here, you've probably already chos
 ## PHPUnit
 
 [PHPUnit](https://phpunit.de/) is the de facto standard framework for automated testing in PHP applications. The [Mezzio Skeleton Application](https://github.com/zendframework/zend-expressive-skeleton) comes with a basic PHPUnit setup.
+
+## What's Next?
+
+The [next post in this series](/posts/example-application-with-mezzio-testing) gets into setting up a good application foundation with automated testing.

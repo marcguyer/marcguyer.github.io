@@ -2,25 +2,80 @@ baseURL = "//marc.guyer.me"
 languageCode = "en-us"
 defaultContentLanguage = "en"
 title = "Marc Guyer"
-theme = "hermit"
+theme = "beautifulhugo"
 enableGitInfo = true
-pygmentsCodefences  = true
-pygmentsUseClasses  = true
+# pygmentsStyle = "trac"
+# pygmentsUseClasses = true
+pygmentsCodeFences = true
+# pygmentsCodefencesGuessSyntax = true
+
 # hasCJKLanguage = true  # If Chinese/Japanese/Korean is your main content language, enable this to make wordCount works right.
 rssLimit = 10  # Maximum number of items in the RSS feed.
 disableKinds = ["RSS"]
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
 enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/functions/emojify/
-# googleAnalytics = "UA-123-45"
+googleAnalytics = "UA-69610431-1"
 disqusShortname = "marcguyer"
 
 [author]
-  name = "Marc Guyer"
+    name = "Marc Guyer"
+    # website = "marc.guyer.me"
+    # email = "marc@guyer.me"
+    # facebook = "marcguyer"
+    github = "marcguyer"
+    gitlab = "marcguyer"
+    # bitbucket = "username"
+    # twitter = "username"
+    # reddit = "username"
+    linkedin = "marcguyer"
+    #xing = "username"
+    stackoverflow = "users/1774759/marcguyer"
+    #snapchat = "username"
+    instagram = "marcguyer"
+    # youtube = "user/username" # or channel/channelname
+    # soundcloud = "username"
+    # spotify = "username"
+    # bandcamp = "username"
+    # itchio = "username"
+    # vk = "username"
+    # paypal = "username"
+    # telegram = "username"
+    # 500px = "username"
+    # codepen = "username"
+    # mastodon = "url"
+    # kaggle = "username"
+    # weibo = "username"
+    slack = "zendframework"
 
-[blackfriday]
-  # hrefTargetBlank = true
-  # noreferrerLinks = true
-  # nofollowLinks = true
+[markup]
+    [markup.goldmark]
+        [markup.goldmark.extensions]
+            definitionList = true
+            footnote = true
+            linkify = true
+            strikethrough = true
+            table = true
+            taskList = true
+            typographer = true
+        [markup.goldmark.parser]
+            attribute = true
+            autoHeadingID = true
+        [markup.goldmark.renderer]
+            hardWraps = false
+            unsafe = true
+            xHTML = false
+    [markup.highlight]
+        codeFences = true
+        hl_Lines = ""
+        lineNoStart = 1
+        lineNos = true
+        lineNumbersInTable = true
+        noClasses = true
+        style = "monokai"
+        tabWidth = 4
+    [markup.tableOfContents]
+        endLevel = 3
+        startLevel = 2
 
 [taxonomies]
   tag = "tags"
@@ -28,17 +83,30 @@ disqusShortname = "marcguyer"
   series = "series"
 
 [params]
+  logo = "https://www.gravatar.com/avatar/e96773ada2643a59cf32d6e1407a7cc8?s=512"
+  favicon = "https://www.gravatar.com/avatar/e96773ada2643a59cf32d6e1407a7cc8?s=512"
+  dateFormat = "2006-01-02"
   dateform        = "2006-01-02"
   dateformShort   = "Jan 2"
   dateformNum     = "2006-01-02"
   dateformNumTime = "2006-01-02 15:04 -0700"
+
+  mainSections = ["posts"]
+  readingTime = true
+  socialShare = true
+  delayDisqus = true
+  showRelatedPosts = true
 
   # Metadata mostly used in document's head
   # description = ""
   # images = [""]
   themeColor = "#494f5c"
 
+  # for beatifulhugo
+  subtitle = "Senior Full Stack Web Systems Architect"
+  # for hermit with my index override
   homeSubtitle = "Senior Full Stack Web Systems Architect"
+  # for hermit with my index override
   homeSubtitles = [
     "PHP, Zend Framework, and Laminas Specialist",
     "REST API and Payment Systems Expert",

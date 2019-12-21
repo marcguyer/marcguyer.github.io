@@ -16,7 +16,7 @@ series:
 
 ## Where do we start?
 
-I think it's a good exercise to start any application with a solid structure for testing the application with automated testing tools. That's why the first post in this series is about testing.
+It's a good choice to start any application with a solid structure for testing the application with automated testing tools. That's why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.
 
 In this post, I'll show a basic setup for testing Mezzio applications. We'll get to some more advanced testing topics in later posts.
 
