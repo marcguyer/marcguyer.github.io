@@ -20,7 +20,7 @@ disqusShortname = "marcguyer"
 [author]
     name = "Marc Guyer"
     # website = "marc.guyer.me"
-    # email = "marc@guyer.me"
+    scrim = "marcguyer"
     # facebook = "marcguyer"
     github = "marcguyer"
     gitlab = "marcguyer"
@@ -96,6 +96,7 @@ disqusShortname = "marcguyer"
   socialShare = true
   delayDisqus = true
   showRelatedPosts = true
+  comments = true
 
   # Metadata mostly used in document's head
   # description = ""
