@@ -49,12 +49,12 @@ In this particular instance, the complete snapshot backup files and the incremen
 #### Create a clean working directory and download the snapshot
 
 Create a clean directory on the server where you will work with the backup files
-```sh
+```sh {linenos=false}
 mkdir /restore_tmp
-```  
+```
 
 Download the full snapshot:
-```sh
+```sh {linenos=false}
 aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup.qp.xbs /restore_tmp/
 ```
 
@@ -63,46 +63,46 @@ _NOTE: We're using the AWS CLI here. Authentication is accomplished with stored 
 ### 2. Decompress Backup File
 
 The following command decompresses the file into the same (current) directory
-```sh
+```sh {linenos=false}
 xbstream -x < mysqlbackup.qp.xbs
 ```
 
 **There are still many compressed files in the result!** The next step is to decompress all compressed files in the current directory and can be done like so:
-```sh
+```sh {linenos=false}
 xtrabackup --decompress --remove-original --parallel=8 --target-dir=.
 ```
 
 ### 3. Prepare the Backup Files
 
 Next we need to prepare the backup. This step completes any open transactions or rollbacks that happened during the original backup procedure.
-```sh
+```sh {linenos=false}
 xtrabackup --prepare --target-dir=.
 ```
 
 ### 4. Restore the files
 
 The MySQL server must be shut down for this step.
-```sh
+```sh {linenos=false}
 systemctl stop mysql
 ```
 
 The datadir must be empty for restoration. Consider backing up what's there if it's not empty.
-```sh
+```sh {linenos=false}
 rm -rf /var/lib/mysql/*
 ```
 
 Now, move the backup into the datadir with the `xtrabackup` binary. Note that the `--target-dir` is required and is used to indicate where the files will be moved _from_:
-```sh
+```sh {linenos=false}
 xtrabackup --move-back --target-dir=.
 ```
 
 The ownership must change:
-```sh
+```sh {linenos=false}
 chown -R mysql:mysql /var/lib/mysql
 ```
 
 Now we can start the server:
-```sh
+```sh {linenos=false}
 systemctl start mysql
 ```
 

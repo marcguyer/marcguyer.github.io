@@ -8,3 +8,5 @@ draft: false
 * REST API and Payment Systems Expert
 * Open Source Contributor
 * Private Pilot
+
+Available for hire - [Ask me anything about your project](//scr.im/marcguyer)
