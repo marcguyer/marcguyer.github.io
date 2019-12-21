@@ -133,45 +133,45 @@ Xtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM
 <h4 id="create-a-clean-working-directory-and-download-the-snapshot">Create a clean working directory and download the snapshot<a href="#create-a-clean-working-directory-and-download-the-snapshot" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h4>
 
 <p>Create a clean directory on the server where you will work with the backup files</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">mkdir /restore_tmp</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">mkdir /restore_tmp</code></pre></div>
 <p>Download the full snapshot:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup.qp.xbs /restore_tmp/</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup.qp.xbs /restore_tmp/</code></pre></div>
 <p><em>NOTE: We&rsquo;re using the AWS CLI here. Authentication is accomplished with stored credentials for the current user. More about <a href="https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-configure.html">AWS CLI Configuration</a>.</em></p>
 
 <h3 id="2-decompress-backup-file">2. Decompress Backup File<a href="#2-decompress-backup-file" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>The following command decompresses the file into the same (current) directory</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">xbstream -x &lt; mysqlbackup.qp.xbs</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xbstream -x &lt; mysqlbackup.qp.xbs</code></pre></div>
 <p><strong>There are still many compressed files in the result!</strong> The next step is to decompress all compressed files in the current directory and can be done like so:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">xtrabackup --decompress --remove-original --parallel<span class="o">=</span><span class="m">8</span> --target-dir<span class="o">=</span>.</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xtrabackup --decompress --remove-original --parallel<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span> --target-dir<span style="color:#f92672">=</span>.</code></pre></div>
 <h3 id="3-prepare-the-backup-files">3. Prepare the Backup Files<a href="#3-prepare-the-backup-files" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>Next we need to prepare the backup. This step completes any open transactions or rollbacks that happened during the original backup procedure.</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">xtrabackup --prepare --target-dir<span class="o">=</span>.</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xtrabackup --prepare --target-dir<span style="color:#f92672">=</span>.</code></pre></div>
 <h3 id="4-restore-the-files">4. Restore the files<a href="#4-restore-the-files" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>The MySQL server must be shut down for this step.</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">systemctl stop mysql</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl stop mysql</code></pre></div>
 <p>The datadir must be empty for restoration. Consider backing up what&rsquo;s there if it&rsquo;s not empty.</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">rm -rf /var/lib/mysql/*</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">rm -rf /var/lib/mysql/*</code></pre></div>
 <p>Now, move the backup into the datadir with the <code>xtrabackup</code> binary. Note that the <code>--target-dir</code> is required and is used to indicate where the files will be moved <em>from</em>:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">xtrabackup --move-back --target-dir<span class="o">=</span>.</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">xtrabackup --move-back --target-dir<span style="color:#f92672">=</span>.</code></pre></div>
 <p>The ownership must change:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">chown -R mysql:mysql /var/lib/mysql</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">chown -R mysql:mysql /var/lib/mysql</code></pre></div>
 <p>Now we can start the server:</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">systemctl start mysql</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">systemctl start mysql</code></pre></div>
 <h3 id="advanced-usage">Advanced Usage<a href="#advanced-usage" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h3>
 
 <p>Do it all in one command &ndash; this is a more efficient use of disk since it decompresses the download without saving it to disk first.</p>
-<div class="highlight"><pre class="chroma"><code class="language-sh" data-lang="sh">aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup.qp.xbs - <span class="p">|</span> <span class="se">\
-</span><span class="se"></span>xbstream -x --parallel<span class="o">=</span><span class="m">8</span> <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>xtrabackup --decompress --remove-original --parallel<span class="o">=</span><span class="m">8</span> --target-dir<span class="o">=</span>. <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>xtrabackup --prepare --target-dir<span class="o">=</span>. <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>systemctl stop mysql <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>rm -rf /var/lib/mysql/* <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>xtrabackup --move-back --target-dir<span class="o">=</span>. <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>chown -R mysql:mysql /var/lib/mysql <span class="o">&amp;&amp;</span> <span class="se">\
-</span><span class="se"></span>systemctl start mysql</code></pre></div>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-sh" data-lang="sh">aws s3 cp s3://my-db-backup/xtrabackups/mysqlbackup.qp.xbs - | <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>xbstream -x --parallel<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span> <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>xtrabackup --decompress --remove-original --parallel<span style="color:#f92672">=</span><span style="color:#ae81ff">8</span> --target-dir<span style="color:#f92672">=</span>. <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>xtrabackup --prepare --target-dir<span style="color:#f92672">=</span>. <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>systemctl stop mysql <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>rm -rf /var/lib/mysql/* <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>xtrabackup --move-back --target-dir<span style="color:#f92672">=</span>. <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>chown -R mysql:mysql /var/lib/mysql <span style="color:#f92672">&amp;&amp;</span> <span style="color:#ae81ff">\
+</span><span style="color:#ae81ff"></span>systemctl start mysql</code></pre></div>
 <ol>
 <li>Download single compressed file from S3 and send to stdin.</li>
 <li>Pipe to decompress the single file (streaming to stdin) into multiple files/directories at the current location. The resulting files and directories still contain compressed files.</li>
@@ -243,6 +243,17 @@ Xtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM
 
 
 	<script src="//marc.guyer.me/js/main.min.35ccbf1cdceb91e4c64c06b5d009d6e2977fafe56beda7762febd4e67528d2ac.js" integrity="sha256-Ncy/HNzrkeTGTAa10AnW4pd/r+Vr7ad2L+vU5nUo0qw="></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-69610431-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
 
 </body>
 

@@ -8,32 +8,29 @@
 	<meta name="theme-color" content="#494f5c">
 	<meta name="msapplication-TileColor" content="#494f5c">
 <meta itemprop="name" content="Example Application with Mezzio: Testing">
-<meta itemprop="description" content="Where do we start? I think it&rsquo;s a good exercise to start any application with a solid structure for testing the application with automated testing tools. That&rsquo;s why the first post in this series is about testing.
-In this post, I&rsquo;ll show a basic setup for testing Mezzio applications. We&rsquo;ll get to some more advanced testing topics in later posts.
-Legacy ZF Testing Tools Those experienced with Zend Framework MVC applications are likely familiar with the zend-test library for ZF3, or Zend\Test for ZF2 and maybe even Zend_Test, the old ZF1 testing framework.">
+<meta itemprop="description" content="Where do we start? It&rsquo;s a good choice to start any application with a solid structure for testing the application with automated testing tools. That&rsquo;s why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.
+In this post, I&rsquo;ll show a basic setup for testing Mezzio applications.">
 
 
 <meta itemprop="datePublished" content="2019-12-01T14:28:49-05:00" />
-<meta itemprop="dateModified" content="2019-12-04T11:01:44-05:00" />
-<meta itemprop="wordCount" content="820">
+<meta itemprop="dateModified" content="2019-12-21T11:34:26-05:00" />
+<meta itemprop="wordCount" content="846">
 
 
 
 <meta itemprop="keywords" content="php,mezzio,laminas,prophecy,phpunit," />
 <meta property="og:title" content="Example Application with Mezzio: Testing" />
-<meta property="og:description" content="Where do we start? I think it&rsquo;s a good exercise to start any application with a solid structure for testing the application with automated testing tools. That&rsquo;s why the first post in this series is about testing.
-In this post, I&rsquo;ll show a basic setup for testing Mezzio applications. We&rsquo;ll get to some more advanced testing topics in later posts.
-Legacy ZF Testing Tools Those experienced with Zend Framework MVC applications are likely familiar with the zend-test library for ZF3, or Zend\Test for ZF2 and maybe even Zend_Test, the old ZF1 testing framework." />
+<meta property="og:description" content="Where do we start? It&rsquo;s a good choice to start any application with a solid structure for testing the application with automated testing tools. That&rsquo;s why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.
+In this post, I&rsquo;ll show a basic setup for testing Mezzio applications." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="//marc.guyer.me/posts/example-application-with-mezzio-testing/" />
 <meta property="article:published_time" content="2019-12-01T14:28:49-05:00" />
-<meta property="article:modified_time" content="2019-12-04T11:01:44-05:00" />
+<meta property="article:modified_time" content="2019-12-21T11:34:26-05:00" />
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="Example Application with Mezzio: Testing"/>
-<meta name="twitter:description" content="Where do we start? I think it&rsquo;s a good exercise to start any application with a solid structure for testing the application with automated testing tools. That&rsquo;s why the first post in this series is about testing.
-In this post, I&rsquo;ll show a basic setup for testing Mezzio applications. We&rsquo;ll get to some more advanced testing topics in later posts.
-Legacy ZF Testing Tools Those experienced with Zend Framework MVC applications are likely familiar with the zend-test library for ZF3, or Zend\Test for ZF2 and maybe even Zend_Test, the old ZF1 testing framework."/>
+<meta name="twitter:description" content="Where do we start? It&rsquo;s a good choice to start any application with a solid structure for testing the application with automated testing tools. That&rsquo;s why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.
+In this post, I&rsquo;ll show a basic setup for testing Mezzio applications."/>
 
 	<link rel="apple-touch-icon" sizes="180x180" href="//www.gravatar.com/avatar/65a09071cad77a42b1421c8119352229?s=180">
 	<link rel="icon" type="image/png" sizes="32x32" href="//www.gravatar.com/avatar/65a09071cad77a42b1421c8119352229?s=32">
@@ -87,7 +84,7 @@ Legacy ZF Testing Tools Those experienced with Zend Framework MVC applications a
 
 <h2 id="where-do-we-start">Where do we start?<a href="#where-do-we-start" class="anchor" aria-hidden="true"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 7h3a5 5 0 0 1 5 5 5 5 0 0 1-5 5h-3m-6 0H6a5 5 0 0 1-5-5 5 5 0 0 1 5-5h3"></path><line x1="8" y1="12" x2="16" y2="12"></line></svg></a></h2>
 
-<p>I think it&rsquo;s a good exercise to start any application with a solid structure for testing the application with automated testing tools. That&rsquo;s why the first post in this series is about testing.</p>
+<p>It&rsquo;s a good choice to start any application with a solid structure for testing the application with automated testing tools. That&rsquo;s why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.</p>
 
 <p>In this post, I&rsquo;ll show a basic setup for testing Mezzio applications. We&rsquo;ll get to some more advanced testing topics in later posts.</p>
 
@@ -106,188 +103,188 @@ Legacy ZF Testing Tools Those experienced with Zend Framework MVC applications a
 <p>I&rsquo;ve created a couple of simple abstract classes that all of my functional tests can extend, making writing new tests fast and easy. These tests use real instances of your application components &ndash; the dependency injection container and the application itself including the middleware pipeline and the routes. In fact the base class might remind you of an application bootstrap like that found in <code>public/index.php</code> in a Mezzio skeleton app.</p>
 
 <p>Here&rsquo;s the base class for all functional tests. You&rsquo;ll note that this does nothing except initialize the application to be tested. Some assumptions must hold true for this to work out of the box. In short, if you start with the Mezzio skeleton, you should be all set. If the paths to your container/pipeline/routes config is non-standard, you might have to do some extra work &ndash; perhaps a symlink or two.</p>
-<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 
-<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+<span style="color:#66d9ef">declare</span>(<span style="color:#a6e22e">strict_types</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>);
 
-<span class="k">namespace</span> <span class="nx">FunctionalTest</span><span class="p">;</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">FunctionalTest</span>;
 
-<span class="k">use</span> <span class="nx">PHPUnit\Framework\TestCase</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Container\ContainerInterface</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Zend\Expressive\Application</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Zend\Expressive\MiddlewareFactory</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Helmich\Psr7Assert\Psr7Assertions</span><span class="p">;</span>
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">PHPUnit\Framework\TestCase</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Psr\Container\ContainerInterface</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Zend\Expressive\Application</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Zend\Expressive\MiddlewareFactory</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Helmich\Psr7Assert\Psr7Assertions</span>;
 
-<span class="sd">/**
-</span><span class="sd"> * {@inheritdoc}
-</span><span class="sd"> */</span>
-<span class="k">abstract</span> <span class="k">class</span> <span class="nc">AbstractFunctionalTest</span> <span class="k">extends</span> <span class="nx">TestCase</span>
-<span class="p">{</span>
-    <span class="k">use</span> <span class="nx">Psr7Assertions</span><span class="p">;</span>
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * {@inheritdoc}
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AbstractFunctionalTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">TestCase</span>
+{
+    <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Psr7Assertions</span>;
 
-    <span class="sd">/** @var ContainerInterface */</span>
-    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$container</span><span class="p">;</span>
+    <span style="color:#e6db74">/** @var ContainerInterface */</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">static</span> $container;
 
-    <span class="sd">/** @var Application */</span>
-    <span class="k">protected</span> <span class="k">static</span> <span class="nv">$app</span><span class="p">;</span>
+    <span style="color:#e6db74">/** @var Application */</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">static</span> $app;
 
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">setUpBeforeClass</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
-    <span class="p">{</span>
-        <span class="k">static</span><span class="o">::</span><span class="na">initContainer</span><span class="p">();</span>
-        <span class="k">static</span><span class="o">::</span><span class="na">initApp</span><span class="p">();</span>
-        <span class="k">static</span><span class="o">::</span><span class="na">initPipeline</span><span class="p">();</span>
-        <span class="k">static</span><span class="o">::</span><span class="na">initRoutes</span><span class="p">();</span>
-    <span class="p">}</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">setUpBeforeClass</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+    {
+        <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span><span style="color:#a6e22e">initContainer</span>();
+        <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span><span style="color:#a6e22e">initApp</span>();
+        <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span><span style="color:#a6e22e">initPipeline</span>();
+        <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span><span style="color:#a6e22e">initRoutes</span>();
+    }
 
-    <span class="k">public</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">tearDownAfterClass</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
-    <span class="p">{</span>
-        <span class="k">static</span><span class="o">::</span><span class="nv">$container</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
-        <span class="k">static</span><span class="o">::</span><span class="nv">$app</span> <span class="o">=</span> <span class="k">null</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">tearDownAfterClass</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+    {
+        <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$container <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+        <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$app <span style="color:#f92672">=</span> <span style="color:#66d9ef">null</span>;
+    }
 
-    <span class="sd">/**
-</span><span class="sd">     * Initialize new container instance.
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">initContainer</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
-    <span class="p">{</span>
-        <span class="k">static</span><span class="o">::</span><span class="nv">$container</span> <span class="o">=</span> <span class="k">require</span> <span class="s1">&#39;config/container.php&#39;</span><span class="p">;</span>
-    <span class="p">}</span>
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Initialize new container instance.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">initContainer</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+    {
+        <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$container <span style="color:#f92672">=</span> <span style="color:#66d9ef">require</span> <span style="color:#e6db74">&#39;config/container.php&#39;</span>;
+    }
 
-    <span class="sd">/**
-</span><span class="sd">     * Initialize app.
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">initApp</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
-    <span class="p">{</span>
-        <span class="k">static</span><span class="o">::</span><span class="nv">$app</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">Application</span><span class="o">::</span><span class="na">class</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Initialize app.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">initApp</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+    {
+        <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$app <span style="color:#f92672">=</span> <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">Application</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>);
+    }
 
-    <span class="sd">/**
-</span><span class="sd">     * Initialize pipeline.
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">initPipeline</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
-    <span class="p">{</span>
-        <span class="p">(</span><span class="k">require</span> <span class="s1">&#39;config/pipeline.php&#39;</span><span class="p">)(</span>
-            <span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="p">,</span>
-            <span class="k">static</span><span class="o">::</span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">MiddlewareFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-            <span class="k">static</span><span class="o">::</span><span class="nv">$container</span>
-        <span class="p">);</span>
-    <span class="p">}</span>
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Initialize pipeline.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">initPipeline</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+    {
+        (<span style="color:#66d9ef">require</span> <span style="color:#e6db74">&#39;config/pipeline.php&#39;</span>)(
+            <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$app,
+            <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">MiddlewareFactory</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>),
+            <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$container
+        );
+    }
 
-    <span class="sd">/**
-</span><span class="sd">     * Initialize routes.
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="k">static</span> <span class="k">function</span> <span class="nf">initRoutes</span><span class="p">()</span><span class="o">:</span> <span class="nx">void</span>
-    <span class="p">{</span>
-        <span class="p">(</span><span class="k">require</span> <span class="s1">&#39;config/routes.php&#39;</span><span class="p">)(</span>
-            <span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="p">,</span>
-            <span class="k">static</span><span class="o">::</span><span class="nv">$container</span><span class="o">-&gt;</span><span class="na">get</span><span class="p">(</span><span class="nx">MiddlewareFactory</span><span class="o">::</span><span class="na">class</span><span class="p">),</span>
-            <span class="k">static</span><span class="o">::</span><span class="nv">$container</span>
-        <span class="p">);</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Initialize routes.
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">static</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">initRoutes</span>()<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span>
+    {
+        (<span style="color:#66d9ef">require</span> <span style="color:#e6db74">&#39;config/routes.php&#39;</span>)(
+            <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$app,
+            <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$container<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">get</span>(<span style="color:#a6e22e">MiddlewareFactory</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>),
+            <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$container
+        );
+    }
+}
 </code></pre></div>
 <p>Any simple tests that require only a minimally bootstrapped application can extend the <code>AbstractFunctionalTest</code> class and test away.</p>
 
 <p>Now it gets a little bit more interesting. Here&rsquo;s an abstract extension that adds some framework for defining REST endpoints to be tested and assertions for testing those endpoints:</p>
-<div class="highlight"><pre class="chroma"><code class="language-php" data-lang="php"><span class="cp">&lt;?php</span>
+<div class="highlight"><pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
 
-<span class="k">declare</span><span class="p">(</span><span class="nx">strict_types</span><span class="o">=</span><span class="mi">1</span><span class="p">);</span>
+<span style="color:#66d9ef">declare</span>(<span style="color:#a6e22e">strict_types</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>);
 
-<span class="k">namespace</span> <span class="nx">FunctionalTest</span><span class="p">;</span>
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">FunctionalTest</span>;
 
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ResponseInterface</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Psr\Http\Message\ServerRequestInterface</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Zend\Diactoros\Stream</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Zend\Diactoros\Request</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Zend\Diactoros\Response</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Zend\Diactoros\ServerRequest</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">Zend\Diactoros\Uri</span><span class="p">;</span>
-<span class="k">use</span> <span class="nx">PHPUnit\Framework\Constraint</span><span class="p">;</span>
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Psr\Http\Message\ResponseInterface</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Psr\Http\Message\ServerRequestInterface</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Zend\Diactoros\Stream</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Zend\Diactoros\Request</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Zend\Diactoros\Response</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Zend\Diactoros\ServerRequest</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Zend\Diactoros\Uri</span>;
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">PHPUnit\Framework\Constraint</span>;
 
-<span class="sd">/**
-</span><span class="sd"> * Abstract to set up functional testing via endpoint provider config.
-</span><span class="sd"> */</span>
-<span class="k">abstract</span> <span class="k">class</span> <span class="nc">AbstractFunctionalEndpointTest</span> <span class="k">extends</span> <span class="nx">AbstractFunctionalTest</span>
-<span class="p">{</span>
-    <span class="sd">/**
-</span><span class="sd">     * Provider for testEndpoint() method.
-</span><span class="sd">     *
-</span><span class="sd">     * @see self::testEndpoint() for provider signature
-</span><span class="sd">     *
-</span><span class="sd">     * @return array
-</span><span class="sd">     */</span>
-    <span class="k">abstract</span> <span class="k">public</span> <span class="k">function</span> <span class="nf">endpointProvider</span><span class="p">()</span><span class="o">:</span> <span class="k">array</span><span class="p">;</span>
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Abstract to set up functional testing via endpoint provider config.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AbstractFunctionalEndpointTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AbstractFunctionalTest</span>
+{
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * Provider for testEndpoint() method.
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @see self::testEndpoint() for provider signature
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return array
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">endpointProvider</span>()<span style="color:#f92672">:</span> <span style="color:#66d9ef">array</span>;
 
-    <span class="sd">/**
-</span><span class="sd">     * @param string $method
-</span><span class="sd">     * @param string $uri
-</span><span class="sd">     * @param array  $requestHeaders
-</span><span class="sd">     * @param array  $body
-</span><span class="sd">     * @param array  $queryParams
-</span><span class="sd">     *
-</span><span class="sd">     * @return ServerRequestInterface
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="k">function</span> <span class="nf">getRequest</span><span class="p">(</span>
-        <span class="nx">string</span> <span class="nv">$method</span><span class="p">,</span>
-        <span class="nx">string</span> <span class="nv">$uri</span><span class="p">,</span>
-        <span class="k">array</span> <span class="nv">$requestHeaders</span> <span class="o">=</span> <span class="p">[],</span>
-        <span class="k">array</span> <span class="nv">$body</span> <span class="o">=</span> <span class="p">[],</span>
-        <span class="k">array</span> <span class="nv">$queryParams</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="p">)</span><span class="o">:</span> <span class="nx">ServerRequestInterface</span> <span class="p">{</span>
-        <span class="nv">$uri</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Uri</span><span class="p">(</span><span class="nv">$uri</span><span class="p">);</span>
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * @param string $method
+</span><span style="color:#e6db74">     * @param string $uri
+</span><span style="color:#e6db74">     * @param array  $requestHeaders
+</span><span style="color:#e6db74">     * @param array  $body
+</span><span style="color:#e6db74">     * @param array  $queryParams
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @return ServerRequestInterface
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">getRequest</span>(
+        <span style="color:#a6e22e">string</span> $method,
+        <span style="color:#a6e22e">string</span> $uri,
+        <span style="color:#66d9ef">array</span> $requestHeaders <span style="color:#f92672">=</span> [],
+        <span style="color:#66d9ef">array</span> $body <span style="color:#f92672">=</span> [],
+        <span style="color:#66d9ef">array</span> $queryParams <span style="color:#f92672">=</span> []
+    )<span style="color:#f92672">:</span> <span style="color:#a6e22e">ServerRequestInterface</span> {
+        $uri <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Uri</span>($uri);
 
-        <span class="k">if</span> <span class="p">(</span><span class="k">null</span> <span class="o">!==</span> <span class="nv">$body</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$bodyStream</span> <span class="o">=</span> <span class="nx">fopen</span><span class="p">(</span><span class="s1">&#39;php://memory&#39;</span><span class="p">,</span> <span class="s1">&#39;r+&#39;</span><span class="p">);</span>
-            <span class="nx">fwrite</span><span class="p">(</span><span class="nv">$bodyStream</span><span class="p">,</span> <span class="nx">json_encode</span><span class="p">(</span><span class="nv">$body</span><span class="p">));</span>
-            <span class="nv">$body</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Stream</span><span class="p">(</span><span class="nv">$bodyStream</span><span class="p">);</span>
-        <span class="p">}</span>
+        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">null</span> <span style="color:#f92672">!==</span> $body) {
+            $bodyStream <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#39;php://memory&#39;</span>, <span style="color:#e6db74">&#39;r+&#39;</span>);
+            <span style="color:#a6e22e">fwrite</span>($bodyStream, <span style="color:#a6e22e">json_encode</span>($body));
+            $body <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Stream</span>($bodyStream);
+        }
 
-        <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="k">empty</span><span class="p">(</span><span class="nv">$queryParams</span><span class="p">))</span> <span class="p">{</span>
-            <span class="nv">$uri</span> <span class="o">=</span> <span class="nv">$uri</span><span class="o">-&gt;</span><span class="na">withQuery</span><span class="p">(</span><span class="nx">http_build_query</span><span class="p">(</span><span class="nv">$queryParams</span><span class="p">));</span>
-        <span class="p">}</span>
+        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#66d9ef">empty</span>($queryParams)) {
+            $uri <span style="color:#f92672">=</span> $uri<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">withQuery</span>(<span style="color:#a6e22e">http_build_query</span>($queryParams));
+        }
 
-        <span class="k">return</span> <span class="k">new</span> <span class="nx">ServerRequest</span><span class="p">(</span>
-            <span class="p">[],</span>
-            <span class="p">[],</span>
-            <span class="nv">$uri</span><span class="p">,</span>
-            <span class="nv">$method</span><span class="p">,</span>
-            <span class="nv">$body</span> <span class="o">??</span> <span class="s1">&#39;php://input&#39;</span><span class="p">,</span>
-            <span class="nv">$requestHeaders</span> <span class="o">??</span> <span class="p">[]</span>
-        <span class="p">);</span>
-    <span class="p">}</span>
+        <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ServerRequest</span>(
+            [],
+            [],
+            $uri,
+            $method,
+            $body <span style="color:#f92672">??</span> <span style="color:#e6db74">&#39;php://input&#39;</span>,
+            $requestHeaders <span style="color:#f92672">??</span> []
+        );
+    }
 
-    <span class="sd">/**
-</span><span class="sd">     * @dataProvider endpointProvider
-</span><span class="sd">     *
-</span><span class="sd">     * @param ServerRequestInterface $request
-</span><span class="sd">     * @param Constraint[] $responseConstraints
-</span><span class="sd">     */</span>
-    <span class="k">public</span> <span class="k">function</span> <span class="nf">testEndpoint</span><span class="p">(</span>
-        <span class="nx">ServerRequestInterface</span> <span class="nv">$request</span><span class="p">,</span>
-        <span class="k">array</span> <span class="nv">$responseConstraints</span> <span class="o">=</span> <span class="p">[]</span>
-    <span class="p">)</span><span class="o">:</span> <span class="nx">void</span> <span class="p">{</span>
-        <span class="nv">$response</span> <span class="o">=</span> <span class="k">static</span><span class="o">::</span><span class="nv">$app</span><span class="o">-&gt;</span><span class="na">handle</span><span class="p">(</span><span class="nv">$request</span><span class="p">);</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertInstanceOf</span><span class="p">(</span><span class="nx">ResponseInterface</span><span class="o">::</span><span class="na">class</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
-        <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertResponseConstraints</span><span class="p">(</span><span class="nv">$responseConstraints</span><span class="p">,</span> <span class="nv">$response</span><span class="p">);</span>
-    <span class="p">}</span>
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * @dataProvider endpointProvider
+</span><span style="color:#e6db74">     *
+</span><span style="color:#e6db74">     * @param ServerRequestInterface $request
+</span><span style="color:#e6db74">     * @param Constraint[] $responseConstraints
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">testEndpoint</span>(
+        <span style="color:#a6e22e">ServerRequestInterface</span> $request,
+        <span style="color:#66d9ef">array</span> $responseConstraints <span style="color:#f92672">=</span> []
+    )<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span> {
+        $response <span style="color:#f92672">=</span> <span style="color:#66d9ef">static</span><span style="color:#f92672">::</span>$app<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">handle</span>($request);
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertInstanceOf</span>(<span style="color:#a6e22e">ResponseInterface</span><span style="color:#f92672">::</span><span style="color:#a6e22e">class</span>, $response);
+        $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertResponseConstraints</span>($responseConstraints, $response);
+    }
 
-    <span class="sd">/**
-</span><span class="sd">     * @param Constraint[]      $responseConstraints
-</span><span class="sd">     * @param ResponseInterface $response
-</span><span class="sd">     */</span>
-    <span class="k">protected</span> <span class="k">function</span> <span class="nf">assertResponseConstraints</span><span class="p">(</span>
-        <span class="k">array</span> <span class="nv">$responseConstraints</span><span class="p">,</span>
-        <span class="nx">ResponseInterface</span> <span class="nv">$response</span>
-    <span class="p">)</span><span class="o">:</span> <span class="nx">void</span> <span class="p">{</span>
-        <span class="k">foreach</span> <span class="p">(</span><span class="nv">$responseConstraints</span> <span class="k">as</span> <span class="nv">$msg</span> <span class="o">=&gt;</span> <span class="nv">$constraint</span><span class="p">)</span> <span class="p">{</span>
-            <span class="nv">$this</span><span class="o">-&gt;</span><span class="na">assertThat</span><span class="p">(</span>
-                <span class="nv">$response</span><span class="p">,</span>
-                <span class="nv">$constraint</span><span class="p">,</span>
-                <span class="nx">is_string</span><span class="p">(</span><span class="nv">$msg</span><span class="p">)</span> <span class="o">?</span> <span class="nv">$msg</span> <span class="o">:</span> <span class="s1">&#39;&#39;</span>
-            <span class="p">);</span>
-        <span class="p">}</span>
-    <span class="p">}</span>
-<span class="p">}</span>
+    <span style="color:#e6db74">/**
+</span><span style="color:#e6db74">     * @param Constraint[]      $responseConstraints
+</span><span style="color:#e6db74">     * @param ResponseInterface $response
+</span><span style="color:#e6db74">     */</span>
+    <span style="color:#66d9ef">protected</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">assertResponseConstraints</span>(
+        <span style="color:#66d9ef">array</span> $responseConstraints,
+        <span style="color:#a6e22e">ResponseInterface</span> $response
+    )<span style="color:#f92672">:</span> <span style="color:#a6e22e">void</span> {
+        <span style="color:#66d9ef">foreach</span> ($responseConstraints <span style="color:#66d9ef">as</span> $msg <span style="color:#f92672">=&gt;</span> $constraint) {
+            $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">assertThat</span>(
+                $response,
+                $constraint,
+                <span style="color:#a6e22e">is_string</span>($msg) <span style="color:#f92672">?</span> $msg <span style="color:#f92672">:</span> <span style="color:#e6db74">&#39;&#39;</span>
+            );
+        }
+    }
+}
 </code></pre></div>
 			</div>
 			<hr class="post-end">
@@ -295,9 +292,9 @@ Legacy ZF Testing Tools Those experienced with Zend Framework MVC applications a
 				<p>
 					<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-tag meta-icon"><path d="M20.59 13.41l-7.17 7.17a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"></path><line x1="7" y1="7" x2="7" y2="7"></line></svg><span class="tag"><a href="//marc.guyer.me/tags/php">php</a></span><span class="tag"><a href="//marc.guyer.me/tags/mezzio">mezzio</a></span><span class="tag"><a href="//marc.guyer.me/tags/laminas">laminas</a></span><span class="tag"><a href="//marc.guyer.me/tags/prophecy">prophecy</a></span><span class="tag"><a href="//marc.guyer.me/tags/phpunit">phpunit</a></span>
 				</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>820 Words</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file-text"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline><line x1="16" y1="13" x2="8" y2="13"></line><line x1="16" y1="17" x2="8" y2="17"></line><polyline points="10 9 9 9 8 9"></polyline></svg>846 Words</p>
 				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>2019-12-01 19:28 &#43;0000</p>
-				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-git-commit"><circle cx="12" cy="12" r="4"></circle><line x1="1.05" y1="12" x2="7" y2="12"></line><line x1="17.01" y1="12" x2="22.96" y2="12"></line></svg><a href="https://github.com/marcguyer/marcguyer.github.io/commit/59a525601f9c6f6a7449354d29d5c9657e5ea91d" target="_blank" rel="noopener">59a5256</a> @ 2019-12-04</p>
+				<p><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-git-commit"><circle cx="12" cy="12" r="4"></circle><line x1="1.05" y1="12" x2="7" y2="12"></line><line x1="17.01" y1="12" x2="22.96" y2="12"></line></svg><a href="https://github.com/marcguyer/marcguyer.github.io/commit/0fa524b3cde32dccb55e4d2de625d5c36be6fd27" target="_blank" rel="noopener">0fa524b</a> @ 2019-12-21</p>
 			</footer>
 		</article>
 		<div class="post-nav thin">
@@ -338,6 +335,17 @@ Legacy ZF Testing Tools Those experienced with Zend Framework MVC applications a
 
 
 	<script src="//marc.guyer.me/js/main.min.35ccbf1cdceb91e4c64c06b5d009d6e2977fafe56beda7762febd4e67528d2ac.js" integrity="sha256-Ncy/HNzrkeTGTAa10AnW4pd/r+Vr7ad2L+vU5nUo0qw="></script>
+<script type="application/javascript">
+var doNotTrack = false;
+if (!doNotTrack) {
+	window.ga=window.ga||function(){(ga.q=ga.q||[]).push(arguments)};ga.l=+new Date;
+	ga('create', 'UA-69610431-1', 'auto');
+	
+	ga('send', 'pageview');
+}
+</script>
+<script async src='https://www.google-analytics.com/analytics.js'></script>
+
 
 </body>
 
