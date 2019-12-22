@@ -1,5 +1,5 @@
 ---
-title: "Example Application with Mezzio: Testing"
+title: "Mezzio Example: Functional Testing"
 date: 2019-12-01T14:28:49-05:00
 draft: false
 toc: false
@@ -11,7 +11,7 @@ tags:
   - prophecy
   - phpunit
 series:
-  - "Example Application with Mezzio"
+  - "Mezzio Example"
 ---
 
 ## Where do we start?

@@ -8,7 +8,7 @@ build:
         code: |
             git submodule update --init --recursive
     - arjen/hugo-build@2.9.1:
-        version: "0.60.1"
+        version: "0.61.0"
         theme: beautifulhugo
         flags: --buildDrafts=true
         force_install: true

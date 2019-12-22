@@ -1,5 +1,5 @@
 ---
-title: "Example Application with Mezzio: Introduction"
+title: "Mezzio Example: Introduction"
 date: 2019-11-04T15:08:36-04:00
 draft: false
 toc: false
@@ -11,16 +11,16 @@ tags:
   - prophecy
   - phpunit
 series:
-  - "Example Application with Mezzio"
+  - "Mezzio Example"
 ---
 
 ## What is this?
 
-Let's create a REST API with [Laminas](https://getlaminas.org/)  [Mezzio](https://getexpressive.org/). In this series, you'll learn how to create a REST API from the ground up. We'll use Mezzio as the base framework, Doctrine for the data layer, OAuth2 for authentication and authorization, and Phpunit for automated testing.
+Let's create a REST API with [Laminas](https://getlaminas.org/)  [Mezzio](https://getexpressive.org/). In this series, you'll learn how to create a REST API from the ground up. We'll use Mezzio as the base framework, Doctrine for the data layer, OAuth2 for authentication and authorization, PHPUnit for automated testing, and several other libraries along the way.
 
 ## Source Code
 
-I've created a new bare-bones application using the [Mezzio Skeleton Application](https://github.com/zendframework/zend-expressive-skeleton) where all the code shown in this series lives. You can install it in your local environment and hack on it all you want. You're also welcome to contribute to the example application via PR. Check it out here:
+I've created a new bare-bones application starting with the [Mezzio Skeleton Application](https://github.com/zendframework/zend-expressive-skeleton) where all the code shown in this series lives. You can install it in your local environment and hack on it all you want. You're also welcome to contribute to the example application via PR. Check it out here:
 
 [Example Application with Mezzio, Doctrine, and OAuth2](https://github.com/marcguyer/mezzio-doctrine-oauth2-example)
 
