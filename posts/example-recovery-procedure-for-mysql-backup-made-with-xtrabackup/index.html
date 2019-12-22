@@ -93,7 +93,7 @@ Xtrabackup is nice since …">
   <meta name="twitter:image" content="https://www.gravatar.com/avatar/e96773ada2643a59cf32d6e1407a7cc8?s=512" />
   <meta name="twitter:card" content="summary" />
   <link href='https://www.gravatar.com/avatar/e96773ada2643a59cf32d6e1407a7cc8?s=512' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.60.1" />
+  <meta name="generator" content="Hugo 0.61.0" />
   <link rel="alternate" href="//marc.guyer.me/index.xml" type="application/rss+xml" title="Marc Guyer"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="//marc.guyer.me/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -252,6 +252,7 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
+
         <p>We have a pre-existing procedure for backing up a MySQL database using hot backups with the wonderful <a href="https://www.percona.com/doc/percona-xtrabackup/2.4/index.html">Percona Xtrabackup</a> and in this case the deprecated <a href="https://www.percona.com/doc/percona-xtrabackup/2.4/innobackupex/innobackupex_option_reference.html">innobackupex</a> binary.</p>
 <p>Xtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM tables quickly and <em>without locking</em>. There are countless useful features including point-in-time recovery, incremental backups, single table recovery, single partition recovery, I/O throttling, parallel processing, encryption, compression, streaming, and more.</p>
 <p><strong>A basic recovery procedure document was needed so I wrote one. Here is is.</strong></p>
@@ -428,6 +429,13 @@ if (!doNotTrack) {
         
 
         
+
+          
+          
+
+          
+          
+
           
 
           
@@ -439,7 +447,7 @@ if (!doNotTrack) {
           
           
             <li class="next">
-              <a href="//marc.guyer.me/posts/example-application-with-mezzio/introduction/" data-toggle="tooltip" data-placement="top" title="Example Application with Mezzio: Introduction">Next Post &rarr;</a>
+              <a href="//marc.guyer.me/posts/mezzio-example/introduction/" data-toggle="tooltip" data-placement="top" title="Mezzio Example: Introduction">Next Post &rarr;</a>
             </li>
           
         </ul>
@@ -449,16 +457,27 @@ if (!doNotTrack) {
       
         
           
-          <div class="disqus-comments">                  
-            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="marc.guyer.me/posts/example-recovery-procedure-for-mysql-backup-made-with-xtrabackup">comments</span></button>
+          <div class="disqus-comments">
             <div id="disqus_thread"></div>
-
-            <script type="text/javascript">
-              var disqus_config = function () {
-              this.page.url = 'marc.guyer.me\/posts\/example-recovery-procedure-for-mysql-backup-made-with-xtrabackup';
-            };
-
-          </script>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "marcguyer" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
           </div>
           
         
@@ -545,8 +564,8 @@ if (!doNotTrack) {
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.60.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
-          &nbsp;&bull;&nbsp;[<a href="363f2820e1a189703bbaaa5993eeb112ea96a50c">363f2820</a>]
+          <a href="https://gohugo.io">Hugo v0.61.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          &nbsp;&bull;&nbsp;[<a href="https://github.com/marcguyer/marcguyer.github.io/commit/363f2820e1a189703bbaaa5993eeb112ea96a50c">363f2820</a>]
         </p>
       </div>
     </div>
@@ -563,28 +582,6 @@ if (!doNotTrack) {
 
 
 
-
-
-
-<script type="text/javascript">
-$(function(){
-  $('#show-comments').on('click', function(){
-    var disqus_shortname = 'marcguyer';
-      
-    (function() {
-      var disqus = document.createElement('script'); 
-      disqus.type = 'text/javascript'; 
-      disqus.async = true;
-      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
-    })();
-      
-    $(this).hide(); 
-    });
-  });
-      
-</script>
-<script id="dsq-count-scr" src="//marcguyer.disqus.com/count.js" async></script>
 
 
 

@@ -7,7 +7,7 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
 
-  <title>Example Application with Mezzio: Testing - Marc Guyer</title>
+  <title>Mezzio Example: Functional Testing - Marc Guyer</title>
   <meta name="description" content="Where do we start? It&#39;s a good choice to start any application with a solid structure for testing the application with automated testing tools. That&#39;s why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.
 In this post, I&#39;ll show a basic setup for testing Mezzio applications.">
   <meta name="author" content="Marc Guyer"/><script type="application/ld+json">
@@ -45,8 +45,8 @@ In this post, I&#39;ll show a basic setup for testing Mezzio applications.">
         "@type": "ListItem",
         "position": 3,
         "item": {
-          "@id": "\/\/marc.guyer.me\/posts\/example-application-with-mezzio\/testing\/",
-          "name": "Example application with mezzio testing"
+          "@id": "\/\/marc.guyer.me\/posts\/mezzio-example\/testing\/",
+          "name": "Mezzio example functional testing"
         }
     }]
 }
@@ -57,7 +57,7 @@ In this post, I&#39;ll show a basic setup for testing Mezzio applications.">
   "author": {
     "name" : "Marc Guyer"
   },
-  "headline": "Example Application with Mezzio: Testing",
+  "headline": "Mezzio Example: Functional Testing",
   "description" : "Where do we start? It\x27s a good choice to start any application with a solid structure for testing the application with automated testing tools. That\x27s why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.\nIn this post, I\x27ll show a basic setup for testing Mezzio applications.",
   "inLanguage" : "en",
   "wordCount":  1024 ,
@@ -65,7 +65,7 @@ In this post, I&#39;ll show a basic setup for testing Mezzio applications.">
   "dateModified" : "2019-12-01T14:28:49",
   "image" : "https:\/\/www.gravatar.com\/avatar\/e96773ada2643a59cf32d6e1407a7cc8?s=512",
   "keywords" : [ "php, mezzio, laminas, prophecy, phpunit" ],
-  "mainEntityOfPage" : "\/\/marc.guyer.me\/posts\/example-application-with-mezzio\/testing\/",
+  "mainEntityOfPage" : "\/\/marc.guyer.me\/posts\/mezzio-example\/testing\/",
   "publisher" : {
     "@type": "Organization",
     "name" : "\/\/marc.guyer.me",
@@ -79,20 +79,20 @@ In this post, I&#39;ll show a basic setup for testing Mezzio applications.">
 }
 </script>
 
-<meta property="og:title" content="Example Application with Mezzio: Testing" />
+<meta property="og:title" content="Mezzio Example: Functional Testing" />
 <meta property="og:description" content="Where do we start? It&#39;s a good choice to start any application with a solid structure for testing the application with automated testing tools. That&#39;s why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.
 In this post, I&#39;ll show a basic setup for testing Mezzio applications.">
 <meta property="og:image" content="https://www.gravatar.com/avatar/e96773ada2643a59cf32d6e1407a7cc8?s=512" />
-<meta property="og:url" content="//marc.guyer.me/posts/example-application-with-mezzio/testing/" />
+<meta property="og:url" content="//marc.guyer.me/posts/mezzio-example/testing/" />
 <meta property="og:type" content="website" />
 <meta property="og:site_name" content="Marc Guyer" />
 
-  <meta name="twitter:title" content="Example Application with Mezzio: Testing" />
+  <meta name="twitter:title" content="Mezzio Example: Functional Testing" />
   <meta name="twitter:description" content="Where do we start? It&#39;s a good choice to start any application with a solid structure for testing the application with automated testing tools. That&#39;s why the first post in this series is about …">
   <meta name="twitter:image" content="https://www.gravatar.com/avatar/e96773ada2643a59cf32d6e1407a7cc8?s=512" />
   <meta name="twitter:card" content="summary" />
   <link href='https://www.gravatar.com/avatar/e96773ada2643a59cf32d6e1407a7cc8?s=512' rel='icon' type='image/x-icon'/>
-  <meta name="generator" content="Hugo 0.60.1" />
+  <meta name="generator" content="Hugo 0.61.0" />
   <link rel="alternate" href="//marc.guyer.me/index.xml" type="application/rss+xml" title="Marc Guyer"><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css" integrity="sha384-9eLZqc9ds8eNjO3TmqPeYcDj8n+Qfa4nuSiGYa6DjLNcv9BtN69ZIulL9+8CqC9Y" crossorigin="anonymous">
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous"><link rel="stylesheet" href="//marc.guyer.me/css/main.css" /><link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lora:400,700,400italic,700italic" />
@@ -231,7 +231,7 @@ if (!doNotTrack) {
           <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
             <div class="posts-heading">
               
-                <h1>Example Application with Mezzio: Testing</h1>
+                <h1>Mezzio Example: Functional Testing</h1>
               
               
                 <hr class="small">
@@ -251,6 +251,7 @@ if (!doNotTrack) {
   <div class="row">
     <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
       <article role="main" class="blog-post">
+
         <h2 id="where-do-we-start">Where do we start?</h2>
 <p>It's a good choice to start any application with a solid structure for testing the application with automated testing tools. That's why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.</p>
 <p>In this post, I'll show a basic setup for testing Mezzio applications. We'll get to some more advanced testing topics in later posts.</p>
@@ -660,42 +661,42 @@ if (!doNotTrack) {
     <ul class="share">
       
       <li>
-        <a href="//twitter.com/share?url=%2f%2fmarc.guyer.me%2fposts%2fexample-application-with-mezzio%2ftesting%2f&amp;text=Example%20Application%20with%20Mezzio%3a%20Testing&amp;via=" target="_blank" title="Share on Twitter">
+        <a href="//twitter.com/share?url=%2f%2fmarc.guyer.me%2fposts%2fmezzio-example%2ftesting%2f&amp;text=Mezzio%20Example%3a%20Functional%20Testing&amp;via=" target="_blank" title="Share on Twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.facebook.com/sharer/sharer.php?u=%2f%2fmarc.guyer.me%2fposts%2fexample-application-with-mezzio%2ftesting%2f" target="_blank" title="Share on Facebook">
+        <a href="//www.facebook.com/sharer/sharer.php?u=%2f%2fmarc.guyer.me%2fposts%2fmezzio-example%2ftesting%2f" target="_blank" title="Share on Facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//reddit.com/submit?url=%2f%2fmarc.guyer.me%2fposts%2fexample-application-with-mezzio%2ftesting%2f&amp;title=Example%20Application%20with%20Mezzio%3a%20Testing" target="_blank" title="Share on Reddit">
+        <a href="//reddit.com/submit?url=%2f%2fmarc.guyer.me%2fposts%2fmezzio-example%2ftesting%2f&amp;title=Mezzio%20Example%3a%20Functional%20Testing" target="_blank" title="Share on Reddit">
           <i class="fab fa-reddit"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.linkedin.com/shareArticle?url=%2f%2fmarc.guyer.me%2fposts%2fexample-application-with-mezzio%2ftesting%2f&amp;title=Example%20Application%20with%20Mezzio%3a%20Testing" target="_blank" title="Share on LinkedIn">
+        <a href="//www.linkedin.com/shareArticle?url=%2f%2fmarc.guyer.me%2fposts%2fmezzio-example%2ftesting%2f&amp;title=Mezzio%20Example%3a%20Functional%20Testing" target="_blank" title="Share on LinkedIn">
           <i class="fab fa-linkedin"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.stumbleupon.com/submit?url=%2f%2fmarc.guyer.me%2fposts%2fexample-application-with-mezzio%2ftesting%2f&amp;title=Example%20Application%20with%20Mezzio%3a%20Testing" target="_blank" title="Share on StumbleUpon">
+        <a href="//www.stumbleupon.com/submit?url=%2f%2fmarc.guyer.me%2fposts%2fmezzio-example%2ftesting%2f&amp;title=Mezzio%20Example%3a%20Functional%20Testing" target="_blank" title="Share on StumbleUpon">
           <i class="fab fa-stumbleupon"></i>
         </a>
       </li>
   
       
       <li>
-        <a href="//www.pinterest.com/pin/create/button/?url=%2f%2fmarc.guyer.me%2fposts%2fexample-application-with-mezzio%2ftesting%2f&amp;description=Example%20Application%20with%20Mezzio%3a%20Testing" target="_blank" title="Share on Pinterest">
+        <a href="//www.pinterest.com/pin/create/button/?url=%2f%2fmarc.guyer.me%2fposts%2fmezzio-example%2ftesting%2f&amp;description=Mezzio%20Example%3a%20Functional%20Testing" target="_blank" title="Share on Pinterest">
           <i class="fab fa-pinterest"></i>
         </a>
       </li>
@@ -708,18 +709,29 @@ if (!doNotTrack) {
         
 
         
+
+          
           
             
+            
+            <h4 class="see-also">Series: Mezzio Example</h4>
+            <ol>
+                
+                    <li>
+                        <a href="/posts/mezzio-example/introduction/">Mezzio Example: Introduction</a>
+                    </li>
+                
+                    <li>
+                        <a href="/posts/mezzio-example/testing/">Mezzio Example: Functional Testing</a>
+                    </li>
+                
+            </ol>
           
 
           
-                  <h4 class="see-also">See also</h4>
-                  <ul>
-                
-                
-                    <li><a href="/posts/example-application-with-mezzio/introduction/">Example Application with Mezzio: Introduction</a></li>
-                
-              </ul>
+          
+
+          
 
           
         
@@ -729,7 +741,7 @@ if (!doNotTrack) {
         <ul class="pager blog-pager">
           
             <li class="previous">
-              <a href="//marc.guyer.me/posts/example-application-with-mezzio/introduction/" data-toggle="tooltip" data-placement="top" title="Example Application with Mezzio: Introduction">&larr; Previous Post</a>
+              <a href="//marc.guyer.me/posts/mezzio-example/introduction/" data-toggle="tooltip" data-placement="top" title="Mezzio Example: Introduction">&larr; Previous Post</a>
             </li>
           
           
@@ -740,16 +752,27 @@ if (!doNotTrack) {
       
         
           
-          <div class="disqus-comments">                  
-            <button id="show-comments" class="btn btn-default" type="button">Show <span class="disqus-comment-count" data-disqus-url="marc.guyer.me/posts/example-application-with-mezzio/testing">comments</span></button>
+          <div class="disqus-comments">
             <div id="disqus_thread"></div>
-
-            <script type="text/javascript">
-              var disqus_config = function () {
-              this.page.url = 'marc.guyer.me\/posts\/example-application-with-mezzio\/testing';
-            };
-
-          </script>
+<script type="application/javascript">
+    var disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "marcguyer" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">comments powered by <span class="logo-disqus">Disqus</span></a>
           </div>
           
         
@@ -836,8 +859,8 @@ if (!doNotTrack) {
         </p>
         
         <p class="credits theme-by text-muted">
-          <a href="https://gohugo.io">Hugo v0.60.1</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
-          &nbsp;&bull;&nbsp;[<a href="363f2820e1a189703bbaaa5993eeb112ea96a50c">363f2820</a>]
+          <a href="https://gohugo.io">Hugo v0.61.0</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
+          &nbsp;&bull;&nbsp;[<a href="https://github.com/marcguyer/marcguyer.github.io/commit/2c6711524e552f0672ad3bec68206afb7d8ae6f9">2c671152</a>]
         </p>
       </div>
     </div>
@@ -854,28 +877,6 @@ if (!doNotTrack) {
 
 
 
-
-
-
-<script type="text/javascript">
-$(function(){
-  $('#show-comments').on('click', function(){
-    var disqus_shortname = 'marcguyer';
-      
-    (function() {
-      var disqus = document.createElement('script'); 
-      disqus.type = 'text/javascript'; 
-      disqus.async = true;
-      disqus.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-      (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(disqus);
-    })();
-      
-    $(this).hide(); 
-    });
-  });
-      
-</script>
-<script id="dsq-count-scr" src="//marcguyer.disqus.com/count.js" async></script>
 
 
 
