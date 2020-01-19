@@ -160,5 +160,5 @@ disqusShortname = "marcguyer"
 
   [[menu.main]]
     name = "Contact"
-    url = "about/#contact"
-    weight = 20
+    url = "contact/"
+    weight = 30
