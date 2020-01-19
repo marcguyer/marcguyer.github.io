@@ -1,6 +1,6 @@
 [[social_icons]]
-id = "scrim"
-url = "//scr.im/%s"
+id = "email"
+url = "%s"
 title = "Email me"
 icon = "fas fa-envelope"
 

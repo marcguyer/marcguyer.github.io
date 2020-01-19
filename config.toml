@@ -2,7 +2,7 @@ baseURL = "//marc.guyer.me"
 languageCode = "en-us"
 defaultContentLanguage = "en"
 title = "Marc Guyer"
-theme = "beautifulhugo"
+theme = ["hugo-cloak-email", "beautifulhugo"]
 enableGitInfo = true
 # pygmentsStyle = "trac"
 # pygmentsUseClasses = true
@@ -20,7 +20,7 @@ disqusShortname = "marcguyer"
 [author]
     name = "Marc Guyer"
     # website = "marc.guyer.me"
-    scrim = "marcguyer"
+    email = "/about#contact"
     # facebook = "marcguyer"
     github = "marcguyer"
     gitlab = "marcguyer"
@@ -104,12 +104,12 @@ disqusShortname = "marcguyer"
   themeColor = "#494f5c"
 
   # for beatifulhugo
-  subtitle = "Senior Full Stack Web Systems Architect"
+  subtitle = "Senior Full Stack Web Systems Engineer"
   # for hermit with my index override
-  homeSubtitle = "Senior Full Stack Web Systems Architect"
+  homeSubtitle = "Senior Full Stack Web Systems Engineer"
   # for hermit with my index override
   homeSubtitles = [
-    "PHP, Zend Framework, and Laminas Specialist",
+    "PHP, and Laminas (FKA Zend Framework) Specialist",
     "REST API and Payment Systems Expert",
     "Open Source Contributor",
     "Private Pilot"
@@ -126,7 +126,7 @@ disqusShortname = "marcguyer"
 
   relatedPosts = false  # Add a related content section to all single posts page
 
-  # Add custom css
+  # Add custom css (hermit)
   customCSS = [
     "css/home.css",
     "css/avatar.css"
@@ -156,4 +156,9 @@ disqusShortname = "marcguyer"
   [[menu.main]]
     name = "About"
     url = "about/"
+    weight = 20
+
+  [[menu.main]]
+    name = "Contact"
+    url = "about/#contact"
     weight = 20

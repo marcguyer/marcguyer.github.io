@@ -29,11 +29,43 @@
           {{ if .Params.series }}
             {{ $series := index .Params.series 0 }}
             {{ $.Scratch.Set "seriesPages" (where .Site.Pages ".Params.series" "intersect" (first 1 .Params.series)) }}
+
+            {{ $seriesSorted := sort ($.Scratch.Get "seriesPages") ".Date" }}
+            {{ $.Scratch.Set "prevInSeries" nil }}
+            {{ $.Scratch.Set "nextInSeriesIdx" nil }}
+            {{ range $idx, $page := $seriesSorted }}
+                {{ if eq $page.RelPermalink $.RelPermalink }}
+                    {{ if index $seriesSorted (sub $idx 1) }}
+                        {{ $.Scratch.Set "prevInSeries" (index $seriesSorted (sub $idx 1))  }}
+                    {{ end }}
+                    {{ if index $seriesSorted (add $idx 1) }}
+                        {{ $.Scratch.Set "nextInSeries" (index $seriesSorted (add $idx 1))  }}
+                    {{ end }}
+                {{ end }}
+            {{ end }}
+
+            <ul class="pager blog-pager series-pager">
+              {{ with ($.Scratch.Get "prevInSeries") }}
+                <li class="previous">
+                  <a href="{{ .RelPermalink }}" data-toggle="tooltip" data-placement="top" title="{{ .Title }}">&larr; Previous in Series</a>
+                </li>
+              {{ end }}
+              {{ with ($.Scratch.Get "nextInSeries") }}
+                <li class="next">
+                  <a href="{{ .RelPermalink }}" data-toggle="tooltip" data-placement="top" title="{{ .Title }}">Next in Series &rarr;</a>
+                </li>
+              {{ end }}
+            </ul>
+
             <h4 class="see-also">Series: {{ $series }}</h4>
             <ol>
                 {{ range sort (where .Site.Pages ".Params.series" "intersect" (first 1 .Params.series)) ".Date" }}
                     <li>
-                        <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        {{ if eq .RelPermalink $.RelPermalink }}
+                            {{ .Title }}
+                        {{ else }}
+                            <a href="{{ .RelPermalink }}">{{ .Title }}</a>
+                        {{ end }}
                     </li>
                 {{ end }}
             </ol>

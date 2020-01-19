@@ -22,6 +22,8 @@ I live in downtown Bloomington, Indiana, with [Kate](https://www.kategalvin.com/
 
 ### The Past
 
+{{< youtube 2IPAOxrH7Ro >}}
+
 Way back in the year 2000, I cofounded [Resite Information Technology](http://resiteit.com/). Amazingly as of this writing, that site remains up. After selling the company in 2007, the name was changed to [Resite Online](http://www.resiteonline.com/). That's right, "online."
 
 The Resite platform was written initially in PHP3 and as of 2006 was serving the automated payment acceptance needs of thousands of large apartment complexes in 40 states in the US. Resite was the very first to serve the multi-family industry with a system that enabled tenants to set up automated rent payments via credit card and ACH. I wrote 90% of the code.
@@ -32,8 +34,8 @@ In 2009, as a cofounder of [SproutBox](http://sproutbox.com), I founded [GetChed
 
 Since founding GetCheddar (formerly CheddarGetter), I have remained focused as CTO and Full Stack Architect. Cheddar is the first of it's kind to offer a true software-as-a-service recurring billing and payments platform with fully automated merchant self-signup and self-service. Cheddar specializes in providing usage tracking and billing for web application subscriptions.
 
-The Cheddar platform was initially written in PHP5 and Zend Framework version 1. Initially hosted on the Rackspace Cloud, the entire environment was soon migrated to a proprietary PCI-compliant environment. The hosting environment migration resulted in zero downtime. Later the codebase was migrated to PHP7 and Zend Framework 2. Most recently, it was rewritten as a pure REST API on Zend Expressive with OAuth2. I wrote 99% of the code.
+The Cheddar platform was initially written in PHP5 and Zend Framework version 1. Initially hosted on the Rackspace Cloud, the entire environment was soon migrated to a proprietary PCI-compliant environment. The hosting environment migration resulted in zero downtime. Later the codebase was migrated to PHP7 and Zend Framework v2. Most recently, it was rewritten as a pure REST API using the middleware pattern via [Mezzio](https://getlaminas.org/) (FKA Zend Framework Expressive) with OAuth2. I wrote 99% of the code.
 
-### The Future
+### The Future {#contact}
 
-I'm not really sure. You can help define this.
+I'm currently available for hire. Ask me anything about your project - {{< cloakemail "marc@guyer.me" >}}

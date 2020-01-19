@@ -12,6 +12,8 @@ tags:
   - phpunit
 series:
   - "Mezzio Example"
+aliases:
+  - "/posts/mezzio-example/testing"
 ---
 
 ## Where do we start?
