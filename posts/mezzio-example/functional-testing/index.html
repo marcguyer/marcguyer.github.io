@@ -60,7 +60,7 @@ In this post, I&#39;ll show a basic setup for testing Mezzio applications.">
   "headline": "Mezzio Example: Functional Testing",
   "description" : "Where do we start? It\x27s a good choice to start any application with a solid structure for testing the application with automated testing tools. That\x27s why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.\nIn this post, I\x27ll show a basic setup for testing Mezzio applications.",
   "inLanguage" : "en",
-  "wordCount":  981 ,
+  "wordCount":  1115 ,
   "datePublished" : "2019-12-01T14:28:49",
   "dateModified" : "2019-12-01T14:28:49",
   "image" : "https:\/\/www.gravatar.com\/avatar\/e96773ada2643a59cf32d6e1407a7cc8?s=512",
@@ -347,9 +347,6 @@ if (!doNotTrack) {
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">74
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">75
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">76
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">77
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">78
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">79
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
@@ -364,9 +361,6 @@ if (!doNotTrack) {
 <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">PHPUnit\Framework\TestCase</span>;
 <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Psr\Container\ContainerInterface</span>;
 
-<span style="color:#e6db74">/**
-</span><span style="color:#e6db74"> * {@inheritdoc}
-</span><span style="color:#e6db74"> */</span>
 <span style="color:#66d9ef">abstract</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AbstractFunctionalTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">TestCase</span>
 {
     <span style="color:#66d9ef">use</span> <span style="color:#a6e22e">Psr7Assertions</span>;
@@ -433,8 +427,9 @@ if (!doNotTrack) {
 }
 </code></pre></td></tr></table>
 </div>
-</div><p>Any simple tests that require only a minimally bootstrapped application can extend the <code>AbstractFunctionalTest</code> class and test away.</p>
-<p>Now it gets a little bit more interesting. Here's an abstract extension that adds some framework for defining REST endpoints to be tested and assertions for testing those endpoints:</p>
+</div>
+<p>Any simple tests that require only a minimally bootstrapped application can extend the <code>AbstractFunctionalTest</code> class and test away.</p>
+<p>Now it gets a little bit more interesting. Here's an abstract extension that adds some framework for defining REST endpoints in a PHPUnit <code>@dataProvider</code> to be tested and the constraints to assert for those endpoints:</p>
 <div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
 <table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
@@ -520,10 +515,6 @@ if (!doNotTrack) {
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">81
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">82
 </span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">83
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">84
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">85
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">86
-</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">87
 </span></code></pre></td>
 <td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
 <pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
@@ -558,16 +549,10 @@ if (!doNotTrack) {
         <span style="color:#66d9ef">array</span> $body <span style="color:#f92672">=</span> [],
         <span style="color:#66d9ef">array</span> $queryParams <span style="color:#f92672">=</span> []
     )<span style="color:#f92672">:</span> <span style="color:#a6e22e">ServerRequestInterface</span> {
-        $uri <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Uri</span>($uri);
-
-        <span style="color:#66d9ef">if</span> (<span style="color:#66d9ef">null</span> <span style="color:#f92672">!==</span> $body) {
+        <span style="color:#66d9ef">if</span> ($body) {
             $bodyStream <span style="color:#f92672">=</span> <span style="color:#a6e22e">fopen</span>(<span style="color:#e6db74">&#39;php://memory&#39;</span>, <span style="color:#e6db74">&#39;r+&#39;</span>);
             <span style="color:#a6e22e">fwrite</span>($bodyStream, <span style="color:#a6e22e">json_encode</span>($body));
             $body <span style="color:#f92672">=</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">Stream</span>($bodyStream);
-        }
-
-        <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span><span style="color:#66d9ef">empty</span>($queryParams)) {
-            $uri <span style="color:#f92672">=</span> $uri<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">withQuery</span>(<span style="color:#a6e22e">http_build_query</span>($queryParams));
         }
 
         <span style="color:#66d9ef">return</span> <span style="color:#66d9ef">new</span> <span style="color:#a6e22e">ServerRequest</span>(
@@ -576,7 +561,9 @@ if (!doNotTrack) {
             $uri,
             $method,
             $body <span style="color:#f92672">??</span> <span style="color:#e6db74">&#39;php://input&#39;</span>,
-            $requestHeaders <span style="color:#f92672">??</span> []
+            $requestHeaders <span style="color:#f92672">??</span> [],
+            [],
+            $queryParams
         );
     }
 
@@ -616,6 +603,78 @@ if (!doNotTrack) {
 </code></pre></td></tr></table>
 </div>
 </div>
+<p>Now we can actually define a test. Here's a simple implementation of ab endpoint test for <code>GET /api/ping</code>. Note that going forward, we only need to define an array of endpoints to be tested:</p>
+<div class="highlight"><div style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4">
+<table style="border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block;"><tr><td style="vertical-align:top;padding:0;margin:0;border:0;">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 1
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 2
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 3
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 4
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 5
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 6
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 7
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 8
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f"> 9
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">10
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">11
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">12
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">13
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">14
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">15
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">16
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">17
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">18
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">19
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">20
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">21
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">22
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">23
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">24
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">25
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">26
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">27
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">28
+</span><span style="margin-right:0.4em;padding:0 0.4em 0 0.4em;color:#7f7f7f">29
+</span></code></pre></td>
+<td style="vertical-align:top;padding:0;margin:0;border:0;;width:100%">
+<pre style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4"><code class="language-php" data-lang="php"><span style="color:#75715e">&lt;?php</span>
+
+<span style="color:#66d9ef">declare</span>(<span style="color:#a6e22e">strict_types</span><span style="color:#f92672">=</span><span style="color:#ae81ff">1</span>);
+
+<span style="color:#66d9ef">namespace</span> <span style="color:#a6e22e">FunctionalTest</span>;
+
+<span style="color:#66d9ef">use</span> <span style="color:#a6e22e">PHPUnit\Framework\Assert</span>;
+
+<span style="color:#e6db74">/**
+</span><span style="color:#e6db74"> * Tests only PING.
+</span><span style="color:#e6db74"> */</span>
+<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">PingTest</span> <span style="color:#66d9ef">extends</span> <span style="color:#a6e22e">AbstractEndpointTest</span>
+{
+    <span style="color:#66d9ef">public</span> <span style="color:#66d9ef">function</span> <span style="color:#a6e22e">endpointProvider</span>()<span style="color:#f92672">:</span> <span style="color:#66d9ef">array</span>
+    {
+        <span style="color:#66d9ef">return</span> [
+            <span style="color:#75715e">// GET /api/ping
+</span><span style="color:#75715e"></span>            <span style="color:#e6db74">&#39;api.ping.get&#39;</span> <span style="color:#f92672">=&gt;</span> [
+                $this<span style="color:#f92672">-&gt;</span><span style="color:#a6e22e">getRequest</span>(<span style="color:#e6db74">&#39;GET&#39;</span>, <span style="color:#e6db74">&#39;/api/ping&#39;</span>),
+                [
+                    <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">isSuccess</span>(),
+                    <span style="color:#a6e22e">self</span><span style="color:#f92672">::</span><span style="color:#a6e22e">bodyMatchesJson</span>([
+                        <span style="color:#e6db74">&#39;ack&#39;</span> <span style="color:#f92672">=&gt;</span> <span style="color:#a6e22e">Assert</span><span style="color:#f92672">::</span><span style="color:#a6e22e">greaterThanOrEqual</span>(<span style="color:#a6e22e">time</span>()),
+                    ]),
+                ],
+            ],
+        ];
+    }
+}
+</code></pre></td></tr></table>
+</div>
+</div>
+<p>The result of the above example is a test of the <code>GET /api/ping</code> route, asserting simply that:</p>
+<ol>
+<li>Response code is &gt;=200 and &lt;300</li>
+<li>Response body contains JSON with a property called <code>ack</code> with a value of the current time in UNIX timestamp format.</li>
+</ol>
+
 
         
           <div class="blog-tags">
@@ -870,7 +929,7 @@ if (!doNotTrack) {
         
         <p class="credits theme-by text-muted">
           <a href="https://gohugo.io">Hugo v0.62.2</a> powered &nbsp;&bull;&nbsp; Theme <a href="https://github.com/halogenica/beautifulhugo">Beautiful Hugo</a> adapted from <a href="https://deanattali.com/beautiful-jekyll/">Beautiful Jekyll</a>
-          &nbsp;&bull;&nbsp;[<a href="https://github.com/marcguyer/marcguyer.github.io/commit/257d08b1ff154291af9e73b01d0f280791a3a8a3">257d08b1</a>]
+          &nbsp;&bull;&nbsp;[<a href="https://github.com/marcguyer/marcguyer.github.io/commit/c9d79bc5462d9592500ad221ccf16a2a4c88a33e">c9d79bc5</a>]
         </p>
       </div>
     </div>
