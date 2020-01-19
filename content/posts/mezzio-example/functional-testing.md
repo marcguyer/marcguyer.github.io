@@ -38,178 +38,25 @@ I've created a couple of simple abstract classes that all of my functional tests
 
 Here's the base class for all functional tests. You'll note that this does nothing except initialize the application to be tested. Some assumptions must hold true for this to work out of the box. In short, if you start with the Mezzio skeleton, you should be all set. If the paths to your container/pipeline/routes config is non-standard, you might have to do some extra work -- perhaps a symlink or two.
 
-```php
-<?php
-
-declare(strict_types=1);
-
-namespace FunctionalTest;
-
-use Helmich\Psr7Assert\Psr7Assertions;
-use Mezzio\Application;
-use Mezzio\MiddlewareFactory;
-use PHPUnit\Framework\TestCase;
-use Psr\Container\ContainerInterface;
-
-/**
- * {@inheritdoc}
- */
-abstract class AbstractFunctionalTest extends TestCase
-{
-    use Psr7Assertions;
-
-    /** @var ContainerInterface */
-    protected static $container;
-
-    /** @var Application */
-    protected static $app;
-
-    public static function setUpBeforeClass(): void
-    {
-        static::initContainer();
-        static::initApp();
-        static::initPipeline();
-        static::initRoutes();
-    }
-
-    public static function tearDownAfterClass(): void
-    {
-        static::$container = null;
-        static::$app = null;
-    }
-
-    /**
-     * Initialize new container instance.
-     */
-    protected static function initContainer(): void
-    {
-        static::$container = require 'config/container.php';
-    }
-
-    /**
-     * Initialize app.
-     */
-    protected static function initApp(): void
-    {
-        static::$app = static::$container->get(Application::class);
-    }
-
-    /**
-     * Initialize pipeline.
-     */
-    protected static function initPipeline(): void
-    {
-        (require 'config/pipeline.php')(
-            static::$app,
-            static::$container->get(MiddlewareFactory::class),
-            static::$container
-        );
-    }
-
-    /**
-     * Initialize routes.
-     */
-    protected static function initRoutes(): void
-    {
-        (require 'config/routes.php')(
-            static::$app,
-            static::$container->get(MiddlewareFactory::class),
-            static::$container
-        );
-    }
-}
-```
+{{<highlight php>}}
+{{% githubfile url="https://api.github.com/repos/marcguyer/mezzio-doctrine-oauth2-example/contents/test/FunctionalTest/AbstractFunctionalTest.php" %}}
+{{</highlight>}}
 
 Any simple tests that require only a minimally bootstrapped application can extend the `AbstractFunctionalTest` class and test away.
 
-Now it gets a little bit more interesting. Here's an abstract extension that adds some framework for defining REST endpoints to be tested and assertions for testing those endpoints:
+Now it gets a little bit more interesting. Here's an abstract extension that adds some framework for defining REST endpoints in a PHPUnit `@dataProvider` to be tested and the constraints to assert for those endpoints:
 
-```php
-<?php
+{{<highlight php>}}
+{{% githubfile url="https://api.github.com/repos/marcguyer/mezzio-doctrine-oauth2-example/contents/test/FunctionalTest/AbstractEndpointTest.php" %}}
+{{</highlight>}}
 
-declare(strict_types=1);
+Now we can actually define a test. Here's a simple implementation of ab endpoint test for `GET /api/ping`. Note that going forward, we only need to define an array of endpoints to be tested:
 
-namespace FunctionalTest;
+{{<highlight php>}}
+{{% githubfile url="https://api.github.com/repos/marcguyer/mezzio-doctrine-oauth2-example/contents/test/FunctionalTest/PingTest.php" %}}
+{{</highlight>}}
 
-use Laminas\Diactoros\ServerRequest;
-use Laminas\Diactoros\Stream;
-use Laminas\Diactoros\Uri;
-use PHPUnit\Framework\Constraint;
-use Psr\Http\Message\ResponseInterface;
-use Psr\Http\Message\ServerRequestInterface;
+The result of the above example is a test of the `GET /api/ping` route, asserting simply that:
 
-/**
- * Abstract to set up functional testing via endpoint provider config.
- */
-abstract class AbstractEndpointTest extends AbstractFunctionalTest
-{
-    /**
-     * Provider for testEndpoint() method.
-     *
-     * @see self::testEndpoint() for provider signature
-     */
-    abstract public function endpointProvider(): array;
-
-    protected function getRequest(
-        string $method,
-        string $uri,
-        array $requestHeaders = [],
-        array $body = [],
-        array $queryParams = []
-    ): ServerRequestInterface {
-        $uri = new Uri($uri);
-
-        if (null !== $body) {
-            $bodyStream = fopen('php://memory', 'r+');
-            fwrite($bodyStream, json_encode($body));
-            $body = new Stream($bodyStream);
-        }
-
-        if (!empty($queryParams)) {
-            $uri = $uri->withQuery(http_build_query($queryParams));
-        }
-
-        return new ServerRequest(
-            [],
-            [],
-            $uri,
-            $method,
-            $body ?? 'php://input',
-            $requestHeaders ?? []
-        );
-    }
-
-    /**
-     * @dataProvider endpointProvider
-     *
-     * @param Constraint[] $responseConstraints
-     */
-    public function testEndpoint(
-        ServerRequestInterface $request,
-        array $responseConstraints = []
-    ): void {
-        $response = static::$app->handle($request);
-        $this->assertInstanceOf(ResponseInterface::class, $response);
-        $this->assertResponseConstraints($responseConstraints, $response);
-    }
-
-    /**
-     * @param Constraint[] $responseConstraints
-     */
-    protected function assertResponseConstraints(
-        array $responseConstraints,
-        ResponseInterface $response
-    ): void {
-        if (empty($responseConstraints)) {
-            $responseConstraints[] = self::isSuccess();
-        }
-        foreach ($responseConstraints as $msg => $constraint) {
-            $this->assertThat(
-                $response,
-                $constraint,
-                is_string($msg) ? $msg : ''
-            );
-        }
-    }
-}
-```
+1. Response code is >=200 and <300
+2. Response body contains JSON with a property called `ack` with a value of the current time in UNIX timestamp format.
