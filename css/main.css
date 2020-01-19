@@ -665,6 +665,10 @@ footer .theme-by {
   margin-top:10px;
 }
 
+.pager.series-pager li a {
+  padding: 8px 15px;
+}
+
 h4.panel-title > span.badge {
     float: right;
 }
@@ -767,7 +771,7 @@ div.splitbox div.right {
     padding: 15px 25px;
   }
 }
-.disqus-comments button:hover, 
+.disqus-comments button:hover,
 .disqus-comments button:focus {
   color: #FFF;
   background: #0085a1;
