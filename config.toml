@@ -20,7 +20,7 @@ disqusShortname = "marcguyer"
 [author]
     name = "Marc Guyer"
     # website = "marc.guyer.me"
-    email = "/about#contact"
+    email = "/contact"
     # facebook = "marcguyer"
     github = "marcguyer"
     gitlab = "marcguyer"

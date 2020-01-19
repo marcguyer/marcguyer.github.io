@@ -13,7 +13,7 @@ tags:
 series:
   - "Mezzio Example"
 aliases:
-  - "/posts/mezzio-example/testing"
+  - "/posts/mezzio-example/testing/"
 ---
 
 ## Where do we start?
@@ -24,13 +24,13 @@ In this post, I'll show a basic setup for testing Mezzio applications. We'll get
 
 ## Legacy ZF Testing Tools
 
-Those experienced with [Zend Framework MVC](https://docs.zendframework.com/zend-mvc/) applications are likely familiar with the [zend-test](https://docs.zendframework.com/zend-test/) library for ZF3, or [Zend\\Test](https://framework.zend.com/manual/2.4/en/modules/zend.test.introduction.html) for ZF2 and maybe even [Zend_Test](https://framework.zend.com/manual/1.12/en/zend.test.introduction.html), the old ZF1 testing framework.
+Those experienced with [Laminas MVC](https://docs.laminas.dev/laminas-mvc/) (FKA Zend Framework MVC) applications are likely familiar with the [laminas-test](https://docs.laminas.dev/laminas-test/) library, or [Zend\\Test](https://framework.zend.com/manual/2.4/en/modules/zend.test.introduction.html) for ZF v2 and maybe even [Zend_Test](https://framework.zend.com/manual/1.12/en/zend.test.introduction.html), the old ZF v1 testing framework.
 
-The documentation for these components allude to _unit testing_ your application using these tools. That, unfortunately is a misnomer. All of the testing libraries provided by Zend Framework support _integration testing_ or _functional testing_ your code, but certainly not _unit testing_. The difference between unit tests and integration tests is dramatic. Those differences have been blogged about at length. Check the goog for more information about the different types of tests.
+The documentation for these components allude to _unit testing_ your application using these tools. That, unfortunately is a misnomer. All of the testing libraries provided by Laminas are geared for _integration testing_ or _functional testing_ your code, but not really _unit testing_. The difference between unit tests and integration tests is dramatic. Those differences have been blogged about at length. Check the goog for more information about the different types of tests.
 
 ## A Basic Example
 
-Let's start with an example functional test of your new complete Mezzio application middleware stack. This example should be somewhat familiar if you're used to how [zend-test](https://docs.zendframework.com/zend-test/) works with old MVC apps. We'll test the ping route that comes with the [Mezzio Skeleton Application](https://github.com/zendframework/zend-expressive-skeleton).
+Let's start with an example functional test of your new complete Mezzio application middleware stack. This example should be somewhat familiar if you're used to how [laminas-test](https://docs.laminas.dev/laminas-test/) works with old MVC apps. We'll test the ping route that comes with the [Mezzio Skeleton Application](https://github.com/mezzio/mezzio-skeleton).
 
 You may have noticed that skeleton comes with some basic tests of the simple handlers that come with the skeleton. We'll show those in a later post. For now, we're going to start with a functional test of the `GET /api/ping` REST endpoint from end to end. This test will exercise the entire stack so we can prove that the endpoint "works".
 
@@ -45,11 +45,11 @@ declare(strict_types=1);
 
 namespace FunctionalTest;
 
+use Helmich\Psr7Assert\Psr7Assertions;
+use Mezzio\Application;
+use Mezzio\MiddlewareFactory;
 use PHPUnit\Framework\TestCase;
 use Psr\Container\ContainerInterface;
-use Zend\Expressive\Application;
-use Zend\Expressive\MiddlewareFactory;
-use Helmich\Psr7Assert\Psr7Assertions;
 
 /**
  * {@inheritdoc}
@@ -131,38 +131,25 @@ declare(strict_types=1);
 
 namespace FunctionalTest;
 
+use Laminas\Diactoros\ServerRequest;
+use Laminas\Diactoros\Stream;
+use Laminas\Diactoros\Uri;
+use PHPUnit\Framework\Constraint;
 use Psr\Http\Message\ResponseInterface;
 use Psr\Http\Message\ServerRequestInterface;
-use Zend\Diactoros\Stream;
-use Zend\Diactoros\Request;
-use Zend\Diactoros\Response;
-use Zend\Diactoros\ServerRequest;
-use Zend\Diactoros\Uri;
-use PHPUnit\Framework\Constraint;
 
 /**
  * Abstract to set up functional testing via endpoint provider config.
  */
-abstract class AbstractFunctionalEndpointTest extends AbstractFunctionalTest
+abstract class AbstractEndpointTest extends AbstractFunctionalTest
 {
     /**
      * Provider for testEndpoint() method.
      *
      * @see self::testEndpoint() for provider signature
-     *
-     * @return array
      */
     abstract public function endpointProvider(): array;
 
-    /**
-     * @param string $method
-     * @param string $uri
-     * @param array  $requestHeaders
-     * @param array  $body
-     * @param array  $queryParams
-     *
-     * @return ServerRequestInterface
-     */
     protected function getRequest(
         string $method,
         string $uri,
@@ -195,7 +182,6 @@ abstract class AbstractFunctionalEndpointTest extends AbstractFunctionalTest
     /**
      * @dataProvider endpointProvider
      *
-     * @param ServerRequestInterface $request
      * @param Constraint[] $responseConstraints
      */
     public function testEndpoint(
@@ -208,13 +194,15 @@ abstract class AbstractFunctionalEndpointTest extends AbstractFunctionalTest
     }
 
     /**
-     * @param Constraint[]      $responseConstraints
-     * @param ResponseInterface $response
+     * @param Constraint[] $responseConstraints
      */
     protected function assertResponseConstraints(
         array $responseConstraints,
         ResponseInterface $response
     ): void {
+        if (empty($responseConstraints)) {
+            $responseConstraints[] = self::isSuccess();
+        }
         foreach ($responseConstraints as $msg => $constraint) {
             $this->assertThat(
                 $response,

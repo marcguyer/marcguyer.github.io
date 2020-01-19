@@ -36,6 +36,6 @@ Since founding GetCheddar (formerly CheddarGetter), I have remained focused as C
 
 The Cheddar platform was initially written in PHP5 and Zend Framework version 1. Initially hosted on the Rackspace Cloud, the entire environment was soon migrated to a proprietary PCI-compliant environment. The hosting environment migration resulted in zero downtime. Later the codebase was migrated to PHP7 and Zend Framework v2. Most recently, it was rewritten as a pure REST API using the middleware pattern via [Mezzio](https://getlaminas.org/) (FKA Zend Framework Expressive) with OAuth2. I wrote 99% of the code.
 
-### The Future {#contact}
+### The Future
 
-I'm currently available for hire. Ask me anything about your project - {{< cloakemail "marc@guyer.me" >}}
+You can help define this. I'm currently available for hire. [Contact me](/contact)
