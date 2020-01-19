@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Series on Marc Guyer</title>
+    <link>//marc.guyer.me/series/</link>
+    <description>Recent content in Series on Marc Guyer</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <managingEditor>/contact (Marc Guyer)</managingEditor>
+    <webMaster>/contact (Marc Guyer)</webMaster>
+    <copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright>
+    <lastBuildDate>Sun, 01 Dec 2019 14:28:49 -0500</lastBuildDate>
+    
+	<atom:link href="//marc.guyer.me/series/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Mezzio Example</title>
+      <link>//marc.guyer.me/series/mezzio-example/</link>
+      <pubDate>Sun, 01 Dec 2019 14:28:49 -0500</pubDate>
+      <author>/contact (Marc Guyer)</author>
+      <guid>//marc.guyer.me/series/mezzio-example/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
