@@ -3,14 +3,14 @@
 <meta charset=utf-8>
 <meta http-equiv=x-ua-compatible content="IE=edge">
 <meta name=viewport content="width=device-width,initial-scale=1,maximum-scale=1">
-<title>mysql - Marc Guyer</title>
+<title>doctrine - Marc Guyer</title>
 <meta name=author content="Marc Guyer"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"Marc Guyer","url":"\/\/marc.guyer.me"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"\/\/marc.guyer.me"}</script>
-<meta property="og:title" content="mysql">
+<meta property="og:title" content="doctrine">
 <meta property="og:image" content="https://www.gravatar.com/avatar/e96773ada2643a59cf32d6e1407a7cc8?s=512">
-<meta property="og:url" content="//marc.guyer.me/tags/mysql/">
+<meta property="og:url" content="//marc.guyer.me/tags/doctrine/">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="Marc Guyer">
-<meta name=twitter:title content="mysql">
+<meta name=twitter:title content="doctrine">
 <meta name=twitter:image content="https://www.gravatar.com/avatar/e96773ada2643a59cf32d6e1407a7cc8?s=512">
 <meta name=twitter:card content="summary">
 <link href="https://www.gravatar.com/avatar/e96773ada2643a59cf32d6e1407a7cc8?s=512" rel=icon type=image/x-icon>
@@ -99,7 +99,7 @@
 <div class=row>
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <div class=tags-heading>
-<h1>mysql</h1>
+<h1>doctrine</h1>
 <hr class=small>
 </div>
 </div>
@@ -112,25 +112,30 @@
 <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
 <div class=posts-list>
 <article class=post-preview>
-<a href=//marc.guyer.me/posts/example-recovery-procedure-for-mysql-backup-made-with-xtrabackup/>
-<h2 class=post-title>Example Recovery Procedure for MySQL Backup Made with Xtrabackup</h2>
+<a href=//marc.guyer.me/posts/mezzio-example/doctrine-entities/>
+<h2 class=post-title>Mezzio Example: Domain Model</h2>
 </a>
 <p class=post-meta>
 <span class=post-meta>
-<i class="fas fa-calendar"></i>&nbsp;Posted on 2019-09-24
-&nbsp;(Last modified on 2019-12-21)
+<i class="fas fa-calendar"></i>&nbsp;Posted on 2020-01-19
+&nbsp;(Last modified on 2021-09-15)
 &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
 &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;Marc Guyer
 </span>
 </p>
 <div class=post-entry>
-We have a pre-existing procedure for backing up a MySQL database using hot backups with the wonderful Percona Xtrabackup and in this case the deprecated innobackupex binary.
-Xtrabackup is nice since it creates a clean backup of InnoDB, XtraDB, and MyISAM tables quickly and without locking. There are countless useful features including point-in-time recovery, incremental backups, single table recovery, single partition recovery, I/O throttling, parallel processing, encryption, compression, streaming, and more.
-<a href=//marc.guyer.me/posts/example-recovery-procedure-for-mysql-backup-made-with-xtrabackup/ class=post-read-more>[Read More]</a>
+Overview This post brings several pieces of supporting libraries together. We'
+We&rsquo;ll start by defining a minimum domain model via Doctrine&rsquo;s XML mapping driver. In the short-term, we only need to model what&rsquo;s necessary for our application&rsquo;s authentication layer using OAuth2. We&rsquo;ll get into some detail about this domain model in the next post in the series, OAuth2 Basics. For now, we&rsquo;re creating a minimalist set of objects to comply with our supporting libraries.
+<a href=//marc.guyer.me/posts/mezzio-example/doctrine-entities/ class=post-read-more>[Read More]</a>
 </div>
 <div class=blog-tags>
-<a href=//marc.guyer.me/tags/mysql/>mysql</a>&nbsp;
-<a href=//marc.guyer.me/tags/xtrabackup/>xtrabackup</a>&nbsp;
+<a href=//marc.guyer.me/tags/php/>php</a>&nbsp;
+<a href=//marc.guyer.me/tags/mezzio/>mezzio</a>&nbsp;
+<a href=//marc.guyer.me/tags/laminas/>laminas</a>&nbsp;
+<a href=//marc.guyer.me/tags/prophecy/>prophecy</a>&nbsp;
+<a href=//marc.guyer.me/tags/phpunit/>phpunit</a>&nbsp;
+<a href=//marc.guyer.me/tags/doctrine/>doctrine</a>&nbsp;
+<a href=//marc.guyer.me/tags/oauth2/>oauth2</a>&nbsp;
 </div>
 </article>
 </div>
