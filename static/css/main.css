@@ -819,3 +819,8 @@ h4.see-also {
  ul.share li:hover .fab {
   transform: scale(1.4)
 }
+
+ a.btn-githubfile {
+   margin-top: 20px;
+   margin-bottom: 20px;
+ }

@@ -1,1 +1,10 @@
-{{- (getJSON (.Get "url")).content | base64Decode | safeHTML -}}
+{{- $repo := (trim (.Get "repo") "/") -}}
+{{- $path := (trim (.Get "path") "/") -}}
+{{- $ref := (.Get "ref") -}}
+
+{{- $json := getJSON (printf "https://api.github.com/repos/%s/contents/%s?ref=%s" $repo $path $ref) -}}
+{{- with (base64Decode $json.content) -}}
+```php
+{{ safeHTML . }}
+```
+{{- end -}}

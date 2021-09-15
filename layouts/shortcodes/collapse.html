@@ -1,0 +1,8 @@
+<a class="btn btn-primary btn-githubfile" role="button" data-toggle="collapse"
+    href="#collapseExample-{{ .Get "link" | replaceRE "[^a-zA-Z]+" "-" }}" aria-expanded="false"
+    aria-controls="collapseExample">
+    {{ .Get "link" }}
+</a>
+<div class="collapse in" id="collapseExample-{{ .Get "link" | replaceRE "[^a-zA-Z]+" "-" }}">
+    {{ markdownify .Inner }}
+</div>
