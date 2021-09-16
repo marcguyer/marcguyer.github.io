@@ -42,6 +42,10 @@ I won't go into any more detail. Since you're here, you've probably already chos
 
 [PHPUnit](https://phpunit.de/) is the de facto standard framework for automated testing in PHP applications. The [Mezzio Skeleton Application](https://github.com/mezzio/mezzio-skeleton) comes with a basic PHPUnit setup.
 
+## Psalm
+
+[Psalm](https://psalm.dev/) is static analysis for PHP. It'll make you a better coder. I promise.
+
 ## What's Next?
 
-The [next post in this series](/posts/mezzio-example/functional-testing) gets into setting up a good application foundation with automated testing.
+The [next post in this series](/posts/mezzio-example/functional-and-unit-testing) gets into setting up a good application foundation with automated testing.

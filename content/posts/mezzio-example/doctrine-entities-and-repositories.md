@@ -2,7 +2,7 @@
 title: "Mezzio Example: Doctrine Entities and Repositories"
 date: 2021-09-15T16:25:49-05:00
 draft: false
-toc: false
+toc: true
 images:
 tags:
   - php
@@ -35,7 +35,13 @@ Mezzio includes an implementation of Alex Bilbie's wonderful, spec-compliant [OA
 
 ### Psalm Changes Required for Error Level 1
 
+#### Entity Changes
+
 TLDR; All errors required suppression notation to pass. Check this diff for the details: https://github.com/marcguyer/mezzio-doctrine-oauth2-example/commit/5640b45bb942d577af0f4e3606f30bc91b6105c5
+
+#### Repository Changes
+
+https://github.com/marcguyer/mezzio-doctrine-oauth2-example/commit/df7e770f32137ec1c26bad02eb971421058f5a63
 
 ## Entities
 
@@ -139,4 +145,102 @@ A _User_ represents an unique individual person in our domain model. The _User_ 
 
 ## Repositories
 
-... to be continued ... 
+### User Repository
+
+The _User_ repository will need to implement both the OAuth2 Server library user repository interface and Mezzio Authentication component's user repository interface:
+
+#### Implemented Interfaces
+
+{{< collapse link="League\OAuth2\Server\Repositories\UserRepositoryInterface">}}
+{{% githubfile repo="thephpleague/oauth2-server" path="/src/Repositories/UserRepositoryInterface.php" ref="8.3.2" %}}
+{{< /collapse >}}
+
+{{< collapse link="Mezzio\Authentication\UserRepositoryInterface" >}}
+{{% githubfile repo="mezzio/mezzio-authentication" path="/src/UserRepositoryInterface.php" ref="1.2.1" %}}
+{{< /collapse >}}
+
+#### Implementation
+
+{{< collapse link="Data\Repository\UserRepository" >}}
+{{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/src/Data/Repository/UserRepository.php" ref="df7e770f32137ec1c26bad02eb971421058f5a63" %}}
+{{< /collapse >}}
+
+### OAuthClient Repository
+
+The _Client_ repository will need to implement only the OAuth2 Server library client repository interface:
+
+#### Implemented Interfaces
+
+{{< collapse link="League\OAuth2\Server\Repositories\ClientRepositoryInterface">}}
+{{% githubfile repo="thephpleague/oauth2-server" path="/src/Repositories/ClientRepositoryInterface.php" ref="8.3.2" %}}
+{{< /collapse >}}
+
+#### Implementation
+
+{{< collapse link="Data\Repository\OAuthClientRepository" >}}
+{{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/src/Data/Repository/OAuthClientRepository.php" ref="df7e770f32137ec1c26bad02eb971421058f5a63" %}}
+{{< /collapse >}}
+
+### OAuthAuthCode Repository
+
+The _AuthCode_ repository will need to implement only the OAuth2 Server library authcode repository interface:
+
+#### Implemented Interfaces
+
+{{< collapse link="League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface">}}
+{{% githubfile repo="thephpleague/oauth2-server" path="/src/Repositories/AuthCodeRepositoryInterface.php" ref="8.3.2" %}}
+{{< /collapse >}}
+
+#### Implementation
+
+{{< collapse link="Data\Repository\OAuthAuthCodeRepository" >}}
+{{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/src/Data/Repository/OAuthAuthCodeRepository.php" ref="df7e770f32137ec1c26bad02eb971421058f5a63" %}}
+{{< /collapse >}}
+
+### OAuthAccessToken Repository
+
+The _AccessToken_ repository will need to implement only the OAuth2 Server library accesstoken repository interface:
+
+#### Implemented Interfaces
+
+{{< collapse link="League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface">}}
+{{% githubfile repo="thephpleague/oauth2-server" path="/src/Repositories/AccessTokenRepositoryInterface.php" ref="8.3.2" %}}
+{{< /collapse >}}
+
+#### Implementation
+
+{{< collapse link="Data\Repository\OAuthAccessTokenRepository" >}}
+{{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/src/Data/Repository/OAuthAccessTokenRepository.php" ref="df7e770f32137ec1c26bad02eb971421058f5a63" %}}
+{{< /collapse >}}
+
+### OAuthRefreshToken Repository
+
+The _RefreshToken_ repository will need to implement only the OAuth2 Server library refreshtoken repository interface:
+
+#### Implemented Interfaces
+
+{{< collapse link="League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface">}}
+{{% githubfile repo="thephpleague/oauth2-server" path="/src/Repositories/RefreshTokenRepositoryInterface.php" ref="8.3.2" %}}
+{{< /collapse >}}
+
+#### Implementation
+
+{{< collapse link="Data\Repository\OAuthRefreshTokenRepository" >}}
+{{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/src/Data/Repository/OAuthRefreshTokenRepository.php" ref="df7e770f32137ec1c26bad02eb971421058f5a63" %}}
+{{< /collapse >}}
+
+### OAuthScope Repository
+
+The _Scope_ repository will need to implement only the OAuth2 Server library scope repository interface:
+
+#### Implemented Interfaces
+
+{{< collapse link="League\OAuth2\Server\Repositories\ScopeRepositoryInterface">}}
+{{% githubfile repo="thephpleague/oauth2-server" path="/src/Repositories/ScopeRepositoryInterface.php" ref="8.3.2" %}}
+{{< /collapse >}}
+
+#### Implementation
+
+{{< collapse link="Data\Repository\OAuthScopeRepository" >}}
+{{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/src/Data/Repository/OAuthScopeRepository.php" ref="df7e770f32137ec1c26bad02eb971421058f5a63" %}}
+{{< /collapse >}}
