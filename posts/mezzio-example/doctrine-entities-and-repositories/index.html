@@ -7,7 +7,7 @@
 <meta name=description content="Overview This post brings several pieces of supporting libraries together.
 Entities to Support OAuth2 Requirements We&rsquo;ll start by defining a minimum domain model via PHP8 Attributes and Doctrine&rsquo;s new attribute mapping driver. In the short-term, we only need to model what&rsquo;s necessary for our application&rsquo;s authentication layer using OAuth2. For now, we&rsquo;re creating a minimal set of objects to comply with the needs of our supporting libraries' interfaces. We need a minimum of 6 entities and their corresponding repositories:">
 <meta name=author content="Marc Guyer"><script type=application/ld+json>{"@context":"http://schema.org","@type":"WebSite","name":"Marc Guyer","url":"\/\/marc.guyer.me"}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Organization","name":"","url":"\/\/marc.guyer.me"}</script>
-<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"\/\/marc.guyer.me","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"\/\/marc.guyer.me\/posts\/mezzio-example\/doctrine-entities-and-repositories\/","name":"Mezzio example doctrine entities and repositories"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":"Marc Guyer"},"headline":"Mezzio Example: Doctrine Entities and Repositories","description":"Overview This post brings several pieces of supporting libraries together.\nEntities to Support OAuth2 Requirements We\u0026rsquo;ll start by defining a minimum domain model via PHP8 Attributes and Doctrine\u0026rsquo;s new attribute mapping driver. In the short-term, we only need to model what\u0026rsquo;s necessary for our application\u0026rsquo;s authentication layer using OAuth2. For now, we\u0026rsquo;re creating a minimal set of objects to comply with the needs of our supporting libraries\u0027 interfaces. We need a minimum of 6 entities and their corresponding repositories:","inLanguage":"en","wordCount":4123,"datePublished":"2021-09-15T16:25:49","dateModified":"2021-09-15T16:25:49","image":"https:\/\/www.gravatar.com\/avatar\/e96773ada2643a59cf32d6e1407a7cc8?s=512","keywords":["php, mezzio, laminas, prophecy, phpunit, doctrine, oauth2"],"mainEntityOfPage":"\/\/marc.guyer.me\/posts\/mezzio-example\/doctrine-entities-and-repositories\/","publisher":{"@type":"Organization","name":"\/\/marc.guyer.me","logo":{"@type":"ImageObject","url":"https:\/\/www.gravatar.com\/avatar\/e96773ada2643a59cf32d6e1407a7cc8?s=512","height":60,"width":60}}}</script>
+<script type=application/ld+json>{"@context":"http://schema.org","@type":"BreadcrumbList","itemListElement":[{"@type":"ListItem","position":1,"item":{"@id":"\/\/marc.guyer.me","name":"home"}},{"@type":"ListItem","position":3,"item":{"@id":"\/\/marc.guyer.me\/posts\/mezzio-example\/doctrine-entities-and-repositories\/","name":"Mezzio example doctrine entities and repositories"}}]}</script><script type=application/ld+json>{"@context":"http://schema.org","@type":"Article","author":{"name":"Marc Guyer"},"headline":"Mezzio Example: Doctrine Entities and Repositories","description":"Overview This post brings several pieces of supporting libraries together.\nEntities to Support OAuth2 Requirements We\u0026rsquo;ll start by defining a minimum domain model via PHP8 Attributes and Doctrine\u0026rsquo;s new attribute mapping driver. In the short-term, we only need to model what\u0026rsquo;s necessary for our application\u0026rsquo;s authentication layer using OAuth2. For now, we\u0026rsquo;re creating a minimal set of objects to comply with the needs of our supporting libraries\u0027 interfaces. We need a minimum of 6 entities and their corresponding repositories:","inLanguage":"en","wordCount":6365,"datePublished":"2021-09-15T16:25:49","dateModified":"2021-09-15T16:25:49","image":"https:\/\/www.gravatar.com\/avatar\/e96773ada2643a59cf32d6e1407a7cc8?s=512","keywords":["php, mezzio, laminas, prophecy, phpunit, doctrine, oauth2"],"mainEntityOfPage":"\/\/marc.guyer.me\/posts\/mezzio-example\/doctrine-entities-and-repositories\/","publisher":{"@type":"Organization","name":"\/\/marc.guyer.me","logo":{"@type":"ImageObject","url":"https:\/\/www.gravatar.com\/avatar\/e96773ada2643a59cf32d6e1407a7cc8?s=512","height":60,"width":60}}}</script>
 <meta property="og:title" content="Mezzio Example: Doctrine Entities and Repositories">
 <meta property="og:description" content="Overview This post brings several pieces of supporting libraries together.
 Entities to Support OAuth2 Requirements We&rsquo;ll start by defining a minimum domain model via PHP8 Attributes and Doctrine&rsquo;s new attribute mapping driver. In the short-term, we only need to model what&rsquo;s necessary for our application&rsquo;s authentication layer using OAuth2. For now, we&rsquo;re creating a minimal set of objects to comply with the needs of our supporting libraries' interfaces. We need a minimum of 6 entities and their corresponding repositories:">
@@ -132,7 +132,10 @@ Entities to Support OAuth2 Requirements We&rsquo;ll start by defining a minimum 
 </ul>
 <p>Mezzio includes an implementation of Alex Bilbie&rsquo;s wonderful, spec-compliant <a href=https://oauth2.thephpleague.com/>OAuth2 Server</a> as <a href=https://docs.mezzio.dev/mezzio-authentication-oauth2/>an adapter</a> to the <a href=https://docs.mezzio.dev/mezzio-authentication/>Mezzio authentication abstraction middleware component</a>. Both the server library and the Mezzio authentication component provide various interfaces for which we&rsquo;ll need to provide concrete implementations. We&rsquo;ll do that while building our domain model with <a href=#entities>Entities</a> and <a href=#repositories>Repositories</a>.</p>
 <h3 id=psalm-changes-required-for-error-level-1>Psalm Changes Required for Error Level 1</h3>
+<h4 id=entity-changes>Entity Changes</h4>
 <p>TLDR; All errors required suppression notation to pass. Check this diff for the details: <a href=https://github.com/marcguyer/mezzio-doctrine-oauth2-example/commit/5640b45bb942d577af0f4e3606f30bc91b6105c5>https://github.com/marcguyer/mezzio-doctrine-oauth2-example/commit/5640b45bb942d577af0f4e3606f30bc91b6105c5</a></p>
+<h4 id=repository-changes>Repository Changes</h4>
+<p><a href=https://github.com/marcguyer/mezzio-doctrine-oauth2-example/commit/df7e770f32137ec1c26bad02eb971421058f5a63>https://github.com/marcguyer/mezzio-doctrine-oauth2-example/commit/df7e770f32137ec1c26bad02eb971421058f5a63</a></p>
 <h2 id=entities>Entities</h2>
 <p>An Entity is a persist-able PHP data object with an identity. Generally speaking, an entity represents a database table as a native PHP object with properties that correspond with the table columns.</p>
 <p>We&rsquo;ll create a set of entities fulfilling the minimum requirements of both Mezzio Authentication and the corresponding OAuth2 library.</p>
@@ -2864,7 +2867,1482 @@ Data\Entity\OAuthScope
 </div>
 </div>
 <h2 id=repositories>Repositories</h2>
-<p>&mldr; to be continued &mldr;</p>
+<h3 id=user-repository>User Repository</h3>
+<p>The <em>User</em> repository will need to implement both the OAuth2 Server library user repository interface and Mezzio Authentication component&rsquo;s user repository interface:</p>
+<h4 id=implemented-interfaces-6>Implemented Interfaces</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-League-OAuth-Server-Repositories-UserRepositoryInterface aria-expanded=false aria-controls=collapseExample>
+League\OAuth2\Server\Repositories\UserRepositoryInterface
+</a>
+<div class=collapse id=collapseExample-League-OAuth-Server-Repositories-UserRepositoryInterface>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * @author      Alex Bilbie &lt;hello@alexbilbie.com&gt;
+</span><span style=color:#e6db74> * @copyright   Copyright (c) Alex Bilbie
+</span><span style=color:#e6db74> * @license     http://mit-license.org/
+</span><span style=color:#e6db74> *
+</span><span style=color:#e6db74> * @link        https://github.com/thephpleague/oauth2-server
+</span><span style=color:#e6db74> */</span>
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>League\OAuth2\Server\Repositories</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\ClientEntityInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\UserEntityInterface</span>;
+
+<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>UserRepositoryInterface</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>RepositoryInterface</span>
+{
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Get a user entity.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string                $username
+</span><span style=color:#e6db74>     * @param string                $password
+</span><span style=color:#e6db74>     * @param string                $grantType    The grant type used
+</span><span style=color:#e6db74>     * @param ClientEntityInterface $clientEntity
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return UserEntityInterface|null
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getUserEntityByUserCredentials</span>(
+        $username,
+        $password,
+        $grantType,
+        <span style=color:#a6e22e>ClientEntityInterface</span> $clientEntity
+    );
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-Mezzio-Authentication-UserRepositoryInterface aria-expanded=false aria-controls=collapseExample>
+Mezzio\Authentication\UserRepositoryInterface
+</a>
+<div class=collapse id=collapseExample-Mezzio-Authentication-UserRepositoryInterface>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * @see       https://github.com/mezzio/mezzio-authentication for the canonical source repository
+</span><span style=color:#e6db74> * @copyright https://github.com/mezzio/mezzio-authentication/blob/master/COPYRIGHT.md
+</span><span style=color:#e6db74> * @license   https://github.com/mezzio/mezzio-authentication/blob/master/LICENSE.md New BSD License
+</span><span style=color:#e6db74> */</span>
+
+<span style=color:#66d9ef>declare</span>(<span style=color:#a6e22e>strict_types</span><span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>);
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>Mezzio\Authentication</span>;
+
+<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>UserRepositoryInterface</span>
+{
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Authenticate the identity (id, username, email ...) using a password
+</span><span style=color:#e6db74>     * or using only a credential string (e.g. token based credential)
+</span><span style=color:#e6db74>     * It returns the authenticated user or null.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string $credential can be also a token
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>authenticate</span>(<span style=color:#a6e22e>string</span> $credential, <span style=color:#f92672>?</span><span style=color:#a6e22e>string</span> $password <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>UserInterface</span>;
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h4 id=implementation-6>Implementation</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-Data-Repository-UserRepository aria-expanded=false aria-controls=collapseExample>
+Data\Repository\UserRepository
+</a>
+<div class=collapse id=collapseExample-Data-Repository-UserRepository>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+
+<span style=color:#66d9ef>declare</span>(<span style=color:#a6e22e>strict_types</span><span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>);
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>Data\Repository</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Data\Entity\User</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Doctrine\ORM\EntityRepository</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\UserEntityInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Mezzio\Authentication\UserInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Mezzio\Authentication\UserRepositoryInterface</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>MezzioAuthInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Repositories\UserRepositoryInterface</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>OAuthUserRepositoryInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\ClientEntityInterface</span>;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>UserRepository</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>EntityRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>MezzioAuthInterface</span>, <span style=color:#a6e22e>OAuthUserRepositoryInterface</span>
+{
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getUserEntityByUserCredentials</span>(
+        $username,
+        $password,
+        $grantType,
+        <span style=color:#a6e22e>ClientEntityInterface</span> $clientEntity
+    )<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>UserEntityInterface</span> {
+
+        <span style=color:#e6db74>/** @var ?User $user */</span>
+        $user <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findOneBy</span>([<span style=color:#e6db74>&#39;email&#39;</span> <span style=color:#f92672>=&gt;</span> $username]);
+
+        <span style=color:#66d9ef>if</span> ($user <span style=color:#f92672>===</span> <span style=color:#66d9ef>null</span>) {
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
+        }
+
+        <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>password_verify</span>($password, $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getPassword</span>())) {
+            <span style=color:#66d9ef>return</span> $user;
+        }
+
+        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
+    }
+
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>authenticate</span>(<span style=color:#a6e22e>string</span> $credential, <span style=color:#a6e22e>string</span> $password <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>UserInterface</span>
+    {
+        <span style=color:#e6db74>/** @var ?User $user */</span>
+        $user <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findOneBy</span>([<span style=color:#e6db74>&#39;email&#39;</span> <span style=color:#f92672>=&gt;</span> $credential]);
+
+        <span style=color:#66d9ef>if</span> ($user <span style=color:#f92672>===</span> <span style=color:#66d9ef>null</span>) {
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
+        }
+
+        <span style=color:#75715e>// If password is null, we&#39;re authenticating without password.
+</span><span style=color:#75715e></span>        <span style=color:#75715e>// For example, when using Google or GitHub or Facebook as OAuth2 identity provider
+</span><span style=color:#75715e></span>        <span style=color:#66d9ef>if</span> ($password <span style=color:#f92672>===</span> <span style=color:#66d9ef>null</span>) {
+            <span style=color:#66d9ef>return</span> $user;
+        }
+
+        <span style=color:#66d9ef>if</span> (<span style=color:#a6e22e>password_verify</span>($password, $user<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getPassword</span>())) {
+            <span style=color:#66d9ef>return</span> $user;
+        }
+
+        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>null</span>;
+    }
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h3 id=oauthclient-repository>OAuthClient Repository</h3>
+<p>The <em>Client</em> repository will need to implement only the OAuth2 Server library client repository interface:</p>
+<h4 id=implemented-interfaces-7>Implemented Interfaces</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-League-OAuth-Server-Repositories-ClientRepositoryInterface aria-expanded=false aria-controls=collapseExample>
+League\OAuth2\Server\Repositories\ClientRepositoryInterface
+</a>
+<div class=collapse id=collapseExample-League-OAuth-Server-Repositories-ClientRepositoryInterface>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * @author      Alex Bilbie &lt;hello@alexbilbie.com&gt;
+</span><span style=color:#e6db74> * @copyright   Copyright (c) Alex Bilbie
+</span><span style=color:#e6db74> * @license     http://mit-license.org/
+</span><span style=color:#e6db74> *
+</span><span style=color:#e6db74> * @link        https://github.com/thephpleague/oauth2-server
+</span><span style=color:#e6db74> */</span>
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>League\OAuth2\Server\Repositories</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\ClientEntityInterface</span>;
+
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * Client storage interface.
+</span><span style=color:#e6db74> */</span>
+<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>ClientRepositoryInterface</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>RepositoryInterface</span>
+{
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Get a client.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string $clientIdentifier The client&#39;s identifier
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return ClientEntityInterface|null
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getClientEntity</span>($clientIdentifier);
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Validate a client&#39;s secret.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string      $clientIdentifier The client&#39;s identifier
+</span><span style=color:#e6db74>     * @param null|string $clientSecret     The client&#39;s secret (if sent)
+</span><span style=color:#e6db74>     * @param null|string $grantType        The type of grant the client is using (if sent)
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return bool
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>validateClient</span>($clientIdentifier, $clientSecret, $grantType);
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h4 id=implementation-7>Implementation</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-Data-Repository-OAuthClientRepository aria-expanded=false aria-controls=collapseExample>
+Data\Repository\OAuthClientRepository
+</a>
+<div class=collapse id=collapseExample-Data-Repository-OAuthClientRepository>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+
+<span style=color:#66d9ef>declare</span>(<span style=color:#a6e22e>strict_types</span><span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>);
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>Data\Repository</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Data\Entity\OAuthClient</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Doctrine\ORM\EntityRepository</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>OAuth</span>;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>OAuthClientRepository</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>EntityRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>OAuth\Repositories\ClientRepositoryInterface</span>
+{
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getClientEntity</span>($clientIdentifier)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>OAuth\Entities\ClientEntityInterface</span>
+    {
+        <span style=color:#e6db74>/** @var ?OAuthClient */</span>
+        <span style=color:#66d9ef>return</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findOneBy</span>([<span style=color:#e6db74>&#39;name&#39;</span> <span style=color:#f92672>=&gt;</span> $clientIdentifier]);
+    }
+
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>validateClient</span>($clientIdentifier, $clientSecret, $grantType)<span style=color:#f92672>:</span> <span style=color:#a6e22e>bool</span>
+    {
+        $client <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getClientEntity</span>($clientIdentifier);
+
+        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>null</span> <span style=color:#f92672>===</span> $client) {
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+        }
+
+        <span style=color:#66d9ef>if</span> (<span style=color:#f92672>!</span>$this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>isGranted</span>($client, $grantType)) {
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+        }
+
+        <span style=color:#e6db74>/** @psalm-suppress UndefinedInterfaceMethod */</span>
+        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>empty</span>($client<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getSecret</span>())) {
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>false</span>;
+        }
+
+        <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>         * @psalm-suppress UndefinedInterfaceMethod
+</span><span style=color:#e6db74>         * @psalm-suppress MixedArgument
+</span><span style=color:#e6db74>         */</span>
+        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>password_verify</span>((<span style=color:#a6e22e>string</span>)$clientSecret, $client<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getSecret</span>());
+    }
+
+    <span style=color:#e6db74>/** @psalm-suppress UnusedParam */</span>
+    <span style=color:#66d9ef>private</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isGranted</span>(<span style=color:#a6e22e>OAuth\Entities\ClientEntityInterface</span> $client, <span style=color:#a6e22e>string</span> $grantType <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>)<span style=color:#f92672>:</span> <span style=color:#a6e22e>bool</span>
+    {
+        <span style=color:#66d9ef>return</span> <span style=color:#a6e22e>match</span> ($grantType) {
+            <span style=color:#66d9ef>null</span>, <span style=color:#e6db74>&#39;client_credentials&#39;</span>, <span style=color:#e6db74>&#39;authorization_code&#39;</span>, <span style=color:#e6db74>&#39;refresh_token&#39;</span> <span style=color:#f92672>=&gt;</span> <span style=color:#66d9ef>true</span>,
+            <span style=color:#66d9ef>default</span> <span style=color:#f92672>=&gt;</span> <span style=color:#66d9ef>false</span>,
+        };
+    }
+
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h3 id=oauthauthcode-repository>OAuthAuthCode Repository</h3>
+<p>The <em>AuthCode</em> repository will need to implement only the OAuth2 Server library authcode repository interface:</p>
+<h4 id=implemented-interfaces-8>Implemented Interfaces</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-League-OAuth-Server-Repositories-AuthCodeRepositoryInterface aria-expanded=false aria-controls=collapseExample>
+League\OAuth2\Server\Repositories\AuthCodeRepositoryInterface
+</a>
+<div class=collapse id=collapseExample-League-OAuth-Server-Repositories-AuthCodeRepositoryInterface>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * @author      Alex Bilbie &lt;hello@alexbilbie.com&gt;
+</span><span style=color:#e6db74> * @copyright   Copyright (c) Alex Bilbie
+</span><span style=color:#e6db74> * @license     http://mit-license.org/
+</span><span style=color:#e6db74> *
+</span><span style=color:#e6db74> * @link        https://github.com/thephpleague/oauth2-server
+</span><span style=color:#e6db74> */</span>
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>League\OAuth2\Server\Repositories</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\AuthCodeEntityInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException</span>;
+
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * Auth code storage interface.
+</span><span style=color:#e6db74> */</span>
+<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>AuthCodeRepositoryInterface</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>RepositoryInterface</span>
+{
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Creates a new AuthCode
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return AuthCodeEntityInterface
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getNewAuthCode</span>();
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Persists a new auth code to permanent storage.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param AuthCodeEntityInterface $authCodeEntity
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @throws UniqueTokenIdentifierConstraintViolationException
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>persistNewAuthCode</span>(<span style=color:#a6e22e>AuthCodeEntityInterface</span> $authCodeEntity);
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Revoke an auth code.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string $codeId
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>revokeAuthCode</span>($codeId);
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Check if the auth code has been revoked.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string $codeId
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return bool Return true if this code has been revoked
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isAuthCodeRevoked</span>($codeId);
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h4 id=implementation-8>Implementation</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-Data-Repository-OAuthAuthCodeRepository aria-expanded=false aria-controls=collapseExample>
+Data\Repository\OAuthAuthCodeRepository
+</a>
+<div class=collapse id=collapseExample-Data-Repository-OAuthAuthCodeRepository>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#66d9ef>declare</span>(<span style=color:#a6e22e>strict_types</span><span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>);
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>Data\Repository</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Data\Entity\OAuthAuthCode</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Doctrine\ORM</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>OAuth</span>;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>OAuthAuthCodeRepository</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>ORM\EntityRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>OAuth\Repositories\AuthCodeRepositoryInterface</span>
+{
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getNewAuthCode</span>()<span style=color:#f92672>:</span> <span style=color:#a6e22e>OAuthAuthCode</span>
+    {
+        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>OAuthAuthCode</span>();
+    }
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * @throws ORM\OptimisticLockException
+</span><span style=color:#e6db74>     * @throws ORM\ORMException
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return void
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>persistNewAuthCode</span>(<span style=color:#a6e22e>OAuth\Entities\AuthCodeEntityInterface</span> $authCodeEntity)
+    {
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>persist</span>($authCodeEntity);
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>flush</span>();
+    }
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * @throws ORM\OptimisticLockException
+</span><span style=color:#e6db74>     * @throws ORM\ORMException
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return void
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string $codeId
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>revokeAuthCode</span>($codeId)
+    {
+        <span style=color:#e6db74>/** @var ?OAuthAuthCode $authCodeEntity */</span>
+        $authCodeEntity <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>find</span>($codeId);
+        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>null</span> <span style=color:#f92672>===</span> $authCodeEntity) {
+            <span style=color:#66d9ef>return</span>;
+        }
+        $authCodeEntity<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setIsRevoked</span>(<span style=color:#66d9ef>true</span>);
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>persist</span>($authCodeEntity);
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>flush</span>();
+    }
+
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isAuthCodeRevoked</span>($codeId)<span style=color:#f92672>:</span> <span style=color:#a6e22e>bool</span>
+    {
+        <span style=color:#e6db74>/** @var ?OAuthAuthCode $authCodeEntity */</span>
+        $authCodeEntity <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>find</span>($codeId);
+        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>null</span> <span style=color:#f92672>===</span> $authCodeEntity) {
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
+        }
+
+        <span style=color:#66d9ef>return</span> $authCodeEntity<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getIsRevoked</span>();
+    }
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h3 id=oauthaccesstoken-repository>OAuthAccessToken Repository</h3>
+<p>The <em>AccessToken</em> repository will need to implement only the OAuth2 Server library accesstoken repository interface:</p>
+<h4 id=implemented-interfaces-9>Implemented Interfaces</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-League-OAuth-Server-Repositories-AccessTokenRepositoryInterface aria-expanded=false aria-controls=collapseExample>
+League\OAuth2\Server\Repositories\AccessTokenRepositoryInterface
+</a>
+<div class=collapse id=collapseExample-League-OAuth-Server-Repositories-AccessTokenRepositoryInterface>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * @author      Alex Bilbie &lt;hello@alexbilbie.com&gt;
+</span><span style=color:#e6db74> * @copyright   Copyright (c) Alex Bilbie
+</span><span style=color:#e6db74> * @license     http://mit-license.org/
+</span><span style=color:#e6db74> *
+</span><span style=color:#e6db74> * @link        https://github.com/thephpleague/oauth2-server
+</span><span style=color:#e6db74> */</span>
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>League\OAuth2\Server\Repositories</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\AccessTokenEntityInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\ClientEntityInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\ScopeEntityInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException</span>;
+
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * Access token interface.
+</span><span style=color:#e6db74> */</span>
+<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>AccessTokenRepositoryInterface</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>RepositoryInterface</span>
+{
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Create a new access token
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param ClientEntityInterface  $clientEntity
+</span><span style=color:#e6db74>     * @param ScopeEntityInterface[] $scopes
+</span><span style=color:#e6db74>     * @param mixed                  $userIdentifier
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return AccessTokenEntityInterface
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getNewToken</span>(<span style=color:#a6e22e>ClientEntityInterface</span> $clientEntity, <span style=color:#66d9ef>array</span> $scopes, $userIdentifier <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>);
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Persists a new access token to permanent storage.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param AccessTokenEntityInterface $accessTokenEntity
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @throws UniqueTokenIdentifierConstraintViolationException
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>persistNewAccessToken</span>(<span style=color:#a6e22e>AccessTokenEntityInterface</span> $accessTokenEntity);
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Revoke an access token.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string $tokenId
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>revokeAccessToken</span>($tokenId);
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Check if the access token has been revoked.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string $tokenId
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return bool Return true if this token has been revoked
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isAccessTokenRevoked</span>($tokenId);
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h4 id=implementation-9>Implementation</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-Data-Repository-OAuthAccessTokenRepository aria-expanded=false aria-controls=collapseExample>
+Data\Repository\OAuthAccessTokenRepository
+</a>
+<div class=collapse id=collapseExample-Data-Repository-OAuthAccessTokenRepository>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">62
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">63
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">64
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">65
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">66
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">67
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">68
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">69
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">70
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">71
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">72
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">73
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">74
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">75
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">76
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">77
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">78
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+
+<span style=color:#66d9ef>declare</span>(<span style=color:#a6e22e>strict_types</span><span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>);
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>Data\Repository</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Data\Entity\User</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Data\Entity\OAuthAccessToken</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Doctrine\ORM\EntityRepository</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Doctrine\ORM\OptimisticLockException</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Doctrine\ORM\ORMException</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>OAuth</span>;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>OAuthAccessTokenRepository</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>EntityRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>OAuth\Repositories\AccessTokenRepositoryInterface</span>
+{
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * @throws ORMException
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getNewToken</span>(
+        <span style=color:#a6e22e>OAuth\Entities\ClientEntityInterface</span> $clientEntity,
+        <span style=color:#66d9ef>array</span> $scopes,
+        $userIdentifier <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>
+    )<span style=color:#f92672>:</span> <span style=color:#a6e22e>OAuthAccessToken</span> {
+        $accessToken <span style=color:#f92672>=</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>OAuthAccessToken</span>();
+        $accessToken<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setClient</span>($clientEntity);
+        <span style=color:#66d9ef>foreach</span> ($scopes <span style=color:#66d9ef>as</span> $scope) {
+            $accessToken<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>addScope</span>($scope);
+        }
+        <span style=color:#66d9ef>if</span> ($userIdentifier <span style=color:#f92672>!==</span> <span style=color:#66d9ef>null</span>) {
+            $accessToken<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setUser</span>($this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getReference</span>(<span style=color:#a6e22e>User</span><span style=color:#f92672>::</span><span style=color:#a6e22e>class</span>, $userIdentifier));
+        }
+        <span style=color:#66d9ef>return</span> $accessToken;
+    }
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * @return void
+</span><span style=color:#e6db74>     * @throws ORMException
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @throws OptimisticLockException
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>persistNewAccessToken</span>(<span style=color:#a6e22e>OAuth\Entities\AccessTokenEntityInterface</span> $accessTokenEntity)
+    {
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>persist</span>($accessTokenEntity);
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>flush</span>();
+    }
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * @param string $tokenId
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return void
+</span><span style=color:#e6db74>     * @throws ORMException
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>revokeAccessToken</span>($tokenId)
+    {
+        <span style=color:#e6db74>/** @var ?OAuthAccessToken $accessTokenEntity */</span>
+        $accessTokenEntity <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findOneBy</span>([<span style=color:#e6db74>&#39;token&#39;</span> <span style=color:#f92672>=&gt;</span> $tokenId]);
+        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>null</span> <span style=color:#f92672>===</span> $accessTokenEntity) {
+            <span style=color:#66d9ef>return</span>;
+        }
+        $accessTokenEntity<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setIsRevoked</span>(<span style=color:#66d9ef>true</span>);
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>persist</span>($accessTokenEntity);
+        $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>()<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>flush</span>();
+    }
+
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isAccessTokenRevoked</span>($tokenId)<span style=color:#f92672>:</span> <span style=color:#a6e22e>bool</span>
+    {
+        <span style=color:#e6db74>/** @var ?OAuthAccessToken $accessTokenEntity */</span>
+        $accessTokenEntity <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findOneBy</span>([<span style=color:#e6db74>&#39;token&#39;</span> <span style=color:#f92672>=&gt;</span> $tokenId]);
+
+        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>null</span> <span style=color:#f92672>===</span> $accessTokenEntity) {
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
+        }
+
+        <span style=color:#66d9ef>return</span> $accessTokenEntity<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getIsRevoked</span>();
+    }
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h3 id=oauthrefreshtoken-repository>OAuthRefreshToken Repository</h3>
+<p>The <em>RefreshToken</em> repository will need to implement only the OAuth2 Server library refreshtoken repository interface:</p>
+<h4 id=implemented-interfaces-10>Implemented Interfaces</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-League-OAuth-Server-Repositories-RefreshTokenRepositoryInterface aria-expanded=false aria-controls=collapseExample>
+League\OAuth2\Server\Repositories\RefreshTokenRepositoryInterface
+</a>
+<div class=collapse id=collapseExample-League-OAuth-Server-Repositories-RefreshTokenRepositoryInterface>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * @author      Alex Bilbie &lt;hello@alexbilbie.com&gt;
+</span><span style=color:#e6db74> * @copyright   Copyright (c) Alex Bilbie
+</span><span style=color:#e6db74> * @license     http://mit-license.org/
+</span><span style=color:#e6db74> *
+</span><span style=color:#e6db74> * @link        https://github.com/thephpleague/oauth2-server
+</span><span style=color:#e6db74> */</span>
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>League\OAuth2\Server\Repositories</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\RefreshTokenEntityInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Exception\UniqueTokenIdentifierConstraintViolationException</span>;
+
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * Refresh token interface.
+</span><span style=color:#e6db74> */</span>
+<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>RefreshTokenRepositoryInterface</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>RepositoryInterface</span>
+{
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Creates a new refresh token
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return RefreshTokenEntityInterface|null
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getNewRefreshToken</span>();
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Create a new refresh token_name.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param RefreshTokenEntityInterface $refreshTokenEntity
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @throws UniqueTokenIdentifierConstraintViolationException
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>persistNewRefreshToken</span>(<span style=color:#a6e22e>RefreshTokenEntityInterface</span> $refreshTokenEntity);
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Revoke the refresh token.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string $tokenId
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>revokeRefreshToken</span>($tokenId);
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Check if the refresh token has been revoked.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string $tokenId
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return bool Return true if this token has been revoked
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isRefreshTokenRevoked</span>($tokenId);
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h4 id=implementation-10>Implementation</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-Data-Repository-OAuthRefreshTokenRepository aria-expanded=false aria-controls=collapseExample>
+Data\Repository\OAuthRefreshTokenRepository
+</a>
+<div class=collapse id=collapseExample-Data-Repository-OAuthRefreshTokenRepository>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">48
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">49
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">50
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">51
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">52
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">53
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">54
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">55
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">56
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">57
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">58
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">59
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">60
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">61
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#66d9ef>declare</span>(<span style=color:#a6e22e>strict_types</span><span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>);
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>Data\Repository</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Data\Entity\OAuthRefreshToken</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Doctrine\ORM\EntityRepository</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Doctrine\ORM\OptimisticLockException</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Doctrine\ORM\ORMException</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>OAuth</span>;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>OAuthRefreshTokenRepository</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>EntityRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>OAuth\Repositories\RefreshTokenRepositoryInterface</span>
+{
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getNewRefreshToken</span>()<span style=color:#f92672>:</span> <span style=color:#a6e22e>OAuthRefreshToken</span>
+    {
+        <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>new</span> <span style=color:#a6e22e>OAuthRefreshToken</span>();
+    }
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * @throws OptimisticLockException
+</span><span style=color:#e6db74>     * @throws ORMException
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>persistNewRefreshToken</span>(<span style=color:#a6e22e>OAuth\Entities\RefreshTokenEntityInterface</span> $refreshTokenEntity)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+    {
+        $em <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>();
+        $em<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>persist</span>($refreshTokenEntity);
+        $em<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>flush</span>();
+    }
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * @throws OptimisticLockException
+</span><span style=color:#e6db74>     * @throws ORMException
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>revokeRefreshToken</span>($tokenId)<span style=color:#f92672>:</span> <span style=color:#a6e22e>void</span>
+    {
+        <span style=color:#e6db74>/** @var ?OAuthRefreshToken $refreshTokenEntity */</span>
+        $refreshTokenEntity <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>find</span>($tokenId);
+
+        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>null</span> <span style=color:#f92672>===</span> $refreshTokenEntity) {
+            <span style=color:#66d9ef>return</span>;
+        }
+
+        $refreshTokenEntity<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>setIsRevoked</span>(<span style=color:#66d9ef>true</span>);
+        $em <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getEntityManager</span>();
+        $em<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>persist</span>($refreshTokenEntity);
+        $em<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>flush</span>();
+    }
+
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>isRefreshTokenRevoked</span>($tokenId)<span style=color:#f92672>:</span> <span style=color:#a6e22e>bool</span>
+    {
+        <span style=color:#e6db74>/** @var ?OAuthRefreshToken $refreshTokenEntity */</span>
+        $refreshTokenEntity <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>find</span>($tokenId);
+
+        <span style=color:#66d9ef>if</span> (<span style=color:#66d9ef>null</span> <span style=color:#f92672>===</span> $refreshTokenEntity) {
+            <span style=color:#66d9ef>return</span> <span style=color:#66d9ef>true</span>;
+        }
+
+        <span style=color:#66d9ef>return</span> $refreshTokenEntity<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>getIsRevoked</span>();
+    }
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h3 id=oauthscope-repository>OAuthScope Repository</h3>
+<p>The <em>Scope</em> repository will need to implement only the OAuth2 Server library scope repository interface:</p>
+<h4 id=implemented-interfaces-11>Implemented Interfaces</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-League-OAuth-Server-Repositories-ScopeRepositoryInterface aria-expanded=false aria-controls=collapseExample>
+League\OAuth2\Server\Repositories\ScopeRepositoryInterface
+</a>
+<div class=collapse id=collapseExample-League-OAuth-Server-Repositories-ScopeRepositoryInterface>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">31
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">32
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">33
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">34
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">35
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">36
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">37
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">38
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">39
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">40
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">41
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">42
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">43
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">44
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">45
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">46
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">47
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * @author      Alex Bilbie &lt;hello@alexbilbie.com&gt;
+</span><span style=color:#e6db74> * @copyright   Copyright (c) Alex Bilbie
+</span><span style=color:#e6db74> * @license     http://mit-license.org/
+</span><span style=color:#e6db74> *
+</span><span style=color:#e6db74> * @link        https://github.com/thephpleague/oauth2-server
+</span><span style=color:#e6db74> */</span>
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>League\OAuth2\Server\Repositories</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\ClientEntityInterface</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server\Entities\ScopeEntityInterface</span>;
+
+<span style=color:#e6db74>/**
+</span><span style=color:#e6db74> * Scope interface.
+</span><span style=color:#e6db74> */</span>
+<span style=color:#66d9ef>interface</span> <span style=color:#a6e22e>ScopeRepositoryInterface</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>RepositoryInterface</span>
+{
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Return information about a scope.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param string $identifier The scope identifier
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return ScopeEntityInterface|null
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getScopeEntityByIdentifier</span>($identifier);
+
+    <span style=color:#e6db74>/**
+</span><span style=color:#e6db74>     * Given a client, grant type and optional user identifier validate the set of scopes requested are valid and optionally
+</span><span style=color:#e6db74>     * append additional scopes or remove requested scopes.
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @param ScopeEntityInterface[] $scopes
+</span><span style=color:#e6db74>     * @param string                 $grantType
+</span><span style=color:#e6db74>     * @param ClientEntityInterface  $clientEntity
+</span><span style=color:#e6db74>     * @param null|string            $userIdentifier
+</span><span style=color:#e6db74>     *
+</span><span style=color:#e6db74>     * @return ScopeEntityInterface[]
+</span><span style=color:#e6db74>     */</span>
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>finalizeScopes</span>(
+        <span style=color:#66d9ef>array</span> $scopes,
+        $grantType,
+        <span style=color:#a6e22e>ClientEntityInterface</span> $clientEntity,
+        $userIdentifier <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>
+    );
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
+<h4 id=implementation-11>Implementation</h4>
+<a class="btn btn-primary btn-githubfile" role=button data-toggle=collapse href=#collapseExample-Data-Repository-OAuthScopeRepository aria-expanded=false aria-controls=collapseExample>
+Data\Repository\OAuthScopeRepository
+</a>
+<div class=collapse id=collapseExample-Data-Repository-OAuthScopeRepository>
+<div class=highlight><div style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4>
+<table style=border-spacing:0;padding:0;margin:0;border:0;width:auto;overflow:auto;display:block><tr><td style=vertical-align:top;padding:0;margin:0;border:0>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 1
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 2
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 3
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 4
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 5
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 6
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 7
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 8
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f"> 9
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">10
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">11
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">12
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">13
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">14
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">15
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">16
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">17
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">18
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">19
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">20
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">21
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">22
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">23
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">24
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">25
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">26
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">27
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">28
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">29
+</span><span style="margin-right:.4em;padding:0 .4em;color:#7f7f7f">30
+</span></code></pre></td>
+<td style=vertical-align:top;padding:0;margin:0;border:0;width:100%>
+<pre tabindex=0 style=color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4><code class=language-php data-lang=php><span style=color:#f92672>&lt;?</span><span style=color:#a6e22e>php</span>
+
+<span style=color:#66d9ef>declare</span>(<span style=color:#a6e22e>strict_types</span><span style=color:#f92672>=</span><span style=color:#ae81ff>1</span>);
+
+<span style=color:#66d9ef>namespace</span> <span style=color:#a6e22e>Data\Repository</span>;
+
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Data\Entity\OAuthScope</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>Doctrine\ORM\EntityRepository</span>;
+<span style=color:#66d9ef>use</span> <span style=color:#a6e22e>League\OAuth2\Server</span> <span style=color:#66d9ef>as</span> <span style=color:#a6e22e>OAuth</span>;
+
+<span style=color:#66d9ef>class</span> <span style=color:#a6e22e>OAuthScopeRepository</span> <span style=color:#66d9ef>extends</span> <span style=color:#a6e22e>EntityRepository</span> <span style=color:#66d9ef>implements</span> <span style=color:#a6e22e>OAuth\Repositories\ScopeRepositoryInterface</span>
+{
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>getScopeEntityByIdentifier</span>($identifier)<span style=color:#f92672>:</span> <span style=color:#f92672>?</span><span style=color:#a6e22e>OAuth\Entities\ScopeEntityInterface</span>
+    {
+        <span style=color:#e6db74>/** @var ?OAuthScope $scope */</span>
+        $scope <span style=color:#f92672>=</span> $this<span style=color:#f92672>-&gt;</span><span style=color:#a6e22e>findOneBy</span>([<span style=color:#e6db74>&#39;scope&#39;</span> <span style=color:#f92672>=&gt;</span> $identifier]);
+
+        <span style=color:#66d9ef>return</span> $scope;
+    }
+
+    <span style=color:#66d9ef>public</span> <span style=color:#66d9ef>function</span> <span style=color:#a6e22e>finalizeScopes</span>(
+        <span style=color:#66d9ef>array</span> $scopes,
+        $grantType,
+        <span style=color:#a6e22e>OAuth\Entities\ClientEntityInterface</span> $clientEntity,
+        $userIdentifier <span style=color:#f92672>=</span> <span style=color:#66d9ef>null</span>
+    )<span style=color:#f92672>:</span> <span style=color:#66d9ef>array</span> {
+        <span style=color:#66d9ef>return</span> $scopes;
+    }
+}
+
+</code></pre></td></tr></table>
+</div>
+</div>
+</div>
 <div class=blog-tags>
 <a href=//marc.guyer.me/tags/php/>php</a>&nbsp;
 <a href=//marc.guyer.me/tags/mezzio/>mezzio</a>&nbsp;
@@ -3011,7 +4489,7 @@ Marc Guyer
 </p>
 <p class="credits theme-by text-muted">
 <a href=https://gohugo.io>Hugo v0.88.1</a> powered &nbsp;&bull;&nbsp; Theme <a href=https://github.com/halogenica/beautifulhugo>Beautiful Hugo</a> adapted from <a href=https://deanattali.com/beautiful-jekyll/>Beautiful Jekyll</a>
-&nbsp;&bull;&nbsp;[<a href=https://github.com/marcguyer/marcguyer.github.io/commit/a5516d84e9a58e94f5549b1c39fd0b3a5c41bcfc>a5516d84</a>]
+&nbsp;&bull;&nbsp;[<a href=https://github.com/marcguyer/marcguyer.github.io/commit/67284493a36cac490e32252fe8ca251e7ae3f5ee>67284493</a>]
 </p>
 </div>
 </div>
