@@ -39,7 +39,7 @@ I've created a simple abstract class that all of my functional tests can extend,
 
 ### Abstract for all Functional Tests
 
-{{< collapse link="AppFunctionalTest\AbstractFunctionalTest" >}}
+{{< collapse link="AppFunctionalTest\AbstractFunctionalTest" collapse="in" >}}
 {{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/test/AppFunctionalTest/AbstractFunctionalTest.php" ref="0ded9322d8fc3c770a23ef9a7478c7862d8edc86" %}}
 {{< /collapse >}}
 
@@ -55,7 +55,7 @@ Here's a simple implementation of a functional endpoint test for `GET /api/ping`
 
 Note this extends the above `AppFunctionalTest\AbstractFunctionalTest`.
 
-{{< collapse link="AppFunctionalTest\PingTest" >}}
+{{< collapse link="AppFunctionalTest\PingTest" collapse="in" >}}
 {{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/test/AppFunctionalTest/PingTest.php" ref="0ded9322d8fc3c770a23ef9a7478c7862d8edc86" %}}
 {{< /collapse >}}
 
@@ -65,7 +65,7 @@ The result of the above example is a functional test of the `GET /api/ping` rout
 
 Now we're going to establish full test coverage on the `App\Handler\PingHandler` unit.
 
-{{< collapse link="AppTest\Handler\PingTest" >}}
+{{< collapse link="AppTest\Handler\PingTest" collapse="in" >}}
 {{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/test/AppTest/Handler/PingHandlerTest.php" ref="0ded9322d8fc3c770a23ef9a7478c7862d8edc86" %}}
 {{< /collapse >}}
 

@@ -821,6 +821,8 @@ h4.see-also {
 }
 
  a.btn-githubfile {
+   display: block;
+   width: fit-content;
    margin-top: 20px;
-   margin-bottom: 20px;
+   /*margin-bottom: 20px;*/
  }
