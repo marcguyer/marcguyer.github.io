@@ -12,16 +12,16 @@
 &lt;p>&lt;a href="https://psalm.dev/articles/fixing-code-that-aint-broken">https://psalm.dev/articles/fixing-code-that-aint-broken&lt;/a>&lt;/p>
 &lt;p>In this post, I&amp;rsquo;ll show a basic setup for static analysis with Psalm in Mezzio applications.&lt;/p></description></item><item><title>Contact</title><link>//marc.guyer.me/contact/</link><pubDate>Sun, 24 Jan 2021 09:42:49 -0400</pubDate><guid>//marc.guyer.me/contact/</guid><description>&lt;p>Ask me anything about your project - 
 &lt;style>
- #span-936ca7a1.cloaked-e-mail:before {
+ #span-c49dd3b9.cloaked-e-mail:before {
  content:attr(data-domain) "\0040" attr(data-user);
  unicode-bidi:bidi-override;
  direction:rtl;
  }
 &lt;/style>
-&amp;#32;&lt;span class="cloaked-e-mail" data-user="cram" data-domain="em.reyug" id="span-936ca7a1">&lt;/span>&amp;#32;
+&amp;#32;&lt;span class="cloaked-e-mail" data-user="cram" data-domain="em.reyug" id="span-c49dd3b9">&lt;/span>&amp;#32;
 
-&lt;script id="script-936ca7a1">
- var scriptTag = document.getElementById("script-936ca7a1");
+&lt;script id="script-c49dd3b9">
+ var scriptTag = document.getElementById("script-c49dd3b9");
  var link = document.createElement("a");
  var address = "cram".split('').reverse().join('') + "@" + "em.reyug".split('').reverse().join('');
  link.href = "mailto" + ":" + address;
