@@ -1,6 +1,6 @@
 ---
-title: "Mezzio Example: Doctrine Entities and Repositories"
-date: 2021-09-15T16:25:49-05:00
+title: "Mezzio Example: Testing Doctrine Entities and Repositories"
+date: 2021-09-16T16:25:49-05:00
 draft: false
 toc: true
 images:
@@ -18,7 +18,21 @@ series:
 
 ## Overview
 
-This post brings several pieces of supporting libraries together. 
+In this post, we'll see how to create a comprehensive testing framework for Doctrine Entities and Repositories. This is a continuation of our [Mezzio Example series](/posts/mezzio-example/doctrine-entities-and-repositories/) where we previously created our domain model for an OAuth2-enabled application.
+
+Let's make sure our Entities and Repositories have full test coverage. The domain model is a significant part of any dynamic application so the code should be in good shape. We don't want any bugs here.
+
+Since Doctrine plays by a strict set of rules, we can create a simple testing framework based on those assumptions. We know the naming convention of the getters and setters, and we know the relationship between entity properties and those accessors. Further, we can use Doctrine's own ClassMetadata to ensure that we cover everything.
+
+This post will demonstrate a reusable abstract test class that leverages PHP reflection and Doctrine's metadata to automatically test every property, getter, and setter in our entities with minimal boilerplate code.
+
+The framework is a magic box of sorts. As I said, some rules must be followed and the assumptions must hold true for this test framework to be of value. If it doesn't work for one of your properties, or you have some extra methods in there unrelated to class properties and their accessors, you can always add test methods to test those outliers. 
+
+## A Doctrine Entity Test Abstract
+
+{{< collapse link="DataTest\Entity\AbstractEntityTest.php" >}}
+{{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/test/DataTest/Entity/AbstractEntityTest.php" ref="df7e770f32137ec1c26bad02eb971421058f5a63" %}}
+{{< /collapse >}}
 
 ### Entities to Support OAuth2 Requirements
 
@@ -245,6 +259,6 @@ The _Scope_ repository will need to implement only the OAuth2 Server library sco
 {{% githubfile repo="marcguyer/mezzio-doctrine-oauth2-example" path="/src/Data/Repository/OAuthScopeRepository.php" ref="df7e770f32137ec1c26bad02eb971421058f5a63" %}}
 {{< /collapse >}}
 
-## What's Next?
+## Conclusion
 
-The [next post in this series](/posts/mezzio-example/testing-doctrine-entities-and-repositories) suggests a simple framework for easily testing entire Entities and Repositories without writing much code.
+This post has explored a simple framework for easily testing Doctrine Entities and Repositories without writing much code. By leveraging Doctrine's metadata system and class reflection, we can automate testing of property getters and setters, ensuring our domain model is well-tested and reliable.

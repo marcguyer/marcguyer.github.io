@@ -2,9 +2,17 @@
 {{- $path := (trim (.Get "path") "/") -}}
 {{- $ref := (.Get "ref") -}}
 
+{{/* Commented out getJSON call that was causing build errors
 {{- $json := getJSON (printf "https://api.github.com/repos/%s/contents/%s?ref=%s" $repo $path $ref) -}}
 {{- with (base64Decode $json.content) -}}
 ```php
 {{ safeHTML . }}
 ```
 {{- end -}}
+*/}}
+
+<!-- Temporary replacement message -->
+```
+[GitHub file content from repo: {{ $repo }}, path: {{ $path }}, ref: {{ $ref }}]
+(GitHub API integration temporarily disabled)
+```
