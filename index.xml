@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud Architect on Marc Guyer</title><link>//marc.guyer.me/</link><description>Recent content in Cloud Architect on Marc Guyer</description><generator>Hugo</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 15 May 2025 21:32:02 -0400</lastBuildDate><atom:link href="//marc.guyer.me/index.xml" rel="self" type="application/rss+xml"/><item><title>Building Multi-Architecture AWS Lambda Functions with Bref PHP and PostgreSQL</title><link>//marc.guyer.me/posts/bref-php-pdo-postgresql-multi-architecture-example/</link><pubDate>Wed, 15 May 2024 12:00:00 -0400</pubDate><guid>//marc.guyer.me/posts/bref-php-pdo-postgresql-multi-architecture-example/</guid><description>&lt;h2 id="the-multi-architecture-challenge">The Multi-Architecture Challenge&lt;/h2>
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cloud Architect on Marc Guyer</title><link>//marc.guyer.me/</link><description>Recent content in Cloud Architect on Marc Guyer</description><generator>Hugo</generator><language>en-us</language><copyright>This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License.</copyright><lastBuildDate>Thu, 15 May 2025 21:35:40 -0400</lastBuildDate><atom:link href="//marc.guyer.me/index.xml" rel="self" type="application/rss+xml"/><item><title>Building Multi-Architecture AWS Lambda Functions with Bref PHP and PostgreSQL</title><link>//marc.guyer.me/posts/bref-php-pdo-postgresql-multi-architecture-example/</link><pubDate>Wed, 15 May 2024 12:00:00 -0400</pubDate><guid>//marc.guyer.me/posts/bref-php-pdo-postgresql-multi-architecture-example/</guid><description>&lt;h2 id="the-multi-architecture-challenge">The Multi-Architecture Challenge&lt;/h2>
 &lt;p>With the rise of Apple Silicon (ARM64) and the continued use of Intel-based (x86_64) systems, developers face increasing challenges in creating applications that work seamlessly across both architectures. This is especially true for PHP developers working with AWS Lambda, where subtle differences can lead to frustrating issues.&lt;/p>
 &lt;p>In the PHP ecosystem, one particular pain point has been connecting to PostgreSQL databases from Lambda functions. The variations in how PDO PostgreSQL extension loading works across architectures has been a source of confusion for many developers.&lt;/p></description></item><item><title>Mezzio Example: Testing Doctrine Entities and Repositories</title><link>//marc.guyer.me/posts/mezzio-example/testing-doctrine-entities-and-repositories/</link><pubDate>Thu, 16 Sep 2021 16:25:49 -0500</pubDate><guid>//marc.guyer.me/posts/mezzio-example/testing-doctrine-entities-and-repositories/</guid><description>&lt;h2 id="overview">Overview&lt;/h2>
 &lt;p>In this post, we&amp;rsquo;ll see how to create a comprehensive testing framework for Doctrine Entities and Repositories. This is a continuation of our &lt;a href="//marc.guyer.me/posts/mezzio-example/doctrine-entities-and-repositories/">Mezzio Example series&lt;/a> where we previously created our domain model for an OAuth2-enabled application.&lt;/p>
@@ -12,16 +12,16 @@
 &lt;p>&lt;a href="https://psalm.dev/articles/fixing-code-that-aint-broken">https://psalm.dev/articles/fixing-code-that-aint-broken&lt;/a>&lt;/p>
 &lt;p>In this post, I&amp;rsquo;ll show a basic setup for static analysis with Psalm in Mezzio applications.&lt;/p></description></item><item><title>Contact</title><link>//marc.guyer.me/contact/</link><pubDate>Sun, 24 Jan 2021 09:42:49 -0400</pubDate><guid>//marc.guyer.me/contact/</guid><description>&lt;p>Ask me anything about your project - 
 &lt;style>
- #span-9942f3c0.cloaked-e-mail:before {
+ #span-b0b3375a.cloaked-e-mail:before {
  content:attr(data-domain) "\0040" attr(data-user);
  unicode-bidi:bidi-override;
  direction:rtl;
  }
 &lt;/style>
-&amp;#32;&lt;span class="cloaked-e-mail" data-user="cram" data-domain="em.reyug" id="span-9942f3c0">&lt;/span>&amp;#32;
+&amp;#32;&lt;span class="cloaked-e-mail" data-user="cram" data-domain="em.reyug" id="span-b0b3375a">&lt;/span>&amp;#32;
 
-&lt;script id="script-9942f3c0">
- var scriptTag = document.getElementById("script-9942f3c0");
+&lt;script id="script-b0b3375a">
+ var scriptTag = document.getElementById("script-b0b3375a");
  var link = document.createElement("a");
  var address = "cram".split('').reverse().join('') + "@" + "em.reyug".split('').reverse().join('');
  link.href = "mailto" + ":" + address;
