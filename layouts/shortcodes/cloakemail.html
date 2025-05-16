@@ -1,0 +1,15 @@
+{{/* A simpler implementation of the cloakemail shortcode */}}
+{{ $email := .Get 0 }}
+{{ if not $email }}{{ $email = .Get "address" }}{{ end }}
+
+<script type="text/javascript">
+// Email obfuscator script 2.1 by Tim Williams
+// Anti-spam: convert characters to HTML entities
+var linktext = "{{ $email }}";
+var part1 = linktext.split("@")[0];
+var part2 = linktext.split("@")[1];
+document.write('<a href="mailto:' + part1 + '@' + part2 + '">' + part1 + '@' + part2 + '</a>');
+</script>
+<noscript>
+  <em>Email address protected. Enable JavaScript to see it.</em>
+</noscript>
