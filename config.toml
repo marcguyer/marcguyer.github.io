@@ -103,10 +103,12 @@ disqusShortname = "marcguyer"
   # images = [""]
   themeColor = "#494f5c"
 
+  # Title for the browser tab and SEO
+  homeTitle = "Cloud Architect"
   # for beatifulhugo
-  subtitle = "Senior Full Stack Web Systems Engineer"
+  subtitle = "Cloud Architect"
   # for hermit with my index override
-  homeSubtitle = "Senior Full Stack Web Systems Engineer"
+  homeSubtitle = "Cloud Architect"
   # for hermit with my index override
   homeSubtitles = [
     "PHP, and Laminas (FKA Zend Framework) Specialist",
