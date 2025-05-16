@@ -16,7 +16,7 @@ I have interests, it's true. In no particular order, here are a few:
 * Waking up
 * Solving problems
 
-I live in downtown Bloomington, Indiana, with [Kate](https://www.kategalvin.com/) and _JEFF!_.
+I live in downtown Bloomington, Indiana, with [Kate](https://www.kategalvin.com/).
 
 ## Professional
 
