@@ -9,8 +9,6 @@ draft: false
 
 With the rise of Apple Silicon (ARM64) and the continued use of Intel-based (x86_64) systems, developers face increasing challenges in creating applications that work seamlessly across both architectures. This is especially true for PHP developers working with AWS Lambda, where subtle differences can lead to frustrating issues.
 
-In the PHP ecosystem, one particular pain point has been connecting to PostgreSQL databases from Lambda functions. The variations in how PDO PostgreSQL extension loading works across architectures has been a source of confusion for many developers.
-
 ## Example with Bref PHP Runtime + PDO PostgreSQL Extension
 
 To address these challenges, I've created a comprehensive example repository that demonstrates a working multi-architecture implementation of PHP Lambda functions using [Bref](https://bref.sh/) and PDO PostgreSQL. This example focuses on:
