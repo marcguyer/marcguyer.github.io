@@ -11,17 +11,16 @@
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
 </button>
 <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=tags-heading><h1>Oauth2</h1><hr class=small></div></div></div></div></div></header><div class=container role=main><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=posts-list><article class=post-preview><a href=//marc.guyer.me/posts/mezzio-example/testing-doctrine-entities-and-repositories/><h2 class=post-title>Mezzio Example: Testing Doctrine Entities and Repositories</h2></a><p class=post-meta><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on 2021-09-16
-&nbsp;(Last modified on 2025-05-15)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
+&nbsp;(Last modified on 2025-05-17)
+&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;32&nbsp;minutes
 &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;</span></p><div class=post-entry><h2 id=overview>Overview</h2><p>In this post, we&rsquo;ll see how to create a comprehensive testing framework for Doctrine Entities and Repositories. This is a continuation of our <a href=/posts/mezzio-example/doctrine-entities-and-repositories/>Mezzio Example series</a> where we previously created our domain model for an OAuth2-enabled application.</p><p>Let&rsquo;s make sure our Entities and Repositories have full test coverage. The domain model is a significant part of any dynamic application so the code should be in good shape. We don&rsquo;t want any bugs here.</p><a href=//marc.guyer.me/posts/mezzio-example/testing-doctrine-entities-and-repositories/ class=post-read-more>[Read More]</a></div><div class=blog-tags><a href=//marc.guyer.me/tags/php/>php</a>&nbsp;
 <a href=//marc.guyer.me/tags/mezzio/>mezzio</a>&nbsp;
 <a href=//marc.guyer.me/tags/laminas/>laminas</a>&nbsp;
-<a href=//marc.guyer.me/tags/prophecy/>prophecy</a>&nbsp;
 <a href=//marc.guyer.me/tags/phpunit/>phpunit</a>&nbsp;
 <a href=//marc.guyer.me/tags/doctrine/>doctrine</a>&nbsp;
 <a href=//marc.guyer.me/tags/oauth2/>oauth2</a>&nbsp;</div></article><article class=post-preview><a href=//marc.guyer.me/posts/mezzio-example/doctrine-entities-and-repositories/><h2 class=post-title>Mezzio Example: Doctrine Entities and Repositories</h2></a><p class=post-meta><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on 2021-09-15
-&nbsp;(Last modified on 2025-05-15)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;5&nbsp;minutes
+&nbsp;(Last modified on 2025-05-17)
+&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;31&nbsp;minutes
 &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;</span></p><div class=post-entry><h2 id=overview>Overview</h2><p>This post brings several pieces of supporting libraries together.</p><h3 id=entities-to-support-oauth2-requirements>Entities to Support OAuth2 Requirements</h3><p>We&rsquo;ll start by defining a minimum domain model via PHP8 Attributes and Doctrine&rsquo;s new attribute mapping driver. In the short-term, we only need to model what&rsquo;s necessary for our application&rsquo;s authentication layer using OAuth2. For now, we&rsquo;re creating a minimal set of objects to comply with the needs of our supporting libraries&rsquo; interfaces. We need a minimum of 6 entities and their corresponding repositories:</p><a href=//marc.guyer.me/posts/mezzio-example/doctrine-entities-and-repositories/ class=post-read-more>[Read More]</a></div><div class=blog-tags><a href=//marc.guyer.me/tags/php/>php</a>&nbsp;
 <a href=//marc.guyer.me/tags/mezzio/>mezzio</a>&nbsp;
 <a href=//marc.guyer.me/tags/laminas/>laminas</a>&nbsp;

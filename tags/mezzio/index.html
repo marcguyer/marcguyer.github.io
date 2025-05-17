@@ -11,17 +11,16 @@
 <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button><div class=pswp__preloader><div class=pswp__preloader__icn><div class=pswp__preloader__cut><div class=pswp__preloader__donut></div></div></div></div></div><div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap"><div class=pswp__share-tooltip></div></div><button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
 </button>
 <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)"></button><div class=pswp__caption><div class=pswp__caption__center></div></div></div></div></div><header class=header-section><div class="intro-header no-img"><div class=container><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=tags-heading><h1>Mezzio</h1><hr class=small></div></div></div></div></div></header><div class=container role=main><div class=row><div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1"><div class=posts-list><article class=post-preview><a href=//marc.guyer.me/posts/mezzio-example/testing-doctrine-entities-and-repositories/><h2 class=post-title>Mezzio Example: Testing Doctrine Entities and Repositories</h2></a><p class=post-meta><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on 2021-09-16
-&nbsp;(Last modified on 2025-05-15)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;6&nbsp;minutes
+&nbsp;(Last modified on 2025-05-17)
+&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;32&nbsp;minutes
 &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;</span></p><div class=post-entry><h2 id=overview>Overview</h2><p>In this post, we&rsquo;ll see how to create a comprehensive testing framework for Doctrine Entities and Repositories. This is a continuation of our <a href=/posts/mezzio-example/doctrine-entities-and-repositories/>Mezzio Example series</a> where we previously created our domain model for an OAuth2-enabled application.</p><p>Let&rsquo;s make sure our Entities and Repositories have full test coverage. The domain model is a significant part of any dynamic application so the code should be in good shape. We don&rsquo;t want any bugs here.</p><a href=//marc.guyer.me/posts/mezzio-example/testing-doctrine-entities-and-repositories/ class=post-read-more>[Read More]</a></div><div class=blog-tags><a href=//marc.guyer.me/tags/php/>php</a>&nbsp;
 <a href=//marc.guyer.me/tags/mezzio/>mezzio</a>&nbsp;
 <a href=//marc.guyer.me/tags/laminas/>laminas</a>&nbsp;
-<a href=//marc.guyer.me/tags/prophecy/>prophecy</a>&nbsp;
 <a href=//marc.guyer.me/tags/phpunit/>phpunit</a>&nbsp;
 <a href=//marc.guyer.me/tags/doctrine/>doctrine</a>&nbsp;
 <a href=//marc.guyer.me/tags/oauth2/>oauth2</a>&nbsp;</div></article><article class=post-preview><a href=//marc.guyer.me/posts/mezzio-example/doctrine-entities-and-repositories/><h2 class=post-title>Mezzio Example: Doctrine Entities and Repositories</h2></a><p class=post-meta><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on 2021-09-15
-&nbsp;(Last modified on 2025-05-15)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;5&nbsp;minutes
+&nbsp;(Last modified on 2025-05-17)
+&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;31&nbsp;minutes
 &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;</span></p><div class=post-entry><h2 id=overview>Overview</h2><p>This post brings several pieces of supporting libraries together.</p><h3 id=entities-to-support-oauth2-requirements>Entities to Support OAuth2 Requirements</h3><p>We&rsquo;ll start by defining a minimum domain model via PHP8 Attributes and Doctrine&rsquo;s new attribute mapping driver. In the short-term, we only need to model what&rsquo;s necessary for our application&rsquo;s authentication layer using OAuth2. For now, we&rsquo;re creating a minimal set of objects to comply with the needs of our supporting libraries&rsquo; interfaces. We need a minimum of 6 entities and their corresponding repositories:</p><a href=//marc.guyer.me/posts/mezzio-example/doctrine-entities-and-repositories/ class=post-read-more>[Read More]</a></div><div class=blog-tags><a href=//marc.guyer.me/tags/php/>php</a>&nbsp;
 <a href=//marc.guyer.me/tags/mezzio/>mezzio</a>&nbsp;
 <a href=//marc.guyer.me/tags/laminas/>laminas</a>&nbsp;
@@ -29,19 +28,20 @@
 <a href=//marc.guyer.me/tags/phpunit/>phpunit</a>&nbsp;
 <a href=//marc.guyer.me/tags/doctrine/>doctrine</a>&nbsp;
 <a href=//marc.guyer.me/tags/oauth2/>oauth2</a>&nbsp;</div></article><article class=post-preview><a href=//marc.guyer.me/posts/mezzio-example/psalm-introduction/><h2 class=post-title>Mezzio Example: Psalm Introduction</h2></a><p class=post-meta><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on 2021-09-15
+&nbsp;(Last modified on 2025-05-17)
 &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;1&nbsp;minutes
 &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;</span></p><div class=post-entry><h2 id=what-is-psalm>What is Psalm?</h2><p><a href=https://psalm.dev>Psalm</a> is a static analysis tool for PHP that helps you identify problems with your code. If you use it, you&rsquo;ll become a better coder. I promise.</p><h3 id=learn-more-about-psalm>Learn more about Psalm</h3><p>Here&rsquo;s a great read &ndash; the story of the origins of Psalm at Vimeo and the value it provided the team.</p><p><a href=https://psalm.dev/articles/fixing-code-that-aint-broken>https://psalm.dev/articles/fixing-code-that-aint-broken</a></p><p>In this post, I&rsquo;ll show a basic setup for static analysis with Psalm in Mezzio applications.</p><a href=//marc.guyer.me/posts/mezzio-example/psalm-introduction/ class=post-read-more>[Read More]</a></div><div class=blog-tags><a href=//marc.guyer.me/tags/php/>php</a>&nbsp;
 <a href=//marc.guyer.me/tags/mezzio/>mezzio</a>&nbsp;
 <a href=//marc.guyer.me/tags/laminas/>laminas</a>&nbsp;
 <a href=//marc.guyer.me/tags/psalm/>psalm</a>&nbsp;</div></article><article class=post-preview><a href=//marc.guyer.me/posts/mezzio-example/functional-and-unit-testing/><h2 class=post-title>Mezzio Example: Functional and Unit Testing</h2></a><p class=post-meta><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on 2019-12-01
-&nbsp;(Last modified on 2021-09-16)
-&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;3&nbsp;minutes
+&nbsp;(Last modified on 2025-05-17)
+&nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;5&nbsp;minutes
 &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;</span></p><div class=post-entry><h2 id=where-do-we-start>Where do we start?</h2><p>It&rsquo;s a good choice to start any application with a solid structure for testing the application with automated testing tools. That&rsquo;s why the first post in this series is about testing. Any well-tested application will typically have more lines of testing code than actual application code. Starting with a good structure for testing will pay dividends down the road.</p><p>In this post, I&rsquo;ll show a basic setup for testing Mezzio applications. We&rsquo;ll get to some more advanced testing topics in later posts.</p><a href=//marc.guyer.me/posts/mezzio-example/functional-and-unit-testing/ class=post-read-more>[Read More]</a></div><div class=blog-tags><a href=//marc.guyer.me/tags/php/>php</a>&nbsp;
 <a href=//marc.guyer.me/tags/mezzio/>mezzio</a>&nbsp;
 <a href=//marc.guyer.me/tags/laminas/>laminas</a>&nbsp;
 <a href=//marc.guyer.me/tags/prophecy/>prophecy</a>&nbsp;
 <a href=//marc.guyer.me/tags/phpunit/>phpunit</a>&nbsp;</div></article><article class=post-preview><a href=//marc.guyer.me/posts/mezzio-example/introduction/><h2 class=post-title>Mezzio Example: Introduction</h2></a><p class=post-meta><span class=post-meta><i class="fas fa-calendar"></i>&nbsp;Posted on 2019-11-04
-&nbsp;(Last modified on 2021-09-16)
+&nbsp;(Last modified on 2025-05-17)
 &nbsp;|&nbsp;<i class="fas fa-clock"></i>&nbsp;2&nbsp;minutes
 &nbsp;|&nbsp;<i class="fas fa-user"></i>&nbsp;</span></p><div class=post-entry><h2 id=what-is-this>What is this?</h2><p>Let&rsquo;s create a REST API with <a href=https://docs.mezzio.dev/>Mezzio</a>. In this series, you&rsquo;ll learn how to create a REST API from the ground up. We&rsquo;ll use Mezzio as the base framework, Doctrine for the data layer, OAuth2 for authentication and authorization, PHPUnit for automated testing, and several other libraries along the way.</p><h2 id=source-code>Source Code</h2><p>I&rsquo;ve created a new bare-bones application starting with the <a href=https://github.com/mezzio/mezzio-skeleton>Mezzio Skeleton Application</a> where all the code shown in this series lives. You can install it in your local environment and hack on it all you want. You&rsquo;re also welcome to contribute to the example application via PR. Check it out here:</p><a href=//marc.guyer.me/posts/mezzio-example/introduction/ class=post-read-more>[Read More]</a></div><div class=blog-tags><a href=//marc.guyer.me/tags/php/>php</a>&nbsp;
 <a href=//marc.guyer.me/tags/mezzio/>mezzio</a>&nbsp;
