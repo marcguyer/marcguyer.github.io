@@ -2,6 +2,7 @@
 title: "Mezzio Example: Introduction"
 date: 2019-11-04T15:08:36-04:00
 draft: false
+comments: true
 toc: false
 images:
 tags:

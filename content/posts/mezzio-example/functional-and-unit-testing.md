@@ -2,6 +2,7 @@
 title: "Mezzio Example: Functional and Unit Testing"
 date: 2019-12-01T14:28:49-05:00
 draft: false
+comments: true
 toc: false
 images:
 tags:

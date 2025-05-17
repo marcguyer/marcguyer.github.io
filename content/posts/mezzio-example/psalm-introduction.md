@@ -2,6 +2,7 @@
 title: "Mezzio Example: Psalm Introduction"
 date: 2021-09-15T14:28:49-05:00
 draft: false
+comments: true
 toc: false
 images:
 tags:

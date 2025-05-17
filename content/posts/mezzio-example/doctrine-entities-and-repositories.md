@@ -2,6 +2,7 @@
 title: "Mezzio Example: Doctrine Entities and Repositories"
 date: 2021-09-15T16:25:49-05:00
 draft: false
+comments: true
 toc: true
 images:
 tags:

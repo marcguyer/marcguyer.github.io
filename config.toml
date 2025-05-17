@@ -16,6 +16,14 @@ copyright = "This work is licensed under a Creative Commons Attribution-NonComme
 enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/functions/emojify/
 googleAnalytics = "UA-69610431-1"
 
+[services]
+  [services.disqus]
+    shortname = "marcguyer"
+  
+  # Required for resources.GetRemote to work with GitHub content
+  [services.remote]
+    enable = true
+
 [author]
     name = "Marc Guyer"
     # website = "marc.guyer.me"
@@ -89,7 +97,6 @@ googleAnalytics = "UA-69610431-1"
   dateformShort   = "Jan 2"
   dateformNum     = "2006-01-02"
   dateformNumTime = "2006-01-02 15:04 -0700"
-  disqusShortname = "marcguyer"
 
   mainSections = ["posts"]
   readingTime = true
@@ -114,7 +121,6 @@ googleAnalytics = "UA-69610431-1"
     "PHP, and Laminas (FKA Zend Framework) Specialist",
     "REST API and Payment Systems Expert",
     "Open Source Contributor",
-    "Private Pilot"
   ]
   footerCopyright = ''
   # bgImg = ""  # Homepage background-image URL

@@ -3,6 +3,7 @@ title: "Building Multi-Architecture AWS Lambda Functions with Bref PHP and Postg
 date: 2024-05-15T12:00:00-04:00
 tags: ["php", "aws", "lambda", "bref", "postgresql", "docker", "arm64", "apple-silicon"]
 draft: false
+comments: true
 ---
 
 ## The Multi-Architecture Challenge

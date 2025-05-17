@@ -4,5 +4,5 @@
     {{ .Get "link" }}
 </a>
 <div class="collapse {{ .Get "in" }}" id="collapseExample-{{ .Get "link" | replaceRE "[^a-zA-Z]+" "-" }}">
-    {{ markdownify .Inner }}
+    {{ .Inner | safeHTML }}
 </div>

@@ -2,13 +2,13 @@
 title: "Mezzio Example: Testing Doctrine Entities and Repositories"
 date: 2021-09-16T16:25:49-05:00
 draft: false
+comments: true
 toc: true
 images:
 tags:
   - php
   - mezzio
   - laminas
-  - prophecy
   - phpunit
   - doctrine
   - oauth2
