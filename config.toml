@@ -14,7 +14,6 @@ rssLimit = 10  # Maximum number of items in the RSS feed.
 # disableKinds = ["RSS"]
 copyright = "This work is licensed under a Creative Commons Attribution-NonCommercial 4.0 International License." # This message is only used by the RSS template.
 enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/functions/emojify/
-googleAnalytics = "UA-69610431-1"
 
 [services]
   [services.disqus]
@@ -23,6 +22,10 @@ googleAnalytics = "UA-69610431-1"
   # Required for resources.GetRemote to work with GitHub content
   [services.remote]
     enable = true
+  
+  # Modern Google Analytics 4 configuration
+  [services.googleAnalytics]
+    id = "G-VQCK8DJZ8Y"
 
 [author]
     name = "Marc Guyer"

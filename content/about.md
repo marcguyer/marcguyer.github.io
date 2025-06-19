@@ -36,7 +36,67 @@ The Cheddar platform was initially written in PHP5 and Zend Framework version 1.
 
 ### The Present
 
-Since 2020, I've been assisting mature startups with team leading and architectural and engineering challenges in cloud software systems. 
+Since 2020, I've been assisting startups with team leading and architectural and engineering challenges in cloud software systems.
+
+#### Globalized Mobile Application REST API Platform (2021-present)
+
+I've been leading the DevOps and infrastructure architecture for a mature, a sophisticated mobile platform built as a microservices monorepo. Over 4 years and 43,964 commits, the project evolved from basic architecture to enterprise-grade infrastructure:
+
+**Key Technical Achievements:**
+- **Blue/Green Deployment System**: Production-ready zero-downtime deployments with 7-phase orchestrated deployment pipeline
+- **PostgreSQL Migration**: Complete database engine migration with advanced performance tuning for 2000+ concurrent connections
+- **Lambda Development Environment**: Hot-reload development with automatic secret management and LocalStack integration
+- **Python Automation & Tooling**: Custom Python scripts for infrastructure automation, deployment orchestration, and data processing
+- **Microservices Architecture**: 12 PHP microservices, 8 Next.js frontends, and 5 AWS Lambda functions
+
+**Infrastructure Highlights:**
+- Docker Compose ecosystem for complete local development
+- Bitbucket Pipelines with manual deployment controls
+- PostgreSQL with PostGIS for geospatial data
+- Redis caching and OpenSearch integration
+
+**Technologies Used:**
+
+*Backend & APIs:*
+- PHP/Laminas/Mezzio microservices framework
+- Python for automation, tooling, and data processing
+- AWS Lambda functions (Python/Node.js/PHP) with LocalStack and SAM emulation
+- REST API architecture with OAuth2 authentication
+
+*Frontend & Mobile:*
+- Next.js 14 with App Router for web applications
+- React Native for mobile applications
+- TypeScript for type-safe development
+
+*Databases & Storage:*
+- AWS Aurora Serverless (MySQL/PostgreSQL engines)
+- PostgreSQL with PostGIS for geospatial capabilities
+- Redis for caching and session management
+- Amazon S3 for object storage
+- Amazon OpenSearch Serverless for search and analytics
+
+*Infrastructure & DevOps:*
+- AWS CloudFormation for Infrastructure as Code
+- AWS CDK for cloud infrastructure provisioning
+- Docker & Docker Compose for unified development environment and CI/CD
+- Bitbucket Pipelines for CI/CD automation
+- AWS VPC, EC2, Load Balancing, Auto Scaling
+- Blue/Green deployment orchestration
+
+*Development & Testing:*
+- LocalStack for AWS service emulation
+- PHPUnit and Jest and Pytest for testing frameworks
+- Git with monorepo architecture
+- Hot-reload development environments
+- Automated secret management and injection
+
+*Monitoring & Operations:*
+- AWS CloudWatch for monitoring and logging
+- Infrastructure automation with Python scripting
+- Performance optimization for high-concurrency workloads
+- Database migration and optimization tooling
+
+This project demonstrates systematic architectural thinking with a focus on production reliability, developer experience, and infrastructure automation. 
 
 ### The Future
 
