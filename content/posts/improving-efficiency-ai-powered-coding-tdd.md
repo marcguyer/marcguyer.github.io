@@ -5,8 +5,6 @@ draft: false
 tags: ["AI", "TDD", "Software Development", "Productivity", "Testing"]
 ---
 
-# Improving Efficiency of AI-Powered Coding with TDD
-
 The rise of AI coding assistants has transformed how we write software, but to truly maximize their potential, we need to adapt our development practices. Test-Driven Development (TDD) emerges as a particularly powerful methodology when combined with AI tools, creating a push-pull approach that enhances both code quality and development speed.
 
 **Note:** This post assumes familiarity with TDD principles. If you're new to TDD, consider starting with these resources:

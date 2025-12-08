@@ -8,3 +8,4 @@ draft: false
 * REST API and Payment Systems Expert
 * Mentor, Asynchronous Communicator
 * Open Source Contributor
+* AI Spirit Guide

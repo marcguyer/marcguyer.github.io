@@ -40,20 +40,13 @@ Since 2020, I've been assisting startups with team leading and architectural and
 
 #### Globalized Mobile Application REST API Platform (2021-present)
 
-I've been leading the DevOps and infrastructure architecture for a mature, a sophisticated mobile platform built as a microservices monorepo. Over 4 years and 43,964 commits, the project evolved from basic architecture to enterprise-grade infrastructure:
+I've been leading the DevOps and infrastructure architecture for a mature, sophisticated mobile platform built as a microservices monorepo. Over 4 years and 43,964 commits, the project evolved from basic to enterprise-grade infrastructure:
 
 **Key Technical Achievements:**
-- **Blue/Green Deployment System**: Production-ready zero-downtime deployments with 7-phase orchestrated deployment pipeline
-- **PostgreSQL Migration**: Complete database engine migration with advanced performance tuning for 2000+ concurrent connections
-- **Lambda Development Environment**: Hot-reload development with automatic secret management and LocalStack integration
-- **Python Automation & Tooling**: Custom Python scripts for infrastructure automation, deployment orchestration, and data processing
-- **Microservices Architecture**: 12 PHP microservices, 8 Next.js frontends, and 5 AWS Lambda functions
-
-**Infrastructure Highlights:**
-- Docker Compose ecosystem for complete local development
-- Bitbucket Pipelines with manual deployment controls
-- PostgreSQL with PostGIS for geospatial data
-- Redis caching and OpenSearch integration
+- **Blue/Green Deployment System**: zero-downtime deployment orchestration system with 7-phase pipeline, event management, and automated rollback capabilities. This production-ready system coordinates CloudFormation, Serverless Framework, Serverless Application Model (SAM) and heterogeneous database migrations (AWS DMS). The project resulted in a >70% reduction in AWS costs for the client.
+- **PostgreSQL Migration**: Complete database engine migration with advanced performance tuning for 2000+ concurrent connections. Combined a legacy data layer with 2 primary databases: existing MySQL Aurora and OpenSearch Serverless source with single PostgreSQL target. 
+- **Integrated Development Environment**: Multi-service, multi-language, hot-reload development with automatic secret management and LocalStack integration
+- **Microservices Architecture**: Modern AWS Lambda with NodeJs, Python, and PHP runtimes. 
 
 **Technologies Used:**
 
@@ -69,7 +62,7 @@ I've been leading the DevOps and infrastructure architecture for a mature, a sop
 - TypeScript for type-safe development
 
 *Databases & Storage:*
-- AWS Aurora Serverless (MySQL/PostgreSQL engines)
+- AWS Aurora Serverless (MySQL and PostgreSQL engines)
 - PostgreSQL with PostGIS for geospatial capabilities
 - Redis for caching and session management
 - Amazon S3 for object storage
@@ -95,8 +88,6 @@ I've been leading the DevOps and infrastructure architecture for a mature, a sop
 - Infrastructure automation with Python scripting
 - Performance optimization for high-concurrency workloads
 - Database migration and optimization tooling
-
-This project demonstrates systematic architectural thinking with a focus on production reliability, developer experience, and infrastructure automation. 
 
 ### The Future
 
