@@ -87,10 +87,6 @@ Comparison to Bref's [published benchmarks](https://github.com/brefphp/benchmark
 
 [Swoole](https://www.swoole.co.uk/) and [RoadRunner](https://roadrunner.dev/) keep PHP processes alive between requests. Lambda's warm containers achieve similar performance (~2ms/request). The difference: you manage 24/7 servers vs. AWS manages infrastructure with pay-per-request and zero idle cost. Lambda wins for variable traffic; Swoole/RoadRunner for consistent high-volume workloads where you're already managing servers.
 
-## Conclusion
-
-PHP 8.4 on Lambda ARM64: 132-147ms cold start, 2ms warm, 33MB layer, $0.0075/1M requests at 256MB. Full control over PHP versions and extensions with standard PSR-7/PSR-15 patterns.
-
 **Repository:** [github.com/marcguyer/lambda-php](https://github.com/marcguyer/lambda-php)
 
 ---
