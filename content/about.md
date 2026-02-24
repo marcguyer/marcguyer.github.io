@@ -16,7 +16,7 @@ I have interests, it's true. In no particular order, here are a few:
 * Waking up
 * Solving problems
 
-I live in downtown Bloomington, Indiana, with [Kate](https://www.kategalvin.com/).
+I live in Philadelphia, PA, with [Kate](https://www.kategalvin.com/).
 
 ## Professional
 
@@ -37,6 +37,42 @@ The Cheddar platform was initially written in PHP5 and Zend Framework version 1.
 ### The Present
 
 Since 2020, I've been assisting startups with team leading and architectural and engineering challenges in cloud software systems.
+
+#### Verification-First B2B SaaS Review Platform (2025-present)
+
+Solo architect and engineer building a B2B SaaS review platform for the wellness industry from the ground up. Responsible for the entire technical vision and execution — from research and planning through infrastructure provisioning and backend API development.
+
+**Key Technical Achievements:**
+- **Full-stack architecture**: Designed and building a TypeScript monorepo (Next.js 16, React 19, Turborepo, pnpm) with Prisma ORM and PostgreSQL
+- **Cloud infrastructure**: AWS (Cognito, S3, CloudFront), Cloudflare (DNS/WAF), Neon (PostgreSQL), Vercel — all provisioned via Terraform
+- **Research & planning**: Led research across 6 SaaS infrastructure domains; authored 14 architectural decision records
+- **Docker-first development**: Full local environment with dev-prod parity (LocalStack, serverless Redis proxy, PostgreSQL)
+- **CI/CD pipeline**: GitHub Actions for lint/type-check/build, Vercel for preview and production deployments, Turborepo remote caching
+
+**Technologies Used:**
+
+*Backend & APIs:*
+- Next.js 16 API routes with App Router
+- Prisma 6 ORM with PostgreSQL
+- AWS Cognito for authentication with RBAC authorization
+- Paddle Billing for payment processing
+
+*Frontend:*
+- React 19 with TypeScript 5.9
+- Turborepo monorepo with shared packages (UI, DB, config)
+
+*Databases & Storage:*
+- Neon PostgreSQL (Vercel Postgres) with Snowflake ID generation
+- Redis/Upstash for caching and rate limiting
+- Amazon S3 for uploads and video storage
+
+*Infrastructure & DevOps:*
+- Terraform for Infrastructure as Code (modular, multi-environment)
+- AWS (Cognito, S3, CloudFront, Route53)
+- Cloudflare for DNS and WAF
+- Vercel for hosting and edge deployment
+- Docker & Docker Compose for local development
+- GitHub Actions for CI/CD
 
 #### Globalized Mobile Application REST API Platform (2021-present)
 
