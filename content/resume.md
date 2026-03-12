@@ -56,12 +56,6 @@ Cofounded and built the first automated payment acceptance platform for the US m
 - First-to-market with automated tenant rent payments via credit card and ACH
 - Grew from PHP3 prototype to production platform processing payments at scale
 
-## Open Source
-
-- Active contributor to [Laminas](https://getlaminas.org/) (formerly Zend Framework) ecosystem
-- Published technical blog posts on serverless PHP, AWS Lambda runtimes, and Mezzio patterns
-- [GitHub](https://github.com/marcguyer) · [GitLab](https://gitlab.com/marcguyer) · [Stack Overflow](https://stackoverflow.com/users/1774759/marcguyer)
-
 ## Links
 
 - **Website**: [marc.guyer.me](https://marc.guyer.me)
