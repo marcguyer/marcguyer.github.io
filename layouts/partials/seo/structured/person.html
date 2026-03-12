@@ -1,0 +1,31 @@
+{{- if .IsHome -}}
+{{- $author := site.Params.author -}}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Person",
+  "name": "{{ $author.name }}",
+  "jobTitle": "Cloud Architect & CTO",
+  "url": "{{ site.BaseURL }}",
+  "image": "{{ site.Params.logo }}",
+  "description": "{{ site.Params.description }}",
+  "sameAs": [
+    {{- $links := slice }}
+    {{- with $author.github }}{{ $links = $links | append (printf "https://github.com/%s" .) }}{{ end }}
+    {{- with $author.linkedin }}{{ $links = $links | append (printf "https://www.linkedin.com/in/%s" .) }}{{ end }}
+    {{- with $author.stackoverflow }}{{ $links = $links | append (printf "https://stackoverflow.com/%s" .) }}{{ end }}
+    {{- with $author.instagram }}{{ $links = $links | append (printf "https://instagram.com/%s" .) }}{{ end }}
+    {{- range $i, $link := $links }}{{ if $i }},{{ end }}
+    "{{ $link }}"
+    {{- end }}
+  ]
+  {{- with site.Params.knowsabout }},
+  "knowsAbout": [
+    {{- range $i, $topic := . }}{{ if $i }},{{ end }}
+    "{{ $topic }}"
+    {{- end }}
+  ]
+  {{- end }}
+}
+</script>
+{{- end -}}

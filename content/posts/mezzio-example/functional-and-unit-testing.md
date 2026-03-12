@@ -2,6 +2,7 @@
 title: "Mezzio Example: Functional and Unit Testing"
 date: 2019-12-01T14:28:49-05:00
 draft: false
+description: "Implementing functional and unit tests for a Mezzio REST API application with PHPUnit, covering handlers, middleware, and HTTP testing."
 comments: true
 toc: false
 images:

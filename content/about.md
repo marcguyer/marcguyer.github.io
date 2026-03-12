@@ -2,7 +2,10 @@
 title: "About"
 date: 2019-08-03T09:42:49-04:00
 draft: false
+description: "About Marc Guyer — Cloud Architect and CTO with 25+ years building payment platforms, serverless systems, and SaaS products. Based in Philadelphia, PA."
 ---
+
+For a structured overview of my professional background, see my [Resume](/resume).
 
 ## Personal
 
@@ -11,10 +14,9 @@ I have interests, it's true. In no particular order, here are a few:
 * Solving problems
 * Flying - currently licensed with a single-engine land class rating
 * Playing golf
-* Solving problems
 * Sleeping
 * Waking up
-* Solving problems
+* More solving problems
 
 I live in Philadelphia, PA, with [Kate](https://www.kategalvin.com/).
 

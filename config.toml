@@ -27,36 +27,6 @@ enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/func
   [services.googleAnalytics]
     id = "G-VQCK8DJZ8Y"
 
-[author]
-    name = "Marc Guyer"
-    # website = "marc.guyer.me"
-    email = "/contact"
-    # facebook = "marcguyer"
-    github = "marcguyer"
-    gitlab = "marcguyer"
-    # bitbucket = "username"
-    # twitter = "username"
-    # reddit = "username"
-    linkedin = "marcguyer"
-    #xing = "username"
-    stackoverflow = "users/1774759/marcguyer"
-    #snapchat = "username"
-    instagram = "marcguyer"
-    # youtube = "user/username" # or channel/channelname
-    # soundcloud = "username"
-    # spotify = "username"
-    # bandcamp = "username"
-    # itchio = "username"
-    # vk = "username"
-    # paypal = "username"
-    # telegram = "username"
-    # 500px = "username"
-    # codepen = "username"
-    # mastodon = "url"
-    # kaggle = "username"
-    # weibo = "username"
-    slack = "zendframework"
-
 [markup]
     [markup.goldmark]
         [markup.goldmark.extensions]
@@ -109,8 +79,31 @@ enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/func
   comments = true
 
   # Metadata mostly used in document's head
-  # description = ""
+  description = "Marc Guyer — Cloud Architect and CTO with 25+ years building payment platforms, serverless systems, and SaaS products. PHP, TypeScript, Terraform, REST API specialist."
   # images = [""]
+
+  knowsAbout = [
+    "AWS",
+    "Cloud Architecture",
+    "Serverless",
+    "PHP",
+    "TypeScript",
+    "Terraform",
+    "REST APIs",
+    "Payment Systems",
+    "PostgreSQL",
+    "Docker",
+    "CI/CD",
+    "Microservices",
+    "Infrastructure as Code",
+    "Laminas",
+    "Mezzio",
+    "Next.js",
+    "OAuth2",
+    "PCI Compliance",
+    "Blue/Green Deployments",
+    "Open Source"
+  ]
   themeColor = "#494f5c"
 
   # Title for the browser tab and SEO
@@ -143,6 +136,14 @@ enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/func
     "css/avatar.css"
   ]
 
+  [params.author]
+    name = "Marc Guyer"
+    email = "/contact"
+    github = "marcguyer"
+    linkedin = "marcguyer"
+    stackoverflow = "users/1774759/marcguyer"
+    instagram = "marcguyer"
+
   # Social Icons
   # Check https://github.com/Track3/hermit#social-icons for more info.
   [[params.social]]
@@ -168,6 +169,11 @@ enableEmoji = true  # Shorthand emojis in content files - https://gohugo.io/func
     name = "About"
     url = "about/"
     weight = 20
+
+  [[menu.main]]
+    name = "Resume"
+    url = "resume/"
+    weight = 25
 
   [[menu.main]]
     name = "Contact"

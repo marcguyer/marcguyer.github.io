@@ -2,6 +2,7 @@
 title: "Building Multi-Architecture AWS Lambda Functions with Bref PHP and PostgreSQL"
 date: 2024-05-15T12:00:00-04:00
 tags: ["php", "aws", "lambda", "bref", "postgresql", "docker", "arm64", "apple-silicon"]
+description: "Step-by-step guide to building multi-architecture (AMD64/ARM64) AWS Lambda functions with Bref PHP and PostgreSQL PDO on Apple Silicon."
 draft: false
 comments: true
 ---

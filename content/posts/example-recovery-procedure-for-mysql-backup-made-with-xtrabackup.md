@@ -2,6 +2,7 @@
 title: "Example Recovery Procedure for MySQL Backup Made with Xtrabackup"
 date: 2019-09-24T17:09:56-04:00
 draft: false
+description: "Step-by-step procedure for recovering a MySQL database from a backup created with Percona Xtrabackup."
 comments: true
 toc: false
 images:

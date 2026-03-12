@@ -3,6 +3,7 @@ title: "Building a PHP 8.4 Lambda Runtime: Performance Analysis"
 date: 2025-11-24T12:00:00-05:00
 tags: ["php", "aws", "lambda", "arm64", "performance", "serverless"]
 series: ["serverless-php"]
+description: "Performance analysis of a custom PHP 8.4 Lambda runtime on ARM64, comparing cold starts and throughput against Bref and managed runtimes."
 draft: false
 comments: true
 ---

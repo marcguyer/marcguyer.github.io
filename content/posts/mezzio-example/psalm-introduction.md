@@ -2,6 +2,7 @@
 title: "Mezzio Example: Psalm Introduction"
 date: 2021-09-15T14:28:49-05:00
 draft: false
+description: "Adding Psalm static analysis to a Mezzio application for type safety and catching bugs before runtime."
 comments: true
 toc: false
 images:

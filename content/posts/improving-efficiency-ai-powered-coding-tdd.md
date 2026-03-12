@@ -3,6 +3,7 @@ title: "Improving Efficiency of AI-Powered Coding with TDD"
 date: 2025-08-26T14:49:41-04:00
 draft: false
 tags: ["AI", "TDD", "Software Development", "Productivity", "Testing"]
+description: "How Test-Driven Development creates a push-pull feedback loop with AI coding assistants to improve code quality and development speed."
 ---
 
 The rise of AI coding assistants has transformed how we write software, but to truly maximize their potential, we need to adapt our development practices. Test-Driven Development (TDD) emerges as a particularly powerful methodology when combined with AI tools, creating a push-pull approach that enhances both code quality and development speed.
