@@ -6,6 +6,8 @@ description: "Marc Guyer — Cloud Architect and CTO with 25+ years of experienc
 comments: false
 ---
 
+[Download PDF](/marc-guyer-resume.pdf)
+
 ## Summary
 
 Cloud Architect and CTO with 25+ years of experience designing, building, and scaling payment platforms, serverless systems, and B2B SaaS products. Proven track record as a technical cofounder, solo architect, and engineering leader. Deep expertise in AWS, PHP, TypeScript, Terraform, and REST API design.
